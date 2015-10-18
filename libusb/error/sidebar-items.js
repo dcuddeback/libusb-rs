@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["Error","Errors returned by the `libusb` library."]],"type":[["Result","A result of a function that may return a `Error`."]]});

@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["EndpointDescriptor","Describes an endpoint."]]});

@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `DeviceHandle` struct in crate `libusb`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, DeviceHandle">
+
+    <title>libusb::DeviceHandle - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../main.css">
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <section class="sidebar">
+        
+        <p class='location'><a href='index.html'>libusb</a></p><script>window.sidebarCurrent = {name: 'DeviceHandle', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </section>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content struct">
+<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>libusb</a>::<wbr><a class='struct' href=''>DeviceHandle</a></span><span class='out-of-band'><span id='render-detail'>
+            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                [<span class='inner'>&#x2212;</span>]
+            </a>
+        </span><a id='src-1169' class='srclink' href='../src/libusb/device_handle.rs.html#17-21' title='goto source code'>[src]</a></span></h1>
+<pre class='rust struct'>pub struct DeviceHandle&lt;'a&gt; {
+    // some fields omitted
+}</pre><div class='docblock'><p>A handle to an open USB device.</p>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl&lt;'a&gt; <a class='struct' href='../libusb/struct.DeviceHandle.html' title='libusb::DeviceHandle'>DeviceHandle</a>&lt;'a&gt;</code></h3><div class='impl-items'><h4 id='method.active_configuration' class='method'><code>fn <a href='#method.active_configuration' class='fnname'>active_configuration</a>(&amp;mut self) -&gt; <a class='type' href='../libusb/type.Result.html' title='libusb::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>&gt;</code></h4>
+<div class='docblock'><p>Returns the active configuration number.</p>
+</div><h4 id='method.set_active_configuration' class='method'><code>fn <a href='#method.set_active_configuration' class='fnname'>set_active_configuration</a>(&amp;mut self, config: <a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>) -&gt; <a class='type' href='../libusb/type.Result.html' title='libusb::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;</code></h4>
+<div class='docblock'><p>Sets the device&#39;s active configuration.</p>
+</div><h4 id='method.unconfigure' class='method'><code>fn <a href='#method.unconfigure' class='fnname'>unconfigure</a>(&amp;mut self) -&gt; <a class='type' href='../libusb/type.Result.html' title='libusb::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;</code></h4>
+<div class='docblock'><p>Puts the device in an unconfigured state.</p>
+</div><h4 id='method.reset' class='method'><code>fn <a href='#method.reset' class='fnname'>reset</a>(&amp;mut self) -&gt; <a class='type' href='../libusb/type.Result.html' title='libusb::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;</code></h4>
+<div class='docblock'><p>Resets the device.</p>
+</div><h4 id='method.kernel_driver_active' class='method'><code>fn <a href='#method.kernel_driver_active' class='fnname'>kernel_driver_active</a>(&amp;mut self, iface: <a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>) -&gt; <a class='type' href='../libusb/type.Result.html' title='libusb::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a>&gt;</code></h4>
+<div class='docblock'><p>Indicates whether the device has an attached kernel driver.</p>
+
+<p>This method is not supported on all platforms.</p>
+</div><h4 id='method.detach_kernel_driver' class='method'><code>fn <a href='#method.detach_kernel_driver' class='fnname'>detach_kernel_driver</a>(&amp;mut self, iface: <a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>) -&gt; <a class='type' href='../libusb/type.Result.html' title='libusb::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;</code></h4>
+<div class='docblock'><p>Detaches an attached kernel driver from the device.</p>
+
+<p>This method is not supported on all platforms.</p>
+</div><h4 id='method.attach_kernel_driver' class='method'><code>fn <a href='#method.attach_kernel_driver' class='fnname'>attach_kernel_driver</a>(&amp;mut self, iface: <a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>) -&gt; <a class='type' href='../libusb/type.Result.html' title='libusb::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;</code></h4>
+<div class='docblock'><p>Attaches a kernel driver to the device.</p>
+
+<p>This method is not supported on all platforms.</p>
+</div><h4 id='method.claim_interface' class='method'><code>fn <a href='#method.claim_interface' class='fnname'>claim_interface</a>(&amp;mut self, iface: <a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>) -&gt; <a class='type' href='../libusb/type.Result.html' title='libusb::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;</code></h4>
+<div class='docblock'><p>Claims one of the device&#39;s interfaces.</p>
+
+<p>An interface must be claimed before operating on it. All claimed interfaces are released
+when the device handle goes out of scope.</p>
+</div><h4 id='method.release_interface' class='method'><code>fn <a href='#method.release_interface' class='fnname'>release_interface</a>(&amp;mut self, iface: <a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>) -&gt; <a class='type' href='../libusb/type.Result.html' title='libusb::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;</code></h4>
+<div class='docblock'><p>Releases a claimed interface.</p>
+</div><h4 id='method.set_alternate_setting' class='method'><code>fn <a href='#method.set_alternate_setting' class='fnname'>set_alternate_setting</a>(&amp;mut self, iface: <a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>, setting: <a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>) -&gt; <a class='type' href='../libusb/type.Result.html' title='libusb::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>&gt;</code></h4>
+<div class='docblock'><p>Sets an interface&#39;s active setting.</p>
+</div><h4 id='method.read_interrupt' class='method'><code>fn <a href='#method.read_interrupt' class='fnname'>read_interrupt</a>(&amp;mut self, endpoint: <a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>, buf: <a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;mut [</a><a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a>, timeout: <a class='struct' href='http://doc.rust-lang.org/nightly/std/time/duration/struct.Duration.html' title='std::time::duration::Duration'>Duration</a>) -&gt; <a class='type' href='../libusb/type.Result.html' title='libusb::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>&gt;</code></h4>
+<div class='docblock'><p>Reads from an interrupt endpoint.</p>
+
+<p>This function attempts to read from the interrupt endpoint with the address given by the
+<code>endpoint</code> parameter and fills <code>buf</code> with any data received from the endpoint. The function
+blocks up to the amount of time specified by <code>timeout</code>.</p>
+
+<p>If the return value is <code>Ok(n)</code>, then <code>buf</code> is populated with <code>n</code> bytes of data received
+from the endpoint.</p>
+
+<h2 id="errors" class='section-header'><a
+                           href="#errors">Errors</a></h2>
+<p>If this function encounters any form of error while fulfilling the transfer request, an
+error variant will be returned. If an error variant is returned, no bytes were read.</p>
+
+<p>The errors returned by this function include:</p>
+
+<ul>
+<li><code>InvalidParam</code> if the endpoint is not an input endpoint.</li>
+<li><code>Timeout</code> if the transfer timed out.</li>
+<li><code>Pipe</code> if the endpoint halted.</li>
+<li><code>Overflow</code> if the device offered more data.</li>
+<li><code>NoDevice</code> if the device has been disconnected.</li>
+<li><code>Io</code> if the transfer encountered an I/O error.</li>
+</ul>
+</div><h4 id='method.write_interrupt' class='method'><code>fn <a href='#method.write_interrupt' class='fnname'>write_interrupt</a>(&amp;mut self, endpoint: <a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>, buf: <a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;[</a><a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a>, timeout: <a class='struct' href='http://doc.rust-lang.org/nightly/std/time/duration/struct.Duration.html' title='std::time::duration::Duration'>Duration</a>) -&gt; <a class='type' href='../libusb/type.Result.html' title='libusb::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>&gt;</code></h4>
+<div class='docblock'><p>Writes to an interrupt endpoint.</p>
+
+<p>This function attempts to write the contents of <code>buf</code> to the interrupt endpoint with the
+address given by the <code>endpoint</code> parameter. The function blocks up to the amount of time
+specified by <code>timeout</code>.</p>
+
+<p>If the return value is <code>Ok(n)</code>, then <code>n</code> bytes of <code>buf</code> were written to the endpoint.</p>
+
+<h2 id="errors" class='section-header'><a
+                           href="#errors">Errors</a></h2>
+<p>If this function encounters any form of error while fulfilling the transfer request, an
+error variant will be returned. If an error variant is returned, no bytes were written.</p>
+
+<p>The errors returned by this function include:</p>
+
+<ul>
+<li><code>InvalidParam</code> if the endpoint is not an output endpoint.</li>
+<li><code>Timeout</code> if the transfer timed out.</li>
+<li><code>Pipe</code> if the endpoint halted.</li>
+<li><code>NoDevice</code> if the device has been disconnected.</li>
+<li><code>Io</code> if the transfer encountered an I/O error.</li>
+</ul>
+</div><h4 id='method.read_bulk' class='method'><code>fn <a href='#method.read_bulk' class='fnname'>read_bulk</a>(&amp;mut self, endpoint: <a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>, buf: <a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;mut [</a><a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a>, timeout: <a class='struct' href='http://doc.rust-lang.org/nightly/std/time/duration/struct.Duration.html' title='std::time::duration::Duration'>Duration</a>) -&gt; <a class='type' href='../libusb/type.Result.html' title='libusb::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>&gt;</code></h4>
+<div class='docblock'><p>Reads from a bulk endpoint.</p>
+
+<p>This function attempts to read from the bulk endpoint with the address given by the
+<code>endpoint</code> parameter and fills <code>buf</code> with any data received from the endpoint. The function
+blocks up to the amount of time specified by <code>timeout</code>.</p>
+
+<p>If the return value is <code>Ok(n)</code>, then <code>buf</code> is populated with <code>n</code> bytes of data received
+from the endpoint.</p>
+
+<h2 id="errors" class='section-header'><a
+                           href="#errors">Errors</a></h2>
+<p>If this function encounters any form of error while fulfilling the transfer request, an
+error variant will be returned. If an error variant is returned, no bytes were read.</p>
+
+<p>The errors returned by this function include:</p>
+
+<ul>
+<li><code>InvalidParam</code> if the endpoint is not an input endpoint.</li>
+<li><code>Timeout</code> if the transfer timed out.</li>
+<li><code>Pipe</code> if the endpoint halted.</li>
+<li><code>Overflow</code> if the device offered more data.</li>
+<li><code>NoDevice</code> if the device has been disconnected.</li>
+<li><code>Io</code> if the transfer encountered an I/O error.</li>
+</ul>
+</div><h4 id='method.write_bulk' class='method'><code>fn <a href='#method.write_bulk' class='fnname'>write_bulk</a>(&amp;mut self, endpoint: <a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>, buf: <a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;[</a><a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a>, timeout: <a class='struct' href='http://doc.rust-lang.org/nightly/std/time/duration/struct.Duration.html' title='std::time::duration::Duration'>Duration</a>) -&gt; <a class='type' href='../libusb/type.Result.html' title='libusb::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>&gt;</code></h4>
+<div class='docblock'><p>Writes to a bulk endpoint.</p>
+
+<p>This function attempts to write the contents of <code>buf</code> to the bulk endpoint with the address
+given by the <code>endpoint</code> parameter. The function blocks up to the amount of time specified
+by <code>timeout</code>.</p>
+
+<p>If the return value is <code>Ok(n)</code>, then <code>n</code> bytes of <code>buf</code> were written to the endpoint.</p>
+
+<h2 id="errors" class='section-header'><a
+                           href="#errors">Errors</a></h2>
+<p>If this function encounters any form of error while fulfilling the transfer request, an
+error variant will be returned. If an error variant is returned, no bytes were written.</p>
+
+<p>The errors returned by this function include:</p>
+
+<ul>
+<li><code>InvalidParam</code> if the endpoint is not an output endpoint.</li>
+<li><code>Timeout</code> if the transfer timed out.</li>
+<li><code>Pipe</code> if the endpoint halted.</li>
+<li><code>NoDevice</code> if the device has been disconnected.</li>
+<li><code>Io</code> if the transfer encountered an I/O error.</li>
+</ul>
+</div><h4 id='method.read_control' class='method'><code>fn <a href='#method.read_control' class='fnname'>read_control</a>(&amp;mut self, request_type: <a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>, request: <a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>, value: <a href='http://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a>, index: <a href='http://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a>, buf: <a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;mut [</a><a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a>, timeout: <a class='struct' href='http://doc.rust-lang.org/nightly/std/time/duration/struct.Duration.html' title='std::time::duration::Duration'>Duration</a>) -&gt; <a class='type' href='../libusb/type.Result.html' title='libusb::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>&gt;</code></h4>
+<div class='docblock'><p>Reads data using a control transfer.</p>
+
+<p>This function attempts to read data from the device using a control transfer and fills
+<code>buf</code> with any data received during the transfer. The function blocks up to the amount of
+time specified by <code>timeout</code>.</p>
+
+<p>The parameters <code>request_type</code>, <code>request</code>, <code>value</code>, and <code>index</code> specify the fields of the
+control transfer setup packet (<code>bmRequestType</code>, <code>bRequest</code>, <code>wValue</code>, and <code>wIndex</code>
+respectively). The values for each of these parameters shall be given in host-endian byte
+order. The value for the <code>request_type</code> parameter can be built with the helper function,
+<a href="fn.request_type.html">request_type()</a>. The meaning of the other parameters depends on the
+type of control request.</p>
+
+<p>If the return value is <code>Ok(n)</code>, then <code>buf</code> is populated with <code>n</code> bytes of data.</p>
+
+<h2 id="errors" class='section-header'><a
+                           href="#errors">Errors</a></h2>
+<p>If this function encounters any form of error while fulfilling the transfer request, an
+error variant will be returned. If an error variant is returned, no bytes were read.</p>
+
+<p>The errors returned by this function include:</p>
+
+<ul>
+<li><code>InvalidParam</code> if <code>request_type</code> does not specify a read transfer.</li>
+<li><code>Timeout</code> if the transfer timed out.</li>
+<li><code>Pipe</code> if the control request was not supported by the device.</li>
+<li><code>NoDevice</code> if the device has been disconnected.</li>
+<li><code>Io</code> if the transfer encountered an I/O error.</li>
+</ul>
+</div><h4 id='method.write_control' class='method'><code>fn <a href='#method.write_control' class='fnname'>write_control</a>(&amp;mut self, request_type: <a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>, request: <a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>, value: <a href='http://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a>, index: <a href='http://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a>, buf: <a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>&amp;[</a><a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a><a href='http://doc.rust-lang.org/nightly/std/primitive.slice.html'>]</a>, timeout: <a class='struct' href='http://doc.rust-lang.org/nightly/std/time/duration/struct.Duration.html' title='std::time::duration::Duration'>Duration</a>) -&gt; <a class='type' href='../libusb/type.Result.html' title='libusb::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>&gt;</code></h4>
+<div class='docblock'><p>Writes data using a control transfer.</p>
+
+<p>This function attempts to write the contents of <code>buf</code> to the device using a control
+transfer. The function blocks up to the amount of time specified by <code>timeout</code>.</p>
+
+<p>The parameters <code>request_type</code>, <code>request</code>, <code>value</code>, and <code>index</code> specify the fields of the
+control transfer setup packet (<code>bmRequestType</code>, <code>bRequest</code>, <code>wValue</code>, and <code>wIndex</code>
+respectively). The values for each of these parameters shall be given in host-endian byte
+order. The value for the <code>request_type</code> parameter can be built with the helper function,
+<a href="fn.request_type.html">request_type()</a>. The meaning of the other parameters depends on the
+type of control request.</p>
+
+<p>If the return value is <code>Ok(n)</code>, then <code>n</code> bytes of <code>buf</code> were transfered.</p>
+
+<h2 id="errors" class='section-header'><a
+                           href="#errors">Errors</a></h2>
+<p>If this function encounters any form of error while fulfilling the transfer request, an
+error variant will be returned. If an error variant is returned, no bytes were read.</p>
+
+<p>The errors returned by this function include:</p>
+
+<ul>
+<li><code>InvalidParam</code> if <code>request_type</code> does not specify a write transfer.</li>
+<li><code>Timeout</code> if the transfer timed out.</li>
+<li><code>Pipe</code> if the control request was not supported by the device.</li>
+<li><code>NoDevice</code> if the device has been disconnected.</li>
+<li><code>Io</code> if the transfer encountered an I/O error.</li>
+</ul>
+</div><h4 id='method.read_languages' class='method'><code>fn <a href='#method.read_languages' class='fnname'>read_languages</a>(&amp;mut self, timeout: <a class='struct' href='http://doc.rust-lang.org/nightly/std/time/duration/struct.Duration.html' title='std::time::duration::Duration'>Duration</a>) -&gt; <a class='type' href='../libusb/type.Result.html' title='libusb::Result'>Result</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/collections/vec/struct.Vec.html' title='collections::vec::Vec'>Vec</a>&lt;<a class='struct' href='../libusb/struct.Language.html' title='libusb::Language'>Language</a>&gt;&gt;</code></h4>
+<div class='docblock'><p>Reads the languages supported by the device&#39;s string descriptors.</p>
+
+<p>This function returns a list of languages that can be used to read the device&#39;s string
+descriptors.</p>
+</div><h4 id='method.read_string_descriptor' class='method'><code>fn <a href='#method.read_string_descriptor' class='fnname'>read_string_descriptor</a>(&amp;mut self, language: <a class='struct' href='../libusb/struct.Language.html' title='libusb::Language'>Language</a>, index: <a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>, timeout: <a class='struct' href='http://doc.rust-lang.org/nightly/std/time/duration/struct.Duration.html' title='std::time::duration::Duration'>Duration</a>) -&gt; <a class='type' href='../libusb/type.Result.html' title='libusb::Result'>Result</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;</code></h4>
+<div class='docblock'><p>Reads a string descriptor from the device.</p>
+
+<p><code>language</code> should be one of the languages returned from <a href="#method.read_languages"><code>read_languages</code></a>.</p>
+</div><h4 id='method.read_manufacturer_string' class='method'><code>fn <a href='#method.read_manufacturer_string' class='fnname'>read_manufacturer_string</a>(&amp;mut self, language: <a class='struct' href='../libusb/struct.Language.html' title='libusb::Language'>Language</a>, device: &amp;<a class='struct' href='../libusb/struct.DeviceDescriptor.html' title='libusb::DeviceDescriptor'>DeviceDescriptor</a>, timeout: <a class='struct' href='http://doc.rust-lang.org/nightly/std/time/duration/struct.Duration.html' title='std::time::duration::Duration'>Duration</a>) -&gt; <a class='type' href='../libusb/type.Result.html' title='libusb::Result'>Result</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;</code></h4>
+<div class='docblock'><p>Reads the device&#39;s manufacturer string descriptor.</p>
+</div><h4 id='method.read_product_string' class='method'><code>fn <a href='#method.read_product_string' class='fnname'>read_product_string</a>(&amp;mut self, language: <a class='struct' href='../libusb/struct.Language.html' title='libusb::Language'>Language</a>, device: &amp;<a class='struct' href='../libusb/struct.DeviceDescriptor.html' title='libusb::DeviceDescriptor'>DeviceDescriptor</a>, timeout: <a class='struct' href='http://doc.rust-lang.org/nightly/std/time/duration/struct.Duration.html' title='std::time::duration::Duration'>Duration</a>) -&gt; <a class='type' href='../libusb/type.Result.html' title='libusb::Result'>Result</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;</code></h4>
+<div class='docblock'><p>Reads the device&#39;s product string descriptor.</p>
+</div><h4 id='method.read_serial_number_string' class='method'><code>fn <a href='#method.read_serial_number_string' class='fnname'>read_serial_number_string</a>(&amp;mut self, language: <a class='struct' href='../libusb/struct.Language.html' title='libusb::Language'>Language</a>, device: &amp;<a class='struct' href='../libusb/struct.DeviceDescriptor.html' title='libusb::DeviceDescriptor'>DeviceDescriptor</a>, timeout: <a class='struct' href='http://doc.rust-lang.org/nightly/std/time/duration/struct.Duration.html' title='std::time::duration::Duration'>Duration</a>) -&gt; <a class='type' href='../libusb/type.Result.html' title='libusb::Result'>Result</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;</code></h4>
+<div class='docblock'><p>Reads the device&#39;s serial number string descriptor.</p>
+</div><h4 id='method.read_configuration_string' class='method'><code>fn <a href='#method.read_configuration_string' class='fnname'>read_configuration_string</a>(&amp;mut self, language: <a class='struct' href='../libusb/struct.Language.html' title='libusb::Language'>Language</a>, configuration: &amp;<a class='struct' href='../libusb/struct.ConfigDescriptor.html' title='libusb::ConfigDescriptor'>ConfigDescriptor</a>, timeout: <a class='struct' href='http://doc.rust-lang.org/nightly/std/time/duration/struct.Duration.html' title='std::time::duration::Duration'>Duration</a>) -&gt; <a class='type' href='../libusb/type.Result.html' title='libusb::Result'>Result</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;</code></h4>
+<div class='docblock'><p>Reads the string descriptor for a configuration&#39;s description.</p>
+</div><h4 id='method.read_interface_string' class='method'><code>fn <a href='#method.read_interface_string' class='fnname'>read_interface_string</a>(&amp;mut self, language: <a class='struct' href='../libusb/struct.Language.html' title='libusb::Language'>Language</a>, interface: &amp;<a class='struct' href='../libusb/struct.InterfaceDescriptor.html' title='libusb::InterfaceDescriptor'>InterfaceDescriptor</a>, timeout: <a class='struct' href='http://doc.rust-lang.org/nightly/std/time/duration/struct.Duration.html' title='std::time::duration::Duration'>Duration</a>) -&gt; <a class='type' href='../libusb/type.Result.html' title='libusb::Result'>Result</a>&lt;<a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;</code></h4>
+<div class='docblock'><p>Reads the string descriptor for a interface&#39;s description.</p>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl&lt;'a&gt; <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.Drop.html' title='core::ops::Drop'>Drop</a> for <a class='struct' href='../libusb/struct.DeviceHandle.html' title='libusb::DeviceHandle'>DeviceHandle</a>&lt;'a&gt;</code></h3><div class='impl-items'><h4 id='method.drop' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/ops/trait.Drop.html#method.drop' class='fnname'>drop</a>(&amp;mut self)</code></h4>
+</div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <div id="help" class="hidden">
+        <div>
+            <div class="shortcuts">
+                <h1>Keyboard Shortcuts</h1>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h1>Search Tricks</h1>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>typedef</code> (or
+                    <code>tdef</code>).
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code>)
+                </p>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <script>
+        window.rootPath = "../";
+        window.currentCrate = "libusb";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../jquery.js"></script>
+    <script src="../main.js"></script>
+    
+    <script async src="../search-index.js"></script>
+</body>
+</html>
