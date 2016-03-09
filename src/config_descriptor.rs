@@ -108,7 +108,7 @@ impl<'a> Iterator for Interfaces<'a> {
 
     fn next(&mut self) -> Option<Interface<'a>> {
         self.iter.next().map(|interface| {
-            ::interface_descriptor::from_libusb(interface)
+            unsafe { ::interface_descriptor::from_libusb(interface) }
         })
     }
 
@@ -119,7 +119,7 @@ impl<'a> Iterator for Interfaces<'a> {
 
 
 #[doc(hidden)]
-pub fn from_libusb(config: *const ::libusb::libusb_config_descriptor) -> ConfigDescriptor {
+pub unsafe fn from_libusb(config: *const ::libusb::libusb_config_descriptor) -> ConfigDescriptor {
     ConfigDescriptor { descriptor: config }
 }
 
@@ -137,7 +137,7 @@ mod test {
     macro_rules! with_config {
         ($name:ident : $config:expr => $body:block) => {
             {
-                let $name = super::from_libusb(&$config);
+                let $name = unsafe { super::from_libusb(&$config) };
                 $body;
                 mem::forget($name);
             }

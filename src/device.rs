@@ -40,7 +40,7 @@ impl<'a> Device<'a> {
 
         try_unsafe!(::libusb::libusb_get_config_descriptor(self.device, config_index, &mut config));
 
-        Ok(::config_descriptor::from_libusb(config))
+        Ok(unsafe { ::config_descriptor::from_libusb(config) })
     }
 
     /// Returns the number of the bus that the device is connected to.
@@ -70,13 +70,13 @@ impl<'a> Device<'a> {
 
         try_unsafe!(::libusb::libusb_open(self.device, &mut handle));
 
-        Ok(::device_handle::from_libusb(self.context, handle))
+        Ok(unsafe { ::device_handle::from_libusb(self.context, handle) })
     }
 }
 
 #[doc(hidden)]
-pub fn from_libusb<'a>(context: PhantomData<&'a Context>, device: *mut ::libusb::libusb_device) -> Device<'a> {
-    unsafe { ::libusb::libusb_ref_device(device) };
+pub unsafe fn from_libusb<'a>(context: PhantomData<&'a Context>, device: *mut ::libusb::libusb_device) -> Device<'a> {
+    ::libusb::libusb_ref_device(device);
 
     Device {
         context: context,
