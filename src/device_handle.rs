@@ -326,7 +326,10 @@ impl<'a> DeviceHandle<'a> {
     /// * `NoDevice` if the device has been disconnected.
     /// * `Io` if the transfer encountered an I/O error.
     pub fn read_control(&mut self, request_type: u8, request: u8, value: u16, index: u16, buf: &mut [u8], timeout: Duration) -> ::Result<usize> {
-        if request_type & ::libusb::LIBUSB_ENDPOINT_DIR_MASK != ::libusb::LIBUSB_ENDPOINT_IN {
+        // only Direction::In is allowed, except for SET_IDLE requests (request 0x0a), where
+        //     Direction::Out is allowed
+        if request_type & ::libusb::LIBUSB_ENDPOINT_DIR_MASK != ::libusb::LIBUSB_ENDPOINT_IN
+                && request != 0x0a {
             return Err(::Error::InvalidParam);
         }
 
