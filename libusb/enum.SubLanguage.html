@@ -9,7 +9,9 @@
 
     <title>libusb::SubLanguage - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../main.css">
+    
 
     
     
@@ -24,10 +26,10 @@
 
     
 
-    <section class="sidebar">
+    <nav class="sidebar">
         
         <p class='location'><a href='index.html'>libusb</a></p><script>window.sidebarCurrent = {name: 'SubLanguage', ty: 'enum', relpath: ''};</script><script defer src="sidebar-items.js"></script>
-    </section>
+    </nav>
 
     <nav class="sub">
         <form class="search-form js-only">
@@ -42,10 +44,10 @@
 
     <section id='main' class="content enum">
 <h1 class='fqn'><span class='in-band'>Enum <a href='index.html'>libusb</a>::<wbr><a class='enum' href=''>SubLanguage</a></span><span class='out-of-band'><span id='render-detail'>
-            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
-                [<span class='inner'>&#x2212;</span>]
-            </a>
-        </span><a id='src-9799' class='srclink' href='../src/libusb/language.rs.html#211-295' title='goto source code'>[src]</a></span></h1>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a id='src-1293' class='srclink' href='../src/libusb/src/language.rs.html#211-295' title='goto source code'>[src]</a></span></h1>
 <pre class='rust enum'>pub enum SubLanguage {
     Standard,
     Classic,
@@ -126,23 +128,35 @@
     VendorDefined2,
     VendorDefined3,
     VendorDefined4,
-    Other(<a href='http://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a>),
+    Other(<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a>),
 }</pre><div class='docblock'><p>Language dialects and writing systems.</p>
 </div><h2 class='variants'>Variants</h2>
-<table><tr><td id='variant.Standard'><code>Standard</code></td><td></td></tr><tr><td id='variant.Classic'><code>Classic</code></td><td></td></tr><tr><td id='variant.Traditional'><code>Traditional</code></td><td></td></tr><tr><td id='variant.Modern'><code>Modern</code></td><td></td></tr><tr><td id='variant.Algeria'><code>Algeria</code></td><td></td></tr><tr><td id='variant.Argentina'><code>Argentina</code></td><td></td></tr><tr><td id='variant.Australia'><code>Australia</code></td><td></td></tr><tr><td id='variant.Austria'><code>Austria</code></td><td></td></tr><tr><td id='variant.Bahrain'><code>Bahrain</code></td><td></td></tr><tr><td id='variant.Belgium'><code>Belgium</code></td><td></td></tr><tr><td id='variant.Belize'><code>Belize</code></td><td></td></tr><tr><td id='variant.Bokmal'><code>Bokmal</code></td><td></td></tr><tr><td id='variant.Bolivia'><code>Bolivia</code></td><td></td></tr><tr><td id='variant.Brazil'><code>Brazil</code></td><td></td></tr><tr><td id='variant.BruneiDarussalam'><code>BruneiDarussalam</code></td><td></td></tr><tr><td id='variant.Canada'><code>Canada</code></td><td></td></tr><tr><td id='variant.Caribbean'><code>Caribbean</code></td><td></td></tr><tr><td id='variant.Chile'><code>Chile</code></td><td></td></tr><tr><td id='variant.China'><code>China</code></td><td></td></tr><tr><td id='variant.Colombia'><code>Colombia</code></td><td></td></tr><tr><td id='variant.CostaRica'><code>CostaRica</code></td><td></td></tr><tr><td id='variant.Cyrillic'><code>Cyrillic</code></td><td></td></tr><tr><td id='variant.DominicanRepublic'><code>DominicanRepublic</code></td><td></td></tr><tr><td id='variant.Ecuador'><code>Ecuador</code></td><td></td></tr><tr><td id='variant.Egypt'><code>Egypt</code></td><td></td></tr><tr><td id='variant.ElSalvador'><code>ElSalvador</code></td><td></td></tr><tr><td id='variant.Finland'><code>Finland</code></td><td></td></tr><tr><td id='variant.Guatemala'><code>Guatemala</code></td><td></td></tr><tr><td id='variant.Honduras'><code>Honduras</code></td><td></td></tr><tr><td id='variant.HongKong'><code>HongKong</code></td><td></td></tr><tr><td id='variant.India'><code>India</code></td><td></td></tr><tr><td id='variant.Iraq'><code>Iraq</code></td><td></td></tr><tr><td id='variant.Ireland'><code>Ireland</code></td><td></td></tr><tr><td id='variant.Jamaica'><code>Jamaica</code></td><td></td></tr><tr><td id='variant.Johab'><code>Johab</code></td><td></td></tr><tr><td id='variant.Jordan'><code>Jordan</code></td><td></td></tr><tr><td id='variant.Kuwait'><code>Kuwait</code></td><td></td></tr><tr><td id='variant.Latin'><code>Latin</code></td><td></td></tr><tr><td id='variant.Lebanon'><code>Lebanon</code></td><td></td></tr><tr><td id='variant.Libya'><code>Libya</code></td><td></td></tr><tr><td id='variant.Liechtenstein'><code>Liechtenstein</code></td><td></td></tr><tr><td id='variant.Luxembourg'><code>Luxembourg</code></td><td></td></tr><tr><td id='variant.Macau'><code>Macau</code></td><td></td></tr><tr><td id='variant.Malaysia'><code>Malaysia</code></td><td></td></tr><tr><td id='variant.Mexico'><code>Mexico</code></td><td></td></tr><tr><td id='variant.Monaco'><code>Monaco</code></td><td></td></tr><tr><td id='variant.Morocco'><code>Morocco</code></td><td></td></tr><tr><td id='variant.Netherlands'><code>Netherlands</code></td><td></td></tr><tr><td id='variant.NewZealand'><code>NewZealand</code></td><td></td></tr><tr><td id='variant.Nicaragua'><code>Nicaragua</code></td><td></td></tr><tr><td id='variant.Nynorsk'><code>Nynorsk</code></td><td></td></tr><tr><td id='variant.Oman'><code>Oman</code></td><td></td></tr><tr><td id='variant.Pakistan'><code>Pakistan</code></td><td></td></tr><tr><td id='variant.Panama'><code>Panama</code></td><td></td></tr><tr><td id='variant.Paraguay'><code>Paraguay</code></td><td></td></tr><tr><td id='variant.Peru'><code>Peru</code></td><td></td></tr><tr><td id='variant.Philippines'><code>Philippines</code></td><td></td></tr><tr><td id='variant.PuertoRico'><code>PuertoRico</code></td><td></td></tr><tr><td id='variant.Qatar'><code>Qatar</code></td><td></td></tr><tr><td id='variant.SaudiArabia'><code>SaudiArabia</code></td><td></td></tr><tr><td id='variant.Singapore'><code>Singapore</code></td><td></td></tr><tr><td id='variant.SouthAfrica'><code>SouthAfrica</code></td><td></td></tr><tr><td id='variant.Switzerland'><code>Switzerland</code></td><td></td></tr><tr><td id='variant.Syria'><code>Syria</code></td><td></td></tr><tr><td id='variant.Taiwan'><code>Taiwan</code></td><td></td></tr><tr><td id='variant.Trinidad'><code>Trinidad</code></td><td></td></tr><tr><td id='variant.Tunisia'><code>Tunisia</code></td><td></td></tr><tr><td id='variant.UnitedArabEmirates'><code>UnitedArabEmirates</code></td><td></td></tr><tr><td id='variant.UnitedKingdom'><code>UnitedKingdom</code></td><td></td></tr><tr><td id='variant.UnitedStates'><code>UnitedStates</code></td><td></td></tr><tr><td id='variant.Uruguay'><code>Uruguay</code></td><td></td></tr><tr><td id='variant.Venezuela'><code>Venezuela</code></td><td></td></tr><tr><td id='variant.Yemen'><code>Yemen</code></td><td></td></tr><tr><td id='variant.Zimbabwe'><code>Zimbabwe</code></td><td></td></tr><tr><td id='variant.UsageDataDescriptor'><code>UsageDataDescriptor</code></td><td></td></tr><tr><td id='variant.VendorDefined1'><code>VendorDefined1</code></td><td></td></tr><tr><td id='variant.VendorDefined2'><code>VendorDefined2</code></td><td></td></tr><tr><td id='variant.VendorDefined3'><code>VendorDefined3</code></td><td></td></tr><tr><td id='variant.VendorDefined4'><code>VendorDefined4</code></td><td></td></tr><tr><td id='variant.Other'><code>Other</code></td><td></td></tr></table><h2 id='implementations'>Trait Implementations</h2><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/cmp/trait.Eq.html' title='core::cmp::Eq'>Eq</a> for <a class='enum' href='../libusb/enum.SubLanguage.html' title='libusb::SubLanguage'>SubLanguage</a></code></h3><div class='impl-items'></div><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html' title='core::cmp::PartialEq'>PartialEq</a> for <a class='enum' href='../libusb/enum.SubLanguage.html' title='libusb::SubLanguage'>SubLanguage</a></code></h3><div class='impl-items'><h4 id='method.eq' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#method.eq' class='fnname'>eq</a>(&amp;self, __arg_0: &amp;<a class='enum' href='../libusb/enum.SubLanguage.html' title='libusb::SubLanguage'>SubLanguage</a>) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
-<h4 id='method.ne' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#method.ne' class='fnname'>ne</a>(&amp;self, __arg_0: &amp;<a class='enum' href='../libusb/enum.SubLanguage.html' title='libusb::SubLanguage'>SubLanguage</a>) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
-</div><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> for <a class='enum' href='../libusb/enum.SubLanguage.html' title='libusb::SubLanguage'>SubLanguage</a></code></h3><div class='impl-items'><h4 id='method.clone' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class='enum' href='../libusb/enum.SubLanguage.html' title='libusb::SubLanguage'>SubLanguage</a></code></h4>
-<h4 id='method.clone_from' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code></h4>
-</div><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Copy.html' title='core::marker::Copy'>Copy</a> for <a class='enum' href='../libusb/enum.SubLanguage.html' title='libusb::SubLanguage'>SubLanguage</a></code></h3><div class='impl-items'></div><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='enum' href='../libusb/enum.SubLanguage.html' title='libusb::SubLanguage'>SubLanguage</a></code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#method.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='http://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
-</div></section>
+<span id='variant.Standard' class='variant'><code>Standard</code></span><span id='variant.Classic' class='variant'><code>Classic</code></span><span id='variant.Traditional' class='variant'><code>Traditional</code></span><span id='variant.Modern' class='variant'><code>Modern</code></span><span id='variant.Algeria' class='variant'><code>Algeria</code></span><span id='variant.Argentina' class='variant'><code>Argentina</code></span><span id='variant.Australia' class='variant'><code>Australia</code></span><span id='variant.Austria' class='variant'><code>Austria</code></span><span id='variant.Bahrain' class='variant'><code>Bahrain</code></span><span id='variant.Belgium' class='variant'><code>Belgium</code></span><span id='variant.Belize' class='variant'><code>Belize</code></span><span id='variant.Bokmal' class='variant'><code>Bokmal</code></span><span id='variant.Bolivia' class='variant'><code>Bolivia</code></span><span id='variant.Brazil' class='variant'><code>Brazil</code></span><span id='variant.BruneiDarussalam' class='variant'><code>BruneiDarussalam</code></span><span id='variant.Canada' class='variant'><code>Canada</code></span><span id='variant.Caribbean' class='variant'><code>Caribbean</code></span><span id='variant.Chile' class='variant'><code>Chile</code></span><span id='variant.China' class='variant'><code>China</code></span><span id='variant.Colombia' class='variant'><code>Colombia</code></span><span id='variant.CostaRica' class='variant'><code>CostaRica</code></span><span id='variant.Cyrillic' class='variant'><code>Cyrillic</code></span><span id='variant.DominicanRepublic' class='variant'><code>DominicanRepublic</code></span><span id='variant.Ecuador' class='variant'><code>Ecuador</code></span><span id='variant.Egypt' class='variant'><code>Egypt</code></span><span id='variant.ElSalvador' class='variant'><code>ElSalvador</code></span><span id='variant.Finland' class='variant'><code>Finland</code></span><span id='variant.Guatemala' class='variant'><code>Guatemala</code></span><span id='variant.Honduras' class='variant'><code>Honduras</code></span><span id='variant.HongKong' class='variant'><code>HongKong</code></span><span id='variant.India' class='variant'><code>India</code></span><span id='variant.Iraq' class='variant'><code>Iraq</code></span><span id='variant.Ireland' class='variant'><code>Ireland</code></span><span id='variant.Jamaica' class='variant'><code>Jamaica</code></span><span id='variant.Johab' class='variant'><code>Johab</code></span><span id='variant.Jordan' class='variant'><code>Jordan</code></span><span id='variant.Kuwait' class='variant'><code>Kuwait</code></span><span id='variant.Latin' class='variant'><code>Latin</code></span><span id='variant.Lebanon' class='variant'><code>Lebanon</code></span><span id='variant.Libya' class='variant'><code>Libya</code></span><span id='variant.Liechtenstein' class='variant'><code>Liechtenstein</code></span><span id='variant.Luxembourg' class='variant'><code>Luxembourg</code></span><span id='variant.Macau' class='variant'><code>Macau</code></span><span id='variant.Malaysia' class='variant'><code>Malaysia</code></span><span id='variant.Mexico' class='variant'><code>Mexico</code></span><span id='variant.Monaco' class='variant'><code>Monaco</code></span><span id='variant.Morocco' class='variant'><code>Morocco</code></span><span id='variant.Netherlands' class='variant'><code>Netherlands</code></span><span id='variant.NewZealand' class='variant'><code>NewZealand</code></span><span id='variant.Nicaragua' class='variant'><code>Nicaragua</code></span><span id='variant.Nynorsk' class='variant'><code>Nynorsk</code></span><span id='variant.Oman' class='variant'><code>Oman</code></span><span id='variant.Pakistan' class='variant'><code>Pakistan</code></span><span id='variant.Panama' class='variant'><code>Panama</code></span><span id='variant.Paraguay' class='variant'><code>Paraguay</code></span><span id='variant.Peru' class='variant'><code>Peru</code></span><span id='variant.Philippines' class='variant'><code>Philippines</code></span><span id='variant.PuertoRico' class='variant'><code>PuertoRico</code></span><span id='variant.Qatar' class='variant'><code>Qatar</code></span><span id='variant.SaudiArabia' class='variant'><code>SaudiArabia</code></span><span id='variant.Singapore' class='variant'><code>Singapore</code></span><span id='variant.SouthAfrica' class='variant'><code>SouthAfrica</code></span><span id='variant.Switzerland' class='variant'><code>Switzerland</code></span><span id='variant.Syria' class='variant'><code>Syria</code></span><span id='variant.Taiwan' class='variant'><code>Taiwan</code></span><span id='variant.Trinidad' class='variant'><code>Trinidad</code></span><span id='variant.Tunisia' class='variant'><code>Tunisia</code></span><span id='variant.UnitedArabEmirates' class='variant'><code>UnitedArabEmirates</code></span><span id='variant.UnitedKingdom' class='variant'><code>UnitedKingdom</code></span><span id='variant.UnitedStates' class='variant'><code>UnitedStates</code></span><span id='variant.Uruguay' class='variant'><code>Uruguay</code></span><span id='variant.Venezuela' class='variant'><code>Venezuela</code></span><span id='variant.Yemen' class='variant'><code>Yemen</code></span><span id='variant.Zimbabwe' class='variant'><code>Zimbabwe</code></span><span id='variant.UsageDataDescriptor' class='variant'><code>UsageDataDescriptor</code></span><span id='variant.VendorDefined1' class='variant'><code>VendorDefined1</code></span><span id='variant.VendorDefined2' class='variant'><code>VendorDefined2</code></span><span id='variant.VendorDefined3' class='variant'><code>VendorDefined3</code></span><span id='variant.VendorDefined4' class='variant'><code>VendorDefined4</code></span><span id='variant.Other' class='variant'><code>Other(<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a>)</code></span><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/cmp/trait.Eq.html' title='core::cmp::Eq'>Eq</a> for <a class='enum' href='../libusb/enum.SubLanguage.html' title='libusb::SubLanguage'>SubLanguage</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-1184' class='srclink' href='../src/libusb/src/language.rs.html#210' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html' title='core::cmp::PartialEq'>PartialEq</a> for <a class='enum' href='../libusb/enum.SubLanguage.html' title='libusb::SubLanguage'>SubLanguage</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-1188' class='srclink' href='../src/libusb/src/language.rs.html#210' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.eq' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#tymethod.eq' class='fnname'>eq</a>(&amp;self, __arg_0: &amp;<a class='enum' href='../libusb/enum.SubLanguage.html' title='libusb::SubLanguage'>SubLanguage</a>) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+<div class='docblock'><p>This method tests for <code>self</code> and <code>other</code> values to be equal, and is used by <code>==</code>. <a href="https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#tymethod.eq">Read more</a></p>
+</div><h4 id='method.ne' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#method.ne' class='fnname'>ne</a>(&amp;self, __arg_0: &amp;<a class='enum' href='../libusb/enum.SubLanguage.html' title='libusb::SubLanguage'>SubLanguage</a>) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+<div class='docblock'><p>This method tests for <code>!=</code>.</p>
+</div></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> for <a class='enum' href='../libusb/enum.SubLanguage.html' title='libusb::SubLanguage'>SubLanguage</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-1203' class='srclink' href='../src/libusb/src/language.rs.html#210' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.clone' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class='enum' href='../libusb/enum.SubLanguage.html' title='libusb::SubLanguage'>SubLanguage</a></code></h4>
+<div class='docblock'><p>Returns a copy of the value. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone">Read more</a></p>
+</div><h4 id='method.clone_from' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code><div class='since' title='Stable since Rust version 1.0.0'>1.0.0</div></h4>
+<div class='docblock'><p>Performs copy-assignment from <code>source</code>. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from">Read more</a></p>
+</div></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Copy.html' title='core::marker::Copy'>Copy</a> for <a class='enum' href='../libusb/enum.SubLanguage.html' title='libusb::SubLanguage'>SubLanguage</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-1207' class='srclink' href='../src/libusb/src/language.rs.html#210' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='enum' href='../libusb/enum.SubLanguage.html' title='libusb::SubLanguage'>SubLanguage</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-1208' class='srclink' href='../src/libusb/src/language.rs.html#210' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
+<div class='docblock'><p>Formats the value using the given formatter.</p>
+</div></div></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
 
-    <div id="help" class="hidden">
+    <aside id="help" class="hidden">
         <div>
+            <h1 class="hidden">Help</h1>
+
             <div class="shortcuts">
-                <h1>Keyboard Shortcuts</h1>
+                <h2>Keyboard Shortcuts</h2>
 
                 <dl>
                     <dt>?</dt>
@@ -155,11 +169,13 @@
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 
             <div class="infos">
-                <h1>Search Tricks</h1>
+                <h2>Search Tricks</h2>
 
                 <p>
                     Prefix searches with a type followed by a colon (e.g.
@@ -169,17 +185,17 @@
                 <p>
                     Accepted types are: <code>fn</code>, <code>mod</code>,
                     <code>struct</code>, <code>enum</code>,
-                    <code>trait</code>, <code>typedef</code> (or
-                    <code>tdef</code>).
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
                 </p>
 
                 <p>
                     Search functions by type signature (e.g.
-                    <code>vec -> usize</code>)
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
                 </p>
             </div>
         </div>
-    </div>
+    </aside>
 
     
 
@@ -191,6 +207,6 @@
     <script src="../jquery.js"></script>
     <script src="../main.js"></script>
     
-    <script async src="../search-index.js"></script>
+    <script defer src="../search-index.js"></script>
 </body>
 </html>

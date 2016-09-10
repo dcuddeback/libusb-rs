@@ -9,7 +9,9 @@
 
     <title>libusb::Context - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../main.css">
+    
 
     
     
@@ -24,10 +26,10 @@
 
     
 
-    <section class="sidebar">
+    <nav class="sidebar">
         
         <p class='location'><a href='index.html'>libusb</a></p><script>window.sidebarCurrent = {name: 'Context', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
-    </section>
+    </nav>
 
     <nav class="sub">
         <form class="search-form js-only">
@@ -42,36 +44,52 @@
 
     <section id='main' class="content struct">
 <h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>libusb</a>::<wbr><a class='struct' href=''>Context</a></span><span class='out-of-band'><span id='render-detail'>
-            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
-                [<span class='inner'>&#x2212;</span>]
-            </a>
-        </span><a id='src-496' class='srclink' href='../src/libusb/context.rs.html#9-11' title='goto source code'>[src]</a></span></h1>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a id='src-122' class='srclink' href='../src/libusb/src/context.rs.html#12-14' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Context {
     // some fields omitted
 }</pre><div class='docblock'><p>A <code>libusb</code> context.</p>
-</div><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='struct' href='../libusb/struct.Context.html' title='libusb::Context'>Context</a></code></h3><div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>() -&gt; <a class='type' href='../libusb/type.Result.html' title='libusb::Result'>Result</a>&lt;Self&gt;</code></h4>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class='struct' href='../libusb/struct.Context.html' title='libusb::Context'>Context</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-129' class='srclink' href='../src/libusb/src/context.rs.html#28-104' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.new' class='method'><code>fn <a href='#method.new' class='fnname'>new</a>() -&gt; <a class='type' href='../libusb/type.Result.html' title='libusb::Result'>Result</a>&lt;Self&gt;</code></h4>
 <div class='docblock'><p>Opens a new <code>libusb</code> context.</p>
 </div><h4 id='method.set_log_level' class='method'><code>fn <a href='#method.set_log_level' class='fnname'>set_log_level</a>(&amp;mut self, level: <a class='enum' href='../libusb/enum.LogLevel.html' title='libusb::LogLevel'>LogLevel</a>)</code></h4>
 <div class='docblock'><p>Sets the log level of a <code>libusb</code> context.</p>
-</div><h4 id='method.has_capability' class='method'><code>fn <a href='#method.has_capability' class='fnname'>has_capability</a>(&amp;self) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
-<h4 id='method.has_hotplug' class='method'><code>fn <a href='#method.has_hotplug' class='fnname'>has_hotplug</a>(&amp;self) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+</div><h4 id='method.has_capability' class='method'><code>fn <a href='#method.has_capability' class='fnname'>has_capability</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+<h4 id='method.has_hotplug' class='method'><code>fn <a href='#method.has_hotplug' class='fnname'>has_hotplug</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
 <div class='docblock'><p>Tests whether the running <code>libusb</code> library supports hotplug.</p>
-</div><h4 id='method.has_hid_access' class='method'><code>fn <a href='#method.has_hid_access' class='fnname'>has_hid_access</a>(&amp;self) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+</div><h4 id='method.has_hid_access' class='method'><code>fn <a href='#method.has_hid_access' class='fnname'>has_hid_access</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
 <div class='docblock'><p>Tests whether the running <code>libusb</code> library has HID access.</p>
-</div><h4 id='method.supports_detach_kernel_driver' class='method'><code>fn <a href='#method.supports_detach_kernel_driver' class='fnname'>supports_detach_kernel_driver</a>(&amp;self) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+</div><h4 id='method.supports_detach_kernel_driver' class='method'><code>fn <a href='#method.supports_detach_kernel_driver' class='fnname'>supports_detach_kernel_driver</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
 <div class='docblock'><p>Tests whether the running <code>libusb</code> library supports detaching the kernel driver.</p>
-</div><h4 id='method.devices' class='method'><code>fn <a href='#method.devices' class='fnname'>devices</a>&lt;'a&gt;(&amp;'a mut self) -&gt; <a class='type' href='../libusb/type.Result.html' title='libusb::Result'>Result</a>&lt;<a class='struct' href='../libusb/struct.DeviceList.html' title='libusb::DeviceList'>DeviceList</a>&lt;'a&gt;&gt;</code></h4>
+</div><h4 id='method.devices' class='method'><code>fn <a href='#method.devices' class='fnname'>devices</a>&lt;'a&gt;(&amp;'a self) -&gt; <a class='type' href='../libusb/type.Result.html' title='libusb::Result'>Result</a>&lt;<a class='struct' href='../libusb/struct.DeviceList.html' title='libusb::DeviceList'>DeviceList</a>&lt;'a&gt;&gt;</code></h4>
 <div class='docblock'><p>Returns a list of the current USB devices. The context must outlive the device list.</p>
-</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.Drop.html' title='core::ops::Drop'>Drop</a> for <a class='struct' href='../libusb/struct.Context.html' title='libusb::Context'>Context</a></code></h3><div class='impl-items'><h4 id='method.drop' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/ops/trait.Drop.html#method.drop' class='fnname'>drop</a>(&amp;mut self)</code></h4>
-</div></section>
+</div><h4 id='method.open_device_with_vid_pid' class='method'><code>fn <a href='#method.open_device_with_vid_pid' class='fnname'>open_device_with_vid_pid</a>&lt;'a&gt;(&amp;'a self, vendor_id: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a>, product_id: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='struct' href='../libusb/struct.DeviceHandle.html' title='libusb::DeviceHandle'>DeviceHandle</a>&lt;'a&gt;&gt;</code></h4>
+<div class='docblock'><p>Convenience function to open a device by its vendor ID and product ID.</p>
+
+<p>This function is provided as a convenience for building prototypes without having to
+iterate a <a href="struct.DeviceList.html"><code>DeviceList</code></a>. It is not meant for production
+applications.</p>
+
+<p>Returns a device handle for the first device found matching <code>vendor_id</code> and <code>product_id</code>.
+On error, or if the device could not be found, it returns <code>None</code>.</p>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html' title='core::ops::Drop'>Drop</a> for <a class='struct' href='../libusb/struct.Context.html' title='libusb::Context'>Context</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-124' class='srclink' href='../src/libusb/src/context.rs.html#16-23' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.drop' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html#tymethod.drop' class='fnname'>drop</a>(&amp;mut self)</code></h4>
+<div class='docblock'><p>Closes the <code>libusb</code> context.</p>
+</div></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Sync.html' title='core::marker::Sync'>Sync</a> for <a class='struct' href='../libusb/struct.Context.html' title='libusb::Context'>Context</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-127' class='srclink' href='../src/libusb/src/context.rs.html#25' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a> for <a class='struct' href='../libusb/struct.Context.html' title='libusb::Context'>Context</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-128' class='srclink' href='../src/libusb/src/context.rs.html#26' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'></div></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
 
-    <div id="help" class="hidden">
+    <aside id="help" class="hidden">
         <div>
+            <h1 class="hidden">Help</h1>
+
             <div class="shortcuts">
-                <h1>Keyboard Shortcuts</h1>
+                <h2>Keyboard Shortcuts</h2>
 
                 <dl>
                     <dt>?</dt>
@@ -84,11 +102,13 @@
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 
             <div class="infos">
-                <h1>Search Tricks</h1>
+                <h2>Search Tricks</h2>
 
                 <p>
                     Prefix searches with a type followed by a colon (e.g.
@@ -98,17 +118,17 @@
                 <p>
                     Accepted types are: <code>fn</code>, <code>mod</code>,
                     <code>struct</code>, <code>enum</code>,
-                    <code>trait</code>, <code>typedef</code> (or
-                    <code>tdef</code>).
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
                 </p>
 
                 <p>
                     Search functions by type signature (e.g.
-                    <code>vec -> usize</code>)
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
                 </p>
             </div>
         </div>
-    </div>
+    </aside>
 
     
 
@@ -120,6 +140,6 @@
     <script src="../jquery.js"></script>
     <script src="../main.js"></script>
     
-    <script async src="../search-index.js"></script>
+    <script defer src="../search-index.js"></script>
 </body>
 </html>

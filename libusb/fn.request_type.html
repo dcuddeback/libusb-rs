@@ -9,7 +9,9 @@
 
     <title>libusb::request_type - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../main.css">
+    
 
     
     
@@ -24,10 +26,10 @@
 
     
 
-    <section class="sidebar">
+    <nav class="sidebar">
         
         <p class='location'><a href='index.html'>libusb</a></p><script>window.sidebarCurrent = {name: 'request_type', ty: 'fn', relpath: ''};</script><script defer src="sidebar-items.js"></script>
-    </section>
+    </nav>
 
     <nav class="sub">
         <form class="search-form js-only">
@@ -42,19 +44,19 @@
 
     <section id='main' class="content fn">
 <h1 class='fqn'><span class='in-band'>Function <a href='index.html'>libusb</a>::<wbr><a class='fn' href=''>request_type</a></span><span class='out-of-band'><span id='render-detail'>
-            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
-                [<span class='inner'>&#x2212;</span>]
-            </a>
-        </span><a id='src-5653' class='srclink' href='../src/libusb/fields.rs.html#198-219' title='goto source code'>[src]</a></span></h1>
-<pre class='rust fn'>pub fn request_type(direction: <a class='enum' href='../libusb/enum.Direction.html' title='libusb::Direction'>Direction</a>, request_type: <a class='enum' href='../libusb/enum.RequestType.html' title='libusb::RequestType'>RequestType</a>, recipient: <a class='enum' href='../libusb/enum.Recipient.html' title='libusb::Recipient'>Recipient</a>) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></pre><div class='docblock'><p>Builds a value for the <code>bmRequestType</code> field of a control transfer setup packet.</p>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a id='src-748' class='srclink' href='../src/libusb/src/fields.rs.html#199-220' title='goto source code'>[src]</a></span></h1>
+<pre class='rust fn'>pub fn request_type(direction: <a class='enum' href='../libusb/enum.Direction.html' title='libusb::Direction'>Direction</a>, request_type: <a class='enum' href='../libusb/enum.RequestType.html' title='libusb::RequestType'>RequestType</a>, recipient: <a class='enum' href='../libusb/enum.Recipient.html' title='libusb::Recipient'>Recipient</a>) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></pre><div class='docblock'><p>Builds a value for the <code>bmRequestType</code> field of a control transfer setup packet.</p>
 
 <p>The <code>bmRequestType</code> field of a USB control transfer setup packet is a bit field specifying
 three parameters, which are given to this function by corresponding enum values.</p>
 
-<h2 id="examples" class='section-header'><a
-                           href="#examples">Examples</a></h2>
+<h2 id='examples' class='section-header'><a href='#examples'>Examples</a></h2>
 <p>The following example returns a <code>bmRequestType</code> value for a standard inbound transfer from the
 device, which could be used for reading a device&#39;s descriptors:</p>
+
 <pre class='rust rust-example-rendered'>
 <span class='kw'>use</span> <span class='ident'>libusb</span>::{<span class='ident'>Direction</span>,<span class='ident'>RequestType</span>,<span class='ident'>Recipient</span>};
 
@@ -64,10 +66,12 @@ device, which could be used for reading a device&#39;s descriptors:</p>
 
     <section class="footer"></section>
 
-    <div id="help" class="hidden">
+    <aside id="help" class="hidden">
         <div>
+            <h1 class="hidden">Help</h1>
+
             <div class="shortcuts">
-                <h1>Keyboard Shortcuts</h1>
+                <h2>Keyboard Shortcuts</h2>
 
                 <dl>
                     <dt>?</dt>
@@ -80,11 +84,13 @@ device, which could be used for reading a device&#39;s descriptors:</p>
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 
             <div class="infos">
-                <h1>Search Tricks</h1>
+                <h2>Search Tricks</h2>
 
                 <p>
                     Prefix searches with a type followed by a colon (e.g.
@@ -94,17 +100,17 @@ device, which could be used for reading a device&#39;s descriptors:</p>
                 <p>
                     Accepted types are: <code>fn</code>, <code>mod</code>,
                     <code>struct</code>, <code>enum</code>,
-                    <code>trait</code>, <code>typedef</code> (or
-                    <code>tdef</code>).
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
                 </p>
 
                 <p>
                     Search functions by type signature (e.g.
-                    <code>vec -> usize</code>)
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
                 </p>
             </div>
         </div>
-    </div>
+    </aside>
 
     
 
@@ -116,6 +122,6 @@ device, which could be used for reading a device&#39;s descriptors:</p>
     <script src="../jquery.js"></script>
     <script src="../main.js"></script>
     
-    <script async src="../search-index.js"></script>
+    <script defer src="../search-index.js"></script>
 </body>
 </html>

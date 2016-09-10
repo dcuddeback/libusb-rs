@@ -9,7 +9,9 @@
 
     <title>libusb::PrimaryLanguage - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../main.css">
+    
 
     
     
@@ -24,10 +26,10 @@
 
     
 
-    <section class="sidebar">
+    <nav class="sidebar">
         
         <p class='location'><a href='index.html'>libusb</a></p><script>window.sidebarCurrent = {name: 'PrimaryLanguage', ty: 'enum', relpath: ''};</script><script defer src="sidebar-items.js"></script>
-    </section>
+    </nav>
 
     <nav class="sub">
         <form class="search-form js-only">
@@ -42,10 +44,10 @@
 
     <section id='main' class="content enum">
 <h1 class='fqn'><span class='in-band'>Enum <a href='index.html'>libusb</a>::<wbr><a class='enum' href=''>PrimaryLanguage</a></span><span class='out-of-band'><span id='render-detail'>
-            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
-                [<span class='inner'>&#x2212;</span>]
-            </a>
-        </span><a id='src-7184' class='srclink' href='../src/libusb/language.rs.html#45-121' title='goto source code'>[src]</a></span></h1>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a id='src-1104' class='srclink' href='../src/libusb/src/language.rs.html#45-121' title='goto source code'>[src]</a></span></h1>
 <pre class='rust enum'>pub enum PrimaryLanguage {
     Afrikaans,
     Albanian,
@@ -120,23 +122,35 @@
     Uzbek,
     Vietnamese,
     HID,
-    Other(<a href='http://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a>),
+    Other(<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a>),
 }</pre><div class='docblock'><p>Primary language families.</p>
 </div><h2 class='variants'>Variants</h2>
-<table><tr><td id='variant.Afrikaans'><code>Afrikaans</code></td><td></td></tr><tr><td id='variant.Albanian'><code>Albanian</code></td><td></td></tr><tr><td id='variant.Arabic'><code>Arabic</code></td><td></td></tr><tr><td id='variant.Armenian'><code>Armenian</code></td><td></td></tr><tr><td id='variant.Assamese'><code>Assamese</code></td><td></td></tr><tr><td id='variant.Azeri'><code>Azeri</code></td><td></td></tr><tr><td id='variant.Basque'><code>Basque</code></td><td></td></tr><tr><td id='variant.Belarussian'><code>Belarussian</code></td><td></td></tr><tr><td id='variant.Bengali'><code>Bengali</code></td><td></td></tr><tr><td id='variant.Bulgarian'><code>Bulgarian</code></td><td></td></tr><tr><td id='variant.Burmese'><code>Burmese</code></td><td></td></tr><tr><td id='variant.Catalan'><code>Catalan</code></td><td></td></tr><tr><td id='variant.Chinese'><code>Chinese</code></td><td></td></tr><tr><td id='variant.Croatian'><code>Croatian</code></td><td></td></tr><tr><td id='variant.Czech'><code>Czech</code></td><td></td></tr><tr><td id='variant.Danish'><code>Danish</code></td><td></td></tr><tr><td id='variant.Dutch'><code>Dutch</code></td><td></td></tr><tr><td id='variant.English'><code>English</code></td><td></td></tr><tr><td id='variant.Estonian'><code>Estonian</code></td><td></td></tr><tr><td id='variant.Faeroese'><code>Faeroese</code></td><td></td></tr><tr><td id='variant.Farsi'><code>Farsi</code></td><td></td></tr><tr><td id='variant.Finnish'><code>Finnish</code></td><td></td></tr><tr><td id='variant.French'><code>French</code></td><td></td></tr><tr><td id='variant.Georgian'><code>Georgian</code></td><td></td></tr><tr><td id='variant.German'><code>German</code></td><td></td></tr><tr><td id='variant.Greek'><code>Greek</code></td><td></td></tr><tr><td id='variant.Gujarati'><code>Gujarati</code></td><td></td></tr><tr><td id='variant.Hebrew'><code>Hebrew</code></td><td></td></tr><tr><td id='variant.Hindi'><code>Hindi</code></td><td></td></tr><tr><td id='variant.Hungarian'><code>Hungarian</code></td><td></td></tr><tr><td id='variant.Icelandic'><code>Icelandic</code></td><td></td></tr><tr><td id='variant.Indonesian'><code>Indonesian</code></td><td></td></tr><tr><td id='variant.Italian'><code>Italian</code></td><td></td></tr><tr><td id='variant.Japanese'><code>Japanese</code></td><td></td></tr><tr><td id='variant.Kannada'><code>Kannada</code></td><td></td></tr><tr><td id='variant.Kashmiri'><code>Kashmiri</code></td><td></td></tr><tr><td id='variant.Kazakh'><code>Kazakh</code></td><td></td></tr><tr><td id='variant.Konkani'><code>Konkani</code></td><td></td></tr><tr><td id='variant.Korean'><code>Korean</code></td><td></td></tr><tr><td id='variant.Latvian'><code>Latvian</code></td><td></td></tr><tr><td id='variant.Lithuanian'><code>Lithuanian</code></td><td></td></tr><tr><td id='variant.Macedonian'><code>Macedonian</code></td><td></td></tr><tr><td id='variant.Malay'><code>Malay</code></td><td></td></tr><tr><td id='variant.Malayalam'><code>Malayalam</code></td><td></td></tr><tr><td id='variant.Manipuri'><code>Manipuri</code></td><td></td></tr><tr><td id='variant.Marathi'><code>Marathi</code></td><td></td></tr><tr><td id='variant.Nepali'><code>Nepali</code></td><td></td></tr><tr><td id='variant.Norwegian'><code>Norwegian</code></td><td></td></tr><tr><td id='variant.Oriya'><code>Oriya</code></td><td></td></tr><tr><td id='variant.Polish'><code>Polish</code></td><td></td></tr><tr><td id='variant.Portuguese'><code>Portuguese</code></td><td></td></tr><tr><td id='variant.Punjabi'><code>Punjabi</code></td><td></td></tr><tr><td id='variant.Romanian'><code>Romanian</code></td><td></td></tr><tr><td id='variant.Russian'><code>Russian</code></td><td></td></tr><tr><td id='variant.Sanskrit'><code>Sanskrit</code></td><td></td></tr><tr><td id='variant.Serbian'><code>Serbian</code></td><td></td></tr><tr><td id='variant.Sindhi'><code>Sindhi</code></td><td></td></tr><tr><td id='variant.Slovak'><code>Slovak</code></td><td></td></tr><tr><td id='variant.Slovenian'><code>Slovenian</code></td><td></td></tr><tr><td id='variant.Spanish'><code>Spanish</code></td><td></td></tr><tr><td id='variant.Sutu'><code>Sutu</code></td><td></td></tr><tr><td id='variant.Swahili'><code>Swahili</code></td><td></td></tr><tr><td id='variant.Swedish'><code>Swedish</code></td><td></td></tr><tr><td id='variant.Tamil'><code>Tamil</code></td><td></td></tr><tr><td id='variant.Tatar'><code>Tatar</code></td><td></td></tr><tr><td id='variant.Telugu'><code>Telugu</code></td><td></td></tr><tr><td id='variant.Thai'><code>Thai</code></td><td></td></tr><tr><td id='variant.Turkish'><code>Turkish</code></td><td></td></tr><tr><td id='variant.Ukrainian'><code>Ukrainian</code></td><td></td></tr><tr><td id='variant.Urdu'><code>Urdu</code></td><td></td></tr><tr><td id='variant.Uzbek'><code>Uzbek</code></td><td></td></tr><tr><td id='variant.Vietnamese'><code>Vietnamese</code></td><td></td></tr><tr><td id='variant.HID'><code>HID</code></td><td></td></tr><tr><td id='variant.Other'><code>Other</code></td><td></td></tr></table><h2 id='implementations'>Trait Implementations</h2><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/cmp/trait.Eq.html' title='core::cmp::Eq'>Eq</a> for <a class='enum' href='../libusb/enum.PrimaryLanguage.html' title='libusb::PrimaryLanguage'>PrimaryLanguage</a></code></h3><div class='impl-items'></div><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html' title='core::cmp::PartialEq'>PartialEq</a> for <a class='enum' href='../libusb/enum.PrimaryLanguage.html' title='libusb::PrimaryLanguage'>PrimaryLanguage</a></code></h3><div class='impl-items'><h4 id='method.eq' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#method.eq' class='fnname'>eq</a>(&amp;self, __arg_0: &amp;<a class='enum' href='../libusb/enum.PrimaryLanguage.html' title='libusb::PrimaryLanguage'>PrimaryLanguage</a>) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
-<h4 id='method.ne' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#method.ne' class='fnname'>ne</a>(&amp;self, __arg_0: &amp;<a class='enum' href='../libusb/enum.PrimaryLanguage.html' title='libusb::PrimaryLanguage'>PrimaryLanguage</a>) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
-</div><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> for <a class='enum' href='../libusb/enum.PrimaryLanguage.html' title='libusb::PrimaryLanguage'>PrimaryLanguage</a></code></h3><div class='impl-items'><h4 id='method.clone' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class='enum' href='../libusb/enum.PrimaryLanguage.html' title='libusb::PrimaryLanguage'>PrimaryLanguage</a></code></h4>
-<h4 id='method.clone_from' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code></h4>
-</div><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/marker/trait.Copy.html' title='core::marker::Copy'>Copy</a> for <a class='enum' href='../libusb/enum.PrimaryLanguage.html' title='libusb::PrimaryLanguage'>PrimaryLanguage</a></code></h3><div class='impl-items'></div><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='enum' href='../libusb/enum.PrimaryLanguage.html' title='libusb::PrimaryLanguage'>PrimaryLanguage</a></code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#method.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='http://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
-</div></section>
+<span id='variant.Afrikaans' class='variant'><code>Afrikaans</code></span><span id='variant.Albanian' class='variant'><code>Albanian</code></span><span id='variant.Arabic' class='variant'><code>Arabic</code></span><span id='variant.Armenian' class='variant'><code>Armenian</code></span><span id='variant.Assamese' class='variant'><code>Assamese</code></span><span id='variant.Azeri' class='variant'><code>Azeri</code></span><span id='variant.Basque' class='variant'><code>Basque</code></span><span id='variant.Belarussian' class='variant'><code>Belarussian</code></span><span id='variant.Bengali' class='variant'><code>Bengali</code></span><span id='variant.Bulgarian' class='variant'><code>Bulgarian</code></span><span id='variant.Burmese' class='variant'><code>Burmese</code></span><span id='variant.Catalan' class='variant'><code>Catalan</code></span><span id='variant.Chinese' class='variant'><code>Chinese</code></span><span id='variant.Croatian' class='variant'><code>Croatian</code></span><span id='variant.Czech' class='variant'><code>Czech</code></span><span id='variant.Danish' class='variant'><code>Danish</code></span><span id='variant.Dutch' class='variant'><code>Dutch</code></span><span id='variant.English' class='variant'><code>English</code></span><span id='variant.Estonian' class='variant'><code>Estonian</code></span><span id='variant.Faeroese' class='variant'><code>Faeroese</code></span><span id='variant.Farsi' class='variant'><code>Farsi</code></span><span id='variant.Finnish' class='variant'><code>Finnish</code></span><span id='variant.French' class='variant'><code>French</code></span><span id='variant.Georgian' class='variant'><code>Georgian</code></span><span id='variant.German' class='variant'><code>German</code></span><span id='variant.Greek' class='variant'><code>Greek</code></span><span id='variant.Gujarati' class='variant'><code>Gujarati</code></span><span id='variant.Hebrew' class='variant'><code>Hebrew</code></span><span id='variant.Hindi' class='variant'><code>Hindi</code></span><span id='variant.Hungarian' class='variant'><code>Hungarian</code></span><span id='variant.Icelandic' class='variant'><code>Icelandic</code></span><span id='variant.Indonesian' class='variant'><code>Indonesian</code></span><span id='variant.Italian' class='variant'><code>Italian</code></span><span id='variant.Japanese' class='variant'><code>Japanese</code></span><span id='variant.Kannada' class='variant'><code>Kannada</code></span><span id='variant.Kashmiri' class='variant'><code>Kashmiri</code></span><span id='variant.Kazakh' class='variant'><code>Kazakh</code></span><span id='variant.Konkani' class='variant'><code>Konkani</code></span><span id='variant.Korean' class='variant'><code>Korean</code></span><span id='variant.Latvian' class='variant'><code>Latvian</code></span><span id='variant.Lithuanian' class='variant'><code>Lithuanian</code></span><span id='variant.Macedonian' class='variant'><code>Macedonian</code></span><span id='variant.Malay' class='variant'><code>Malay</code></span><span id='variant.Malayalam' class='variant'><code>Malayalam</code></span><span id='variant.Manipuri' class='variant'><code>Manipuri</code></span><span id='variant.Marathi' class='variant'><code>Marathi</code></span><span id='variant.Nepali' class='variant'><code>Nepali</code></span><span id='variant.Norwegian' class='variant'><code>Norwegian</code></span><span id='variant.Oriya' class='variant'><code>Oriya</code></span><span id='variant.Polish' class='variant'><code>Polish</code></span><span id='variant.Portuguese' class='variant'><code>Portuguese</code></span><span id='variant.Punjabi' class='variant'><code>Punjabi</code></span><span id='variant.Romanian' class='variant'><code>Romanian</code></span><span id='variant.Russian' class='variant'><code>Russian</code></span><span id='variant.Sanskrit' class='variant'><code>Sanskrit</code></span><span id='variant.Serbian' class='variant'><code>Serbian</code></span><span id='variant.Sindhi' class='variant'><code>Sindhi</code></span><span id='variant.Slovak' class='variant'><code>Slovak</code></span><span id='variant.Slovenian' class='variant'><code>Slovenian</code></span><span id='variant.Spanish' class='variant'><code>Spanish</code></span><span id='variant.Sutu' class='variant'><code>Sutu</code></span><span id='variant.Swahili' class='variant'><code>Swahili</code></span><span id='variant.Swedish' class='variant'><code>Swedish</code></span><span id='variant.Tamil' class='variant'><code>Tamil</code></span><span id='variant.Tatar' class='variant'><code>Tatar</code></span><span id='variant.Telugu' class='variant'><code>Telugu</code></span><span id='variant.Thai' class='variant'><code>Thai</code></span><span id='variant.Turkish' class='variant'><code>Turkish</code></span><span id='variant.Ukrainian' class='variant'><code>Ukrainian</code></span><span id='variant.Urdu' class='variant'><code>Urdu</code></span><span id='variant.Uzbek' class='variant'><code>Uzbek</code></span><span id='variant.Vietnamese' class='variant'><code>Vietnamese</code></span><span id='variant.HID' class='variant'><code>HID</code></span><span id='variant.Other' class='variant'><code>Other(<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a>)</code></span><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/cmp/trait.Eq.html' title='core::cmp::Eq'>Eq</a> for <a class='enum' href='../libusb/enum.PrimaryLanguage.html' title='libusb::PrimaryLanguage'>PrimaryLanguage</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-1001' class='srclink' href='../src/libusb/src/language.rs.html#44' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html' title='core::cmp::PartialEq'>PartialEq</a> for <a class='enum' href='../libusb/enum.PrimaryLanguage.html' title='libusb::PrimaryLanguage'>PrimaryLanguage</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-1005' class='srclink' href='../src/libusb/src/language.rs.html#44' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.eq' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#tymethod.eq' class='fnname'>eq</a>(&amp;self, __arg_0: &amp;<a class='enum' href='../libusb/enum.PrimaryLanguage.html' title='libusb::PrimaryLanguage'>PrimaryLanguage</a>) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+<div class='docblock'><p>This method tests for <code>self</code> and <code>other</code> values to be equal, and is used by <code>==</code>. <a href="https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#tymethod.eq">Read more</a></p>
+</div><h4 id='method.ne' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html#method.ne' class='fnname'>ne</a>(&amp;self, __arg_0: &amp;<a class='enum' href='../libusb/enum.PrimaryLanguage.html' title='libusb::PrimaryLanguage'>PrimaryLanguage</a>) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.bool.html'>bool</a></code></h4>
+<div class='docblock'><p>This method tests for <code>!=</code>.</p>
+</div></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> for <a class='enum' href='../libusb/enum.PrimaryLanguage.html' title='libusb::PrimaryLanguage'>PrimaryLanguage</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-1020' class='srclink' href='../src/libusb/src/language.rs.html#44' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.clone' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class='enum' href='../libusb/enum.PrimaryLanguage.html' title='libusb::PrimaryLanguage'>PrimaryLanguage</a></code></h4>
+<div class='docblock'><p>Returns a copy of the value. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone">Read more</a></p>
+</div><h4 id='method.clone_from' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code><div class='since' title='Stable since Rust version 1.0.0'>1.0.0</div></h4>
+<div class='docblock'><p>Performs copy-assignment from <code>source</code>. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from">Read more</a></p>
+</div></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Copy.html' title='core::marker::Copy'>Copy</a> for <a class='enum' href='../libusb/enum.PrimaryLanguage.html' title='libusb::PrimaryLanguage'>PrimaryLanguage</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-1024' class='srclink' href='../src/libusb/src/language.rs.html#44' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='enum' href='../libusb/enum.PrimaryLanguage.html' title='libusb::PrimaryLanguage'>PrimaryLanguage</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-1025' class='srclink' href='../src/libusb/src/language.rs.html#44' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
+<div class='docblock'><p>Formats the value using the given formatter.</p>
+</div></div></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
 
-    <div id="help" class="hidden">
+    <aside id="help" class="hidden">
         <div>
+            <h1 class="hidden">Help</h1>
+
             <div class="shortcuts">
-                <h1>Keyboard Shortcuts</h1>
+                <h2>Keyboard Shortcuts</h2>
 
                 <dl>
                     <dt>?</dt>
@@ -149,11 +163,13 @@
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 
             <div class="infos">
-                <h1>Search Tricks</h1>
+                <h2>Search Tricks</h2>
 
                 <p>
                     Prefix searches with a type followed by a colon (e.g.
@@ -163,17 +179,17 @@
                 <p>
                     Accepted types are: <code>fn</code>, <code>mod</code>,
                     <code>struct</code>, <code>enum</code>,
-                    <code>trait</code>, <code>typedef</code> (or
-                    <code>tdef</code>).
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
                 </p>
 
                 <p>
                     Search functions by type signature (e.g.
-                    <code>vec -> usize</code>)
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
                 </p>
             </div>
         </div>
-    </div>
+    </aside>
 
     
 
@@ -185,6 +201,6 @@
     <script src="../jquery.js"></script>
     <script src="../main.js"></script>
     
-    <script async src="../search-index.js"></script>
+    <script defer src="../search-index.js"></script>
 </body>
 </html>

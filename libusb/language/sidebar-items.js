@@ -1,1 +1,0 @@
-initSidebarItems({"enum":[["PrimaryLanguage","Primary language families."],["SubLanguage","Language dialects and writing systems."]],"struct":[["Language","A language used to read string descriptors from USB devices."]]});

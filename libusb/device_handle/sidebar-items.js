@@ -1,1 +1,0 @@
-initSidebarItems({"struct":[["DeviceHandle","A handle to an open USB device."]]});

@@ -1,1 +1,0 @@
-initSidebarItems({"struct":[["DeviceList","A list of detected USB devices."],["Devices","Iterator over detected USB devices."]]});

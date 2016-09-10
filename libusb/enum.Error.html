@@ -9,7 +9,9 @@
 
     <title>libusb::Error - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../main.css">
+    
 
     
     
@@ -24,10 +26,10 @@
 
     
 
-    <section class="sidebar">
+    <nav class="sidebar">
         
         <p class='location'><a href='index.html'>libusb</a></p><script>window.sidebarCurrent = {name: 'Error', ty: 'enum', relpath: ''};</script><script defer src="sidebar-items.js"></script>
-    </section>
+    </nav>
 
     <nav class="sub">
         <form class="search-form js-only">
@@ -42,10 +44,10 @@
 
     <section id='main' class="content enum">
 <h1 class='fqn'><span class='in-band'>Enum <a href='index.html'>libusb</a>::<wbr><a class='enum' href=''>Error</a></span><span class='out-of-band'><span id='render-detail'>
-            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
-                [<span class='inner'>&#x2212;</span>]
-            </a>
-        </span><a id='src-61' class='srclink' href='../src/libusb/error.rs.html#14-56' title='goto source code'>[src]</a></span></h1>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a id='src-45' class='srclink' href='../src/libusb/src/error.rs.html#14-56' title='goto source code'>[src]</a></span></h1>
 <pre class='rust enum'>pub enum Error {
     Success,
     Io,
@@ -63,35 +65,45 @@
     Other,
 }</pre><div class='docblock'><p>Errors returned by the <code>libusb</code> library.</p>
 </div><h2 class='variants'>Variants</h2>
-<table><tr><td id='variant.Success'><code>Success</code></td><td><div class='docblock'><p>Success (no error).</p>
-</div></td></tr><tr><td id='variant.Io'><code>Io</code></td><td><div class='docblock'><p>Input/output error.</p>
-</div></td></tr><tr><td id='variant.InvalidParam'><code>InvalidParam</code></td><td><div class='docblock'><p>Invalid parameter.</p>
-</div></td></tr><tr><td id='variant.Access'><code>Access</code></td><td><div class='docblock'><p>Access denied (insufficient permissions).</p>
-</div></td></tr><tr><td id='variant.NoDevice'><code>NoDevice</code></td><td><div class='docblock'><p>No such device (it may have been disconnected).</p>
-</div></td></tr><tr><td id='variant.NotFound'><code>NotFound</code></td><td><div class='docblock'><p>Entity not found.</p>
-</div></td></tr><tr><td id='variant.Busy'><code>Busy</code></td><td><div class='docblock'><p>Resource busy.</p>
-</div></td></tr><tr><td id='variant.Timeout'><code>Timeout</code></td><td><div class='docblock'><p>Operation timed out.</p>
-</div></td></tr><tr><td id='variant.Overflow'><code>Overflow</code></td><td><div class='docblock'><p>Overflow.</p>
-</div></td></tr><tr><td id='variant.Pipe'><code>Pipe</code></td><td><div class='docblock'><p>Pipe error.</p>
-</div></td></tr><tr><td id='variant.Interrupted'><code>Interrupted</code></td><td><div class='docblock'><p>System call interrupted (perhaps due to signal).</p>
-</div></td></tr><tr><td id='variant.NoMem'><code>NoMem</code></td><td><div class='docblock'><p>Insufficient memory.</p>
-</div></td></tr><tr><td id='variant.NotSupported'><code>NotSupported</code></td><td><div class='docblock'><p>Operation not supported or unimplemented on this platform.</p>
-</div></td></tr><tr><td id='variant.Other'><code>Other</code></td><td><div class='docblock'><p>Other error.</p>
-</div></td></tr></table><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='enum' href='../libusb/enum.Error.html' title='libusb::Error'>Error</a></code></h3><div class='impl-items'><h4 id='method.strerror' class='method'><code>fn <a href='#method.strerror' class='fnname'>strerror</a>(&amp;self) -&gt; &amp;'static <a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a></code></h4>
+<span id='variant.Success' class='variant'><code>Success</code></span><div class='docblock'><p>Success (no error).</p>
+</div><span id='variant.Io' class='variant'><code>Io</code></span><div class='docblock'><p>Input/output error.</p>
+</div><span id='variant.InvalidParam' class='variant'><code>InvalidParam</code></span><div class='docblock'><p>Invalid parameter.</p>
+</div><span id='variant.Access' class='variant'><code>Access</code></span><div class='docblock'><p>Access denied (insufficient permissions).</p>
+</div><span id='variant.NoDevice' class='variant'><code>NoDevice</code></span><div class='docblock'><p>No such device (it may have been disconnected).</p>
+</div><span id='variant.NotFound' class='variant'><code>NotFound</code></span><div class='docblock'><p>Entity not found.</p>
+</div><span id='variant.Busy' class='variant'><code>Busy</code></span><div class='docblock'><p>Resource busy.</p>
+</div><span id='variant.Timeout' class='variant'><code>Timeout</code></span><div class='docblock'><p>Operation timed out.</p>
+</div><span id='variant.Overflow' class='variant'><code>Overflow</code></span><div class='docblock'><p>Overflow.</p>
+</div><span id='variant.Pipe' class='variant'><code>Pipe</code></span><div class='docblock'><p>Pipe error.</p>
+</div><span id='variant.Interrupted' class='variant'><code>Interrupted</code></span><div class='docblock'><p>System call interrupted (perhaps due to signal).</p>
+</div><span id='variant.NoMem' class='variant'><code>NoMem</code></span><div class='docblock'><p>Insufficient memory.</p>
+</div><span id='variant.NotSupported' class='variant'><code>NotSupported</code></span><div class='docblock'><p>Operation not supported or unimplemented on this platform.</p>
+</div><span id='variant.Other' class='variant'><code>Other</code></span><div class='docblock'><p>Other error.</p>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class='enum' href='../libusb/enum.Error.html' title='libusb::Error'>Error</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-60' class='srclink' href='../src/libusb/src/error.rs.html#58-78' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.strerror' class='method'><code>fn <a href='#method.strerror' class='fnname'>strerror</a>(&amp;self) -&gt; &amp;'static <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a></code></h4>
 <div class='docblock'><p>Returns a description of an error suitable for display to an end user.</p>
-</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/fmt/trait.Display.html' title='core::fmt::Display'>Display</a> for <a class='enum' href='../libusb/enum.Error.html' title='libusb::Error'>Error</a></code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/fmt/trait.Display.html#method.fmt' class='fnname'>fmt</a>(&amp;self, fmt: &amp;mut <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>StdResult</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Error.html' title='core::fmt::Error'>Error</a>&gt;</code></h4>
-</div><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/std/error/trait.Error.html' title='std::error::Error'>StdError</a> for <a class='enum' href='../libusb/enum.Error.html' title='libusb::Error'>Error</a></code></h3><div class='impl-items'><h4 id='method.description' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/std/error/trait.Error.html#method.description' class='fnname'>description</a>(&amp;self) -&gt; &amp;'static <a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a></code></h4>
-<h4 id='method.cause' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/std/error/trait.Error.html#method.cause' class='fnname'>cause</a>(&amp;self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;<a class='trait' href='http://doc.rust-lang.org/nightly/std/error/trait.Error.html' title='std::error::Error'>Error</a>&gt;</code></h4>
-</div><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='enum' href='../libusb/enum.Error.html' title='libusb::Error'>Error</a></code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#method.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='http://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
-</div></section>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='enum' href='../libusb/enum.Error.html' title='libusb::Error'>Error</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-27' class='srclink' href='../src/libusb/src/error.rs.html#13' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
+<div class='docblock'><p>Formats the value using the given formatter.</p>
+</div></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Display.html' title='core::fmt::Display'>Display</a> for <a class='enum' href='../libusb/enum.Error.html' title='libusb::Error'>Error</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-63' class='srclink' href='../src/libusb/src/error.rs.html#80-84' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.fmt-1' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Display.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, fmt: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>StdResult</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>,&nbsp;<a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Error.html' title='core::fmt::Error'>Error</a>&gt;</code></h4>
+<div class='docblock'><p>Formats the value using the given formatter.</p>
+</div></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/std/error/trait.Error.html' title='std::error::Error'>StdError</a> for <a class='enum' href='../libusb/enum.Error.html' title='libusb::Error'>Error</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-67' class='srclink' href='../src/libusb/src/error.rs.html#86-90' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.description' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/std/error/trait.Error.html#tymethod.description' class='fnname'>description</a>(&amp;self) -&gt; &amp;'static <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a></code></h4>
+<div class='docblock'><p>A short description of the error. <a href="https://doc.rust-lang.org/nightly/std/error/trait.Error.html#tymethod.description">Read more</a></p>
+</div><h4 id='method.cause' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/std/error/trait.Error.html#method.cause' class='fnname'>cause</a>(&amp;self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;<a class='trait' href='https://doc.rust-lang.org/nightly/std/error/trait.Error.html' title='std::error::Error'>Error</a>&gt;</code><div class='since' title='Stable since Rust version 1.0.0'>1.0.0</div></h4>
+<div class='docblock'><p>The lower-level cause of this error, if any.</p>
+</div></div></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
 
-    <div id="help" class="hidden">
+    <aside id="help" class="hidden">
         <div>
+            <h1 class="hidden">Help</h1>
+
             <div class="shortcuts">
-                <h1>Keyboard Shortcuts</h1>
+                <h2>Keyboard Shortcuts</h2>
 
                 <dl>
                     <dt>?</dt>
@@ -104,11 +116,13 @@
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 
             <div class="infos">
-                <h1>Search Tricks</h1>
+                <h2>Search Tricks</h2>
 
                 <p>
                     Prefix searches with a type followed by a colon (e.g.
@@ -118,17 +132,17 @@
                 <p>
                     Accepted types are: <code>fn</code>, <code>mod</code>,
                     <code>struct</code>, <code>enum</code>,
-                    <code>trait</code>, <code>typedef</code> (or
-                    <code>tdef</code>).
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
                 </p>
 
                 <p>
                     Search functions by type signature (e.g.
-                    <code>vec -> usize</code>)
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
                 </p>
             </div>
         </div>
-    </div>
+    </aside>
 
     
 
@@ -140,6 +154,6 @@
     <script src="../jquery.js"></script>
     <script src="../main.js"></script>
     
-    <script async src="../search-index.js"></script>
+    <script defer src="../search-index.js"></script>
 </body>
 </html>

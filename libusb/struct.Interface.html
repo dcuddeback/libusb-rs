@@ -9,7 +9,9 @@
 
     <title>libusb::Interface - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../main.css">
+    
 
     
     
@@ -24,10 +26,10 @@
 
     
 
-    <section class="sidebar">
+    <nav class="sidebar">
         
         <p class='location'><a href='index.html'>libusb</a></p><script>window.sidebarCurrent = {name: 'Interface', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
-    </section>
+    </nav>
 
     <nav class="sub">
         <form class="search-form js-only">
@@ -42,17 +44,18 @@
 
     <section id='main' class="content struct">
 <h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>libusb</a>::<wbr><a class='struct' href=''>Interface</a></span><span class='out-of-band'><span id='render-detail'>
-            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
-                [<span class='inner'>&#x2212;</span>]
-            </a>
-        </span><a id='src-6335' class='srclink' href='../src/libusb/interface_descriptor.rs.html#11-13' title='goto source code'>[src]</a></span></h1>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a id='src-849' class='srclink' href='../src/libusb/src/interface_descriptor.rs.html#12-14' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Interface&lt;'a&gt; {
     // some fields omitted
 }</pre><div class='docblock'><p>A device interface.</p>
 
 <p>An interface can have several descriptors, each describing an alternate setting of the
 interface.</p>
-</div><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl&lt;'a&gt; <a class='struct' href='../libusb/struct.Interface.html' title='libusb::Interface'>Interface</a>&lt;'a&gt;</code></h3><div class='impl-items'><h4 id='method.number' class='method'><code>fn <a href='#method.number' class='fnname'>number</a>(&amp;self) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code></h4>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl&lt;'a&gt; <a class='struct' href='../libusb/struct.Interface.html' title='libusb::Interface'>Interface</a>&lt;'a&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a id='src-852' class='srclink' href='../src/libusb/src/interface_descriptor.rs.html#16-28' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.number' class='method'><code>fn <a href='#method.number' class='fnname'>number</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code></h4>
 <div class='docblock'><p>Returns the interface&#39;s number.</p>
 </div><h4 id='method.descriptors' class='method'><code>fn <a href='#method.descriptors' class='fnname'>descriptors</a>(&amp;self) -&gt; <a class='struct' href='../libusb/struct.InterfaceDescriptors.html' title='libusb::InterfaceDescriptors'>InterfaceDescriptors</a>&lt;'a&gt;</code></h4>
 <div class='docblock'><p>Returns an iterator over the interface&#39;s descriptors.</p>
@@ -61,10 +64,12 @@ interface.</p>
 
     <section class="footer"></section>
 
-    <div id="help" class="hidden">
+    <aside id="help" class="hidden">
         <div>
+            <h1 class="hidden">Help</h1>
+
             <div class="shortcuts">
-                <h1>Keyboard Shortcuts</h1>
+                <h2>Keyboard Shortcuts</h2>
 
                 <dl>
                     <dt>?</dt>
@@ -77,11 +82,13 @@ interface.</p>
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 
             <div class="infos">
-                <h1>Search Tricks</h1>
+                <h2>Search Tricks</h2>
 
                 <p>
                     Prefix searches with a type followed by a colon (e.g.
@@ -91,17 +98,17 @@ interface.</p>
                 <p>
                     Accepted types are: <code>fn</code>, <code>mod</code>,
                     <code>struct</code>, <code>enum</code>,
-                    <code>trait</code>, <code>typedef</code> (or
-                    <code>tdef</code>).
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
                 </p>
 
                 <p>
                     Search functions by type signature (e.g.
-                    <code>vec -> usize</code>)
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
                 </p>
             </div>
         </div>
-    </div>
+    </aside>
 
     
 
@@ -113,6 +120,6 @@ interface.</p>
     <script src="../jquery.js"></script>
     <script src="../main.js"></script>
     
-    <script async src="../search-index.js"></script>
+    <script defer src="../search-index.js"></script>
 </body>
 </html>

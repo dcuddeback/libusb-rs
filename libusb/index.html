@@ -9,7 +9,9 @@
 
     <title>libusb - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../main.css">
+    
 
     
     
@@ -24,10 +26,10 @@
 
     
 
-    <section class="sidebar">
+    <nav class="sidebar">
         
         <p class='location'></p><script>window.sidebarCurrent = {name: 'libusb', ty: 'mod', relpath: '../'};</script>
-    </section>
+    </nav>
 
     <nav class="sub">
         <form class="search-form js-only">
@@ -42,294 +44,236 @@
 
     <section id='main' class="content mod">
 <h1 class='fqn'><span class='in-band'>Crate <a class='mod' href=''>libusb</a></span><span class='out-of-band'><span id='render-detail'>
-            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
-                [<span class='inner'>&#x2212;</span>]
-            </a>
-        </span><a id='src-0' class='srclink' href='../src/libusb/lib.rs.html#1-41' title='goto source code'>[src]</a></span></h1>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a id='src-0' class='srclink' href='../src/libusb/src/lib.rs.html#1-41' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>This crate provides a safe wrapper around the native <code>libusb</code> library.</p>
 </div><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
 <table>
-                    <tr class=' module-item'>
-                        <td><a class='struct' href='struct.ConfigDescriptor.html'
-                               title='libusb::ConfigDescriptor'>ConfigDescriptor</a></td>
-                        <td class='docblock short'>
-                             <p>Describes a configuration.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='struct' href='struct.Context.html'
-                               title='libusb::Context'>Context</a></td>
-                        <td class='docblock short'>
-                             <p>A <code>libusb</code> context.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='struct' href='struct.Device.html'
-                               title='libusb::Device'>Device</a></td>
-                        <td class='docblock short'>
-                             <p>A reference to a USB device.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='struct' href='struct.DeviceDescriptor.html'
-                               title='libusb::DeviceDescriptor'>DeviceDescriptor</a></td>
-                        <td class='docblock short'>
-                             <p>Describes a device.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='struct' href='struct.DeviceHandle.html'
-                               title='libusb::DeviceHandle'>DeviceHandle</a></td>
-                        <td class='docblock short'>
-                             <p>A handle to an open USB device.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='struct' href='struct.DeviceList.html'
-                               title='libusb::DeviceList'>DeviceList</a></td>
-                        <td class='docblock short'>
-                             <p>A list of detected USB devices.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='struct' href='struct.Devices.html'
-                               title='libusb::Devices'>Devices</a></td>
-                        <td class='docblock short'>
-                             <p>Iterator over detected USB devices.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='struct' href='struct.EndpointDescriptor.html'
-                               title='libusb::EndpointDescriptor'>EndpointDescriptor</a></td>
-                        <td class='docblock short'>
-                             <p>Describes an endpoint.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='struct' href='struct.EndpointDescriptors.html'
-                               title='libusb::EndpointDescriptors'>EndpointDescriptors</a></td>
-                        <td class='docblock short'>
-                             <p>Iterator over an interface&#39;s endpoint descriptors.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='struct' href='struct.Interface.html'
-                               title='libusb::Interface'>Interface</a></td>
-                        <td class='docblock short'>
-                             <p>A device interface.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='struct' href='struct.InterfaceDescriptor.html'
-                               title='libusb::InterfaceDescriptor'>InterfaceDescriptor</a></td>
-                        <td class='docblock short'>
-                             <p>Describes an alternate setting for an interface.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='struct' href='struct.InterfaceDescriptors.html'
-                               title='libusb::InterfaceDescriptors'>InterfaceDescriptors</a></td>
-                        <td class='docblock short'>
-                             <p>Iterator over an interface&#39;s descriptors.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='struct' href='struct.Interfaces.html'
-                               title='libusb::Interfaces'>Interfaces</a></td>
-                        <td class='docblock short'>
-                             <p>Iterator over a configuration&#39;s interfaces.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='struct' href='struct.Language.html'
-                               title='libusb::Language'>Language</a></td>
-                        <td class='docblock short'>
-                             <p>A language used to read string descriptors from USB devices.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='struct' href='struct.LibraryVersion.html'
-                               title='libusb::LibraryVersion'>LibraryVersion</a></td>
-                        <td class='docblock short'>
-                             <p>A structure that describes the version of the underlying <code>libusb</code> library.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='struct' href='struct.Version.html'
-                               title='libusb::Version'>Version</a></td>
-                        <td class='docblock short'>
-                             <p>A three-part version consisting of major, minor, and sub minor components.</p>
-
-                        </td>
-                    </tr>
-                </table><h2 id='enums' class='section-header'><a href="#enums">Enums</a></h2>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.ConfigDescriptor.html'
+                                  title='libusb::ConfigDescriptor'>ConfigDescriptor</a></td>
+                           <td class='docblock short'>
+                                <p>Describes a configuration.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.Context.html'
+                                  title='libusb::Context'>Context</a></td>
+                           <td class='docblock short'>
+                                <p>A <code>libusb</code> context.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.Device.html'
+                                  title='libusb::Device'>Device</a></td>
+                           <td class='docblock short'>
+                                <p>A reference to a USB device.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.DeviceDescriptor.html'
+                                  title='libusb::DeviceDescriptor'>DeviceDescriptor</a></td>
+                           <td class='docblock short'>
+                                <p>Describes a device.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.DeviceHandle.html'
+                                  title='libusb::DeviceHandle'>DeviceHandle</a></td>
+                           <td class='docblock short'>
+                                <p>A handle to an open USB device.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.DeviceList.html'
+                                  title='libusb::DeviceList'>DeviceList</a></td>
+                           <td class='docblock short'>
+                                <p>A list of detected USB devices.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.Devices.html'
+                                  title='libusb::Devices'>Devices</a></td>
+                           <td class='docblock short'>
+                                <p>Iterator over detected USB devices.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.EndpointDescriptor.html'
+                                  title='libusb::EndpointDescriptor'>EndpointDescriptor</a></td>
+                           <td class='docblock short'>
+                                <p>Describes an endpoint.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.EndpointDescriptors.html'
+                                  title='libusb::EndpointDescriptors'>EndpointDescriptors</a></td>
+                           <td class='docblock short'>
+                                <p>Iterator over an interface&#39;s endpoint descriptors.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.Interface.html'
+                                  title='libusb::Interface'>Interface</a></td>
+                           <td class='docblock short'>
+                                <p>A device interface.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.InterfaceDescriptor.html'
+                                  title='libusb::InterfaceDescriptor'>InterfaceDescriptor</a></td>
+                           <td class='docblock short'>
+                                <p>Describes an alternate setting for an interface.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.InterfaceDescriptors.html'
+                                  title='libusb::InterfaceDescriptors'>InterfaceDescriptors</a></td>
+                           <td class='docblock short'>
+                                <p>Iterator over an interface&#39;s descriptors.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.Interfaces.html'
+                                  title='libusb::Interfaces'>Interfaces</a></td>
+                           <td class='docblock short'>
+                                <p>Iterator over a configuration&#39;s interfaces.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.Language.html'
+                                  title='libusb::Language'>Language</a></td>
+                           <td class='docblock short'>
+                                <p>A language used to read string descriptors from USB devices.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.LibraryVersion.html'
+                                  title='libusb::LibraryVersion'>LibraryVersion</a></td>
+                           <td class='docblock short'>
+                                <p>A structure that describes the version of the underlying <code>libusb</code> library.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='struct' href='struct.Version.html'
+                                  title='libusb::Version'>Version</a></td>
+                           <td class='docblock short'>
+                                <p>A three-part version consisting of major, minor, and sub minor components.</p>
+                           </td>
+                       </tr></table><h2 id='enums' class='section-header'><a href="#enums">Enums</a></h2>
 <table>
-                    <tr class=' module-item'>
-                        <td><a class='enum' href='enum.Direction.html'
-                               title='libusb::Direction'>Direction</a></td>
-                        <td class='docblock short'>
-                             <p>Transfer and endpoint directions.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='enum' href='enum.Error.html'
-                               title='libusb::Error'>Error</a></td>
-                        <td class='docblock short'>
-                             <p>Errors returned by the <code>libusb</code> library.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='enum' href='enum.LogLevel.html'
-                               title='libusb::LogLevel'>LogLevel</a></td>
-                        <td class='docblock short'>
-                             <p>Library logging levels.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='enum' href='enum.PrimaryLanguage.html'
-                               title='libusb::PrimaryLanguage'>PrimaryLanguage</a></td>
-                        <td class='docblock short'>
-                             <p>Primary language families.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='enum' href='enum.Recipient.html'
-                               title='libusb::Recipient'>Recipient</a></td>
-                        <td class='docblock short'>
-                             <p>Recipients of control transfers.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='enum' href='enum.RequestType.html'
-                               title='libusb::RequestType'>RequestType</a></td>
-                        <td class='docblock short'>
-                             <p>Types of control transfers.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='enum' href='enum.Speed.html'
-                               title='libusb::Speed'>Speed</a></td>
-                        <td class='docblock short'>
-                             <p>Device speeds. Indicates the speed at which a device is operating.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='enum' href='enum.SubLanguage.html'
-                               title='libusb::SubLanguage'>SubLanguage</a></td>
-                        <td class='docblock short'>
-                             <p>Language dialects and writing systems.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='enum' href='enum.SyncType.html'
-                               title='libusb::SyncType'>SyncType</a></td>
-                        <td class='docblock short'>
-                             <p>Isochronous synchronization mode.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='enum' href='enum.TransferType.html'
-                               title='libusb::TransferType'>TransferType</a></td>
-                        <td class='docblock short'>
-                             <p>An endpoint&#39;s transfer type.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='enum' href='enum.UsageType.html'
-                               title='libusb::UsageType'>UsageType</a></td>
-                        <td class='docblock short'>
-                             <p>Isochronous usage type.</p>
-
-                        </td>
-                    </tr>
-                </table><h2 id='functions' class='section-header'><a href="#functions">Functions</a></h2>
+                       <tr class=' module-item'>
+                           <td><a class='enum' href='enum.Direction.html'
+                                  title='libusb::Direction'>Direction</a></td>
+                           <td class='docblock short'>
+                                <p>Transfer and endpoint directions.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='enum' href='enum.Error.html'
+                                  title='libusb::Error'>Error</a></td>
+                           <td class='docblock short'>
+                                <p>Errors returned by the <code>libusb</code> library.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='enum' href='enum.LogLevel.html'
+                                  title='libusb::LogLevel'>LogLevel</a></td>
+                           <td class='docblock short'>
+                                <p>Library logging levels.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='enum' href='enum.PrimaryLanguage.html'
+                                  title='libusb::PrimaryLanguage'>PrimaryLanguage</a></td>
+                           <td class='docblock short'>
+                                <p>Primary language families.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='enum' href='enum.Recipient.html'
+                                  title='libusb::Recipient'>Recipient</a></td>
+                           <td class='docblock short'>
+                                <p>Recipients of control transfers.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='enum' href='enum.RequestType.html'
+                                  title='libusb::RequestType'>RequestType</a></td>
+                           <td class='docblock short'>
+                                <p>Types of control transfers.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='enum' href='enum.Speed.html'
+                                  title='libusb::Speed'>Speed</a></td>
+                           <td class='docblock short'>
+                                <p>Device speeds. Indicates the speed at which a device is operating.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='enum' href='enum.SubLanguage.html'
+                                  title='libusb::SubLanguage'>SubLanguage</a></td>
+                           <td class='docblock short'>
+                                <p>Language dialects and writing systems.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='enum' href='enum.SyncType.html'
+                                  title='libusb::SyncType'>SyncType</a></td>
+                           <td class='docblock short'>
+                                <p>Isochronous synchronization mode.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='enum' href='enum.TransferType.html'
+                                  title='libusb::TransferType'>TransferType</a></td>
+                           <td class='docblock short'>
+                                <p>An endpoint&#39;s transfer type.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='enum' href='enum.UsageType.html'
+                                  title='libusb::UsageType'>UsageType</a></td>
+                           <td class='docblock short'>
+                                <p>Isochronous usage type.</p>
+                           </td>
+                       </tr></table><h2 id='functions' class='section-header'><a href="#functions">Functions</a></h2>
 <table>
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.request_type.html'
-                               title='libusb::request_type'>request_type</a></td>
-                        <td class='docblock short'>
-                             <p>Builds a value for the <code>bmRequestType</code> field of a control transfer setup packet.</p>
-
-                        </td>
-                    </tr>
-                
-                    <tr class=' module-item'>
-                        <td><a class='fn' href='fn.version.html'
-                               title='libusb::version'>version</a></td>
-                        <td class='docblock short'>
-                             <p>Returns a structure with the version of the running libusb library.</p>
-
-                        </td>
-                    </tr>
-                </table><h2 id='types' class='section-header'><a href="#types">Type Definitions</a></h2>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.request_type.html'
+                                  title='libusb::request_type'>request_type</a></td>
+                           <td class='docblock short'>
+                                <p>Builds a value for the <code>bmRequestType</code> field of a control transfer setup packet.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='fn' href='fn.version.html'
+                                  title='libusb::version'>version</a></td>
+                           <td class='docblock short'>
+                                <p>Returns a structure with the version of the running libusb library.</p>
+                           </td>
+                       </tr></table><h2 id='types' class='section-header'><a href="#types">Type Definitions</a></h2>
 <table>
-                    <tr class=' module-item'>
-                        <td><a class='type' href='type.Result.html'
-                               title='libusb::Result'>Result</a></td>
-                        <td class='docblock short'>
-                             <p>A result of a function that may return a <code>Error</code>.</p>
-
-                        </td>
-                    </tr>
-                </table></section>
+                       <tr class=' module-item'>
+                           <td><a class='type' href='type.Result.html'
+                                  title='libusb::Result'>Result</a></td>
+                           <td class='docblock short'>
+                                <p>A result of a function that may return a <code>Error</code>.</p>
+                           </td>
+                       </tr></table></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
 
-    <div id="help" class="hidden">
+    <aside id="help" class="hidden">
         <div>
+            <h1 class="hidden">Help</h1>
+
             <div class="shortcuts">
-                <h1>Keyboard Shortcuts</h1>
+                <h2>Keyboard Shortcuts</h2>
 
                 <dl>
                     <dt>?</dt>
@@ -342,11 +286,13 @@
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 
             <div class="infos">
-                <h1>Search Tricks</h1>
+                <h2>Search Tricks</h2>
 
                 <p>
                     Prefix searches with a type followed by a colon (e.g.
@@ -356,17 +302,17 @@
                 <p>
                     Accepted types are: <code>fn</code>, <code>mod</code>,
                     <code>struct</code>, <code>enum</code>,
-                    <code>trait</code>, <code>typedef</code> (or
-                    <code>tdef</code>).
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
                 </p>
 
                 <p>
                     Search functions by type signature (e.g.
-                    <code>vec -> usize</code>)
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
                 </p>
             </div>
         </div>
-    </div>
+    </aside>
 
     
 
@@ -378,6 +324,6 @@
     <script src="../jquery.js"></script>
     <script src="../main.js"></script>
     
-    <script async src="../search-index.js"></script>
+    <script defer src="../search-index.js"></script>
 </body>
 </html>

@@ -9,7 +9,9 @@
 
     <title>libusb::DeviceDescriptor - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../main.css">
+    
 
     
     
@@ -24,10 +26,10 @@
 
     
 
-    <section class="sidebar">
+    <nav class="sidebar">
         
         <p class='location'><a href='index.html'>libusb</a></p><script>window.sidebarCurrent = {name: 'DeviceDescriptor', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
-    </section>
+    </nav>
 
     <nav class="sub">
         <form class="search-form js-only">
@@ -42,47 +44,52 @@
 
     <section id='main' class="content struct">
 <h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>libusb</a>::<wbr><a class='struct' href=''>DeviceDescriptor</a></span><span class='out-of-band'><span id='render-detail'>
-            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
-                [<span class='inner'>&#x2212;</span>]
-            </a>
-        </span><a id='src-5707' class='srclink' href='../src/libusb/device_descriptor.rs.html#6-8' title='goto source code'>[src]</a></span></h1>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a id='src-757' class='srclink' href='../src/libusb/src/device_descriptor.rs.html#8-10' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct DeviceDescriptor {
     // some fields omitted
 }</pre><div class='docblock'><p>Describes a device.</p>
-</div><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl <a class='struct' href='../libusb/struct.DeviceDescriptor.html' title='libusb::DeviceDescriptor'>DeviceDescriptor</a></code></h3><div class='impl-items'><h4 id='method.usb_version' class='method'><code>fn <a href='#method.usb_version' class='fnname'>usb_version</a>(&amp;self) -&gt; <a class='struct' href='../libusb/struct.Version.html' title='libusb::Version'>Version</a></code></h4>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl <a class='struct' href='../libusb/struct.DeviceDescriptor.html' title='libusb::DeviceDescriptor'>DeviceDescriptor</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-759' class='srclink' href='../src/libusb/src/device_descriptor.rs.html#12-81' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.usb_version' class='method'><code>fn <a href='#method.usb_version' class='fnname'>usb_version</a>(&amp;self) -&gt; <a class='struct' href='../libusb/struct.Version.html' title='libusb::Version'>Version</a></code></h4>
 <div class='docblock'><p>Returns the device&#39;s maximum supported USB version.</p>
 </div><h4 id='method.device_version' class='method'><code>fn <a href='#method.device_version' class='fnname'>device_version</a>(&amp;self) -&gt; <a class='struct' href='../libusb/struct.Version.html' title='libusb::Version'>Version</a></code></h4>
 <div class='docblock'><p>Returns the manufacturer&#39;s version of the device.</p>
-</div><h4 id='method.manufacturer_string_index' class='method'><code>fn <a href='#method.manufacturer_string_index' class='fnname'>manufacturer_string_index</a>(&amp;self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>&gt;</code></h4>
+</div><h4 id='method.manufacturer_string_index' class='method'><code>fn <a href='#method.manufacturer_string_index' class='fnname'>manufacturer_string_index</a>(&amp;self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>&gt;</code></h4>
 <div class='docblock'><p>Returns the index of the string descriptor that contains the manufacturer name.</p>
-</div><h4 id='method.product_string_index' class='method'><code>fn <a href='#method.product_string_index' class='fnname'>product_string_index</a>(&amp;self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>&gt;</code></h4>
+</div><h4 id='method.product_string_index' class='method'><code>fn <a href='#method.product_string_index' class='fnname'>product_string_index</a>(&amp;self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>&gt;</code></h4>
 <div class='docblock'><p>Returns the index of the string descriptor that contains the product name.</p>
-</div><h4 id='method.serial_number_string_index' class='method'><code>fn <a href='#method.serial_number_string_index' class='fnname'>serial_number_string_index</a>(&amp;self) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>&gt;</code></h4>
+</div><h4 id='method.serial_number_string_index' class='method'><code>fn <a href='#method.serial_number_string_index' class='fnname'>serial_number_string_index</a>(&amp;self) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>&gt;</code></h4>
 <div class='docblock'><p>Returns the index of the string descriptor that contains the device&#39;s serial number.</p>
-</div><h4 id='method.class_code' class='method'><code>fn <a href='#method.class_code' class='fnname'>class_code</a>(&amp;self) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code></h4>
+</div><h4 id='method.class_code' class='method'><code>fn <a href='#method.class_code' class='fnname'>class_code</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code></h4>
 <div class='docblock'><p>Returns the device&#39;s class code.</p>
-</div><h4 id='method.sub_class_code' class='method'><code>fn <a href='#method.sub_class_code' class='fnname'>sub_class_code</a>(&amp;self) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code></h4>
+</div><h4 id='method.sub_class_code' class='method'><code>fn <a href='#method.sub_class_code' class='fnname'>sub_class_code</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code></h4>
 <div class='docblock'><p>Returns the device&#39;s sub class code.</p>
-</div><h4 id='method.protocol_code' class='method'><code>fn <a href='#method.protocol_code' class='fnname'>protocol_code</a>(&amp;self) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code></h4>
+</div><h4 id='method.protocol_code' class='method'><code>fn <a href='#method.protocol_code' class='fnname'>protocol_code</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code></h4>
 <div class='docblock'><p>Returns the device&#39;s protocol code.</p>
-</div><h4 id='method.vendor_id' class='method'><code>fn <a href='#method.vendor_id' class='fnname'>vendor_id</a>(&amp;self) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a></code></h4>
+</div><h4 id='method.vendor_id' class='method'><code>fn <a href='#method.vendor_id' class='fnname'>vendor_id</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a></code></h4>
 <div class='docblock'><p>Returns the device&#39;s vendor ID.</p>
-</div><h4 id='method.product_id' class='method'><code>fn <a href='#method.product_id' class='fnname'>product_id</a>(&amp;self) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a></code></h4>
+</div><h4 id='method.product_id' class='method'><code>fn <a href='#method.product_id' class='fnname'>product_id</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a></code></h4>
 <div class='docblock'><p>Returns the device&#39;s product ID.</p>
-</div><h4 id='method.max_packet_size' class='method'><code>fn <a href='#method.max_packet_size' class='fnname'>max_packet_size</a>(&amp;self) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code></h4>
+</div><h4 id='method.max_packet_size' class='method'><code>fn <a href='#method.max_packet_size' class='fnname'>max_packet_size</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code></h4>
 <div class='docblock'><p>Returns the maximum packet size of the device&#39;s first endpoint.</p>
-</div><h4 id='method.num_configurations' class='method'><code>fn <a href='#method.num_configurations' class='fnname'>num_configurations</a>(&amp;self) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code></h4>
+</div><h4 id='method.num_configurations' class='method'><code>fn <a href='#method.num_configurations' class='fnname'>num_configurations</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code></h4>
 <div class='docblock'><p>Returns the number of config descriptors available for the device.</p>
-</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl <a class='trait' href='http://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='struct' href='../libusb/struct.DeviceDescriptor.html' title='libusb::DeviceDescriptor'>DeviceDescriptor</a></code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#method.fmt' class='fnname'>fmt</a>(&amp;self, fmt: &amp;mut <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Error.html' title='core::fmt::Error'>Error</a>&gt;</code></h4>
-</div></section>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='struct' href='../libusb/struct.DeviceDescriptor.html' title='libusb::DeviceDescriptor'>DeviceDescriptor</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-787' class='srclink' href='../src/libusb/src/device_descriptor.rs.html#83-104' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, fmt: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>,&nbsp;<a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Error.html' title='core::fmt::Error'>Error</a>&gt;</code></h4>
+<div class='docblock'><p>Formats the value using the given formatter.</p>
+</div></div></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
 
-    <div id="help" class="hidden">
+    <aside id="help" class="hidden">
         <div>
+            <h1 class="hidden">Help</h1>
+
             <div class="shortcuts">
-                <h1>Keyboard Shortcuts</h1>
+                <h2>Keyboard Shortcuts</h2>
 
                 <dl>
                     <dt>?</dt>
@@ -95,11 +102,13 @@
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 
             <div class="infos">
-                <h1>Search Tricks</h1>
+                <h2>Search Tricks</h2>
 
                 <p>
                     Prefix searches with a type followed by a colon (e.g.
@@ -109,17 +118,17 @@
                 <p>
                     Accepted types are: <code>fn</code>, <code>mod</code>,
                     <code>struct</code>, <code>enum</code>,
-                    <code>trait</code>, <code>typedef</code> (or
-                    <code>tdef</code>).
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
                 </p>
 
                 <p>
                     Search functions by type signature (e.g.
-                    <code>vec -> usize</code>)
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
                 </p>
             </div>
         </div>
-    </div>
+    </aside>
 
     
 
@@ -131,6 +140,6 @@
     <script src="../jquery.js"></script>
     <script src="../main.js"></script>
     
-    <script async src="../search-index.js"></script>
+    <script defer src="../search-index.js"></script>
 </body>
 </html>

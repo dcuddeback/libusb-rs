@@ -9,7 +9,9 @@
 
     <title>libusb::EndpointDescriptor - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../main.css">
+    
 
     
     
@@ -24,10 +26,10 @@
 
     
 
-    <section class="sidebar">
+    <nav class="sidebar">
         
         <p class='location'><a href='index.html'>libusb</a></p><script>window.sidebarCurrent = {name: 'EndpointDescriptor', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
-    </section>
+    </nav>
 
     <nav class="sub">
         <form class="search-form js-only">
@@ -42,16 +44,17 @@
 
     <section id='main' class="content struct">
 <h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>libusb</a>::<wbr><a class='struct' href=''>EndpointDescriptor</a></span><span class='out-of-band'><span id='render-detail'>
-            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
-                [<span class='inner'>&#x2212;</span>]
-            </a>
-        </span><a id='src-6752' class='srclink' href='../src/libusb/endpoint_descriptor.rs.html#6-8' title='goto source code'>[src]</a></span></h1>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a id='src-919' class='srclink' href='../src/libusb/src/endpoint_descriptor.rs.html#8-10' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct EndpointDescriptor&lt;'a&gt; {
     // some fields omitted
 }</pre><div class='docblock'><p>Describes an endpoint.</p>
-</div><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl&lt;'a&gt; <a class='struct' href='../libusb/struct.EndpointDescriptor.html' title='libusb::EndpointDescriptor'>EndpointDescriptor</a>&lt;'a&gt;</code></h3><div class='impl-items'><h4 id='method.address' class='method'><code>fn <a href='#method.address' class='fnname'>address</a>(&amp;self) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code></h4>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl&lt;'a&gt; <a class='struct' href='../libusb/struct.EndpointDescriptor.html' title='libusb::EndpointDescriptor'>EndpointDescriptor</a>&lt;'a&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a id='src-922' class='srclink' href='../src/libusb/src/endpoint_descriptor.rs.html#12-74' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.address' class='method'><code>fn <a href='#method.address' class='fnname'>address</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code></h4>
 <div class='docblock'><p>Returns the endpoint&#39;s address.</p>
-</div><h4 id='method.number' class='method'><code>fn <a href='#method.number' class='fnname'>number</a>(&amp;self) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code></h4>
+</div><h4 id='method.number' class='method'><code>fn <a href='#method.number' class='fnname'>number</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code></h4>
 <div class='docblock'><p>Returns the endpoint number.</p>
 </div><h4 id='method.direction' class='method'><code>fn <a href='#method.direction' class='fnname'>direction</a>(&amp;self) -&gt; <a class='enum' href='../libusb/enum.Direction.html' title='libusb::Direction'>Direction</a></code></h4>
 <div class='docblock'><p>Returns the endpoint&#39;s direction.</p>
@@ -65,20 +68,24 @@
 <div class='docblock'><p>Returns the endpoint&#39;s usage type.</p>
 
 <p>The return value of this method is only valid for isochronous endpoints.</p>
-</div><h4 id='method.max_packet_size' class='method'><code>fn <a href='#method.max_packet_size' class='fnname'>max_packet_size</a>(&amp;self) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a></code></h4>
+</div><h4 id='method.max_packet_size' class='method'><code>fn <a href='#method.max_packet_size' class='fnname'>max_packet_size</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u16.html'>u16</a></code></h4>
 <div class='docblock'><p>Returns the endpoint&#39;s maximum packet size.</p>
-</div><h4 id='method.interval' class='method'><code>fn <a href='#method.interval' class='fnname'>interval</a>(&amp;self) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code></h4>
+</div><h4 id='method.interval' class='method'><code>fn <a href='#method.interval' class='fnname'>interval</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code></h4>
 <div class='docblock'><p>Returns the endpoint&#39;s polling interval.</p>
-</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl&lt;'a&gt; <a class='trait' href='http://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='struct' href='../libusb/struct.EndpointDescriptor.html' title='libusb::EndpointDescriptor'>EndpointDescriptor</a>&lt;'a&gt;</code></h3><div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#method.fmt' class='fnname'>fmt</a>(&amp;self, fmt: &amp;mut <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a href='http://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/core/fmt/struct.Error.html' title='core::fmt::Error'>Error</a>&gt;</code></h4>
-</div></section>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl&lt;'a&gt; <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='struct' href='../libusb/struct.EndpointDescriptor.html' title='libusb::EndpointDescriptor'>EndpointDescriptor</a>&lt;'a&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a id='src-953' class='srclink' href='../src/libusb/src/endpoint_descriptor.rs.html#76-89' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, fmt: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>()</a>,&nbsp;<a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Error.html' title='core::fmt::Error'>Error</a>&gt;</code></h4>
+<div class='docblock'><p>Formats the value using the given formatter.</p>
+</div></div></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
 
-    <div id="help" class="hidden">
+    <aside id="help" class="hidden">
         <div>
+            <h1 class="hidden">Help</h1>
+
             <div class="shortcuts">
-                <h1>Keyboard Shortcuts</h1>
+                <h2>Keyboard Shortcuts</h2>
 
                 <dl>
                     <dt>?</dt>
@@ -91,11 +98,13 @@
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 
             <div class="infos">
-                <h1>Search Tricks</h1>
+                <h2>Search Tricks</h2>
 
                 <p>
                     Prefix searches with a type followed by a colon (e.g.
@@ -105,17 +114,17 @@
                 <p>
                     Accepted types are: <code>fn</code>, <code>mod</code>,
                     <code>struct</code>, <code>enum</code>,
-                    <code>trait</code>, <code>typedef</code> (or
-                    <code>tdef</code>).
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
                 </p>
 
                 <p>
                     Search functions by type signature (e.g.
-                    <code>vec -> usize</code>)
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
                 </p>
             </div>
         </div>
-    </div>
+    </aside>
 
     
 
@@ -127,6 +136,6 @@
     <script src="../jquery.js"></script>
     <script src="../main.js"></script>
     
-    <script async src="../search-index.js"></script>
+    <script defer src="../search-index.js"></script>
 </body>
 </html>

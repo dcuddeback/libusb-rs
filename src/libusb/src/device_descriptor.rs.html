@@ -9,7 +9,9 @@
 
     <title>device_descriptor.rs.html -- source</title>
 
-    <link rel="stylesheet" type="text/css" href="../../main.css">
+    <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../../../main.css">
+    
 
     
     
@@ -24,10 +26,10 @@
 
     
 
-    <section class="sidebar">
+    <nav class="sidebar">
         
         
-    </section>
+    </nav>
 
     <nav class="sub">
         <form class="search-form js-only">
@@ -226,14 +228,20 @@
 <span id="184">184</span>
 <span id="185">185</span>
 <span id="186">186</span>
+<span id="187">187</span>
+<span id="188">188</span>
+<span id="189">189</span>
+<span id="190">190</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fmt</span>;
 
-<span class='kw'>use</span> ::<span class='ident'>fields</span>::<span class='ident'>Version</span>;
+<span class='kw'>use</span> <span class='ident'>libusb</span>::<span class='op'>*</span>;
+
+<span class='kw'>use</span> <span class='ident'>fields</span>::<span class='ident'>Version</span>;
 
 <span class='doccomment'>/// Describes a device.</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>DeviceDescriptor</span> {
-    <span class='ident'>descriptor</span>: ::<span class='ident'>libusb</span>::<span class='ident'>libusb_device_descriptor</span>,
+    <span class='ident'>descriptor</span>: <span class='ident'>libusb_device_descriptor</span>,
 }
 
 <span class='kw'>impl</span> <span class='ident'>DeviceDescriptor</span> {
@@ -331,86 +339,88 @@
 }
 
 <span class='attribute'>#[<span class='ident'>doc</span>(<span class='ident'>hidden</span>)]</span>
-<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>from_libusb</span>(<span class='ident'>device</span>: ::<span class='ident'>libusb</span>::<span class='ident'>libusb_device_descriptor</span>) <span class='op'>-&gt;</span> <span class='ident'>DeviceDescriptor</span> {
+<span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>from_libusb</span>(<span class='ident'>device</span>: <span class='ident'>libusb_device_descriptor</span>) <span class='op'>-&gt;</span> <span class='ident'>DeviceDescriptor</span> {
     <span class='ident'>DeviceDescriptor</span> { <span class='ident'>descriptor</span>: <span class='ident'>device</span> }
 }
 
 
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>test</span>)]</span>
 <span class='kw'>mod</span> <span class='ident'>test</span> {
+    <span class='kw'>use</span> <span class='ident'>fields</span>::<span class='ident'>Version</span>;
+
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>it_has_usb_version</span>() {
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(::<span class='ident'>Version</span>::<span class='ident'>from_bcd</span>(<span class='number'>0x1234</span>), <span class='ident'>super</span>::<span class='ident'>from_libusb</span>(<span class='macro'>device_descriptor</span><span class='macro'>!</span>(<span class='ident'>bcdUSB</span>: <span class='number'>0x1234</span>)).<span class='ident'>usb_version</span>());
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>Version</span>::<span class='ident'>from_bcd</span>(<span class='number'>0x1234</span>), <span class='kw'>super</span>::<span class='ident'>from_libusb</span>(<span class='macro'>device_descriptor</span><span class='macro'>!</span>(<span class='ident'>bcdUSB</span>: <span class='number'>0x1234</span>)).<span class='ident'>usb_version</span>());
     }
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>it_has_device_version</span>() {
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(::<span class='ident'>Version</span>::<span class='ident'>from_bcd</span>(<span class='number'>0x1234</span>), <span class='ident'>super</span>::<span class='ident'>from_libusb</span>(<span class='macro'>device_descriptor</span><span class='macro'>!</span>(<span class='ident'>bcdDevice</span>: <span class='number'>0x1234</span>)).<span class='ident'>device_version</span>());
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>Version</span>::<span class='ident'>from_bcd</span>(<span class='number'>0x1234</span>), <span class='kw'>super</span>::<span class='ident'>from_libusb</span>(<span class='macro'>device_descriptor</span><span class='macro'>!</span>(<span class='ident'>bcdDevice</span>: <span class='number'>0x1234</span>)).<span class='ident'>device_version</span>());
     }
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>it_has_manufacturer_string_index</span>() {
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='prelude-val'>Some</span>(<span class='number'>42</span>), <span class='ident'>super</span>::<span class='ident'>from_libusb</span>(<span class='macro'>device_descriptor</span><span class='macro'>!</span>(<span class='ident'>iManufacturer</span>: <span class='number'>42</span>)).<span class='ident'>manufacturer_string_index</span>());
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='prelude-val'>Some</span>(<span class='number'>42</span>), <span class='kw'>super</span>::<span class='ident'>from_libusb</span>(<span class='macro'>device_descriptor</span><span class='macro'>!</span>(<span class='ident'>iManufacturer</span>: <span class='number'>42</span>)).<span class='ident'>manufacturer_string_index</span>());
     }
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>it_handles_missing_manufacturer_string_index</span>() {
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='prelude-val'>None</span>, <span class='ident'>super</span>::<span class='ident'>from_libusb</span>(<span class='macro'>device_descriptor</span><span class='macro'>!</span>(<span class='ident'>iManufacturer</span>: <span class='number'>0</span>)).<span class='ident'>manufacturer_string_index</span>());
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='prelude-val'>None</span>, <span class='kw'>super</span>::<span class='ident'>from_libusb</span>(<span class='macro'>device_descriptor</span><span class='macro'>!</span>(<span class='ident'>iManufacturer</span>: <span class='number'>0</span>)).<span class='ident'>manufacturer_string_index</span>());
     }
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>it_has_product_string_index</span>() {
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='prelude-val'>Some</span>(<span class='number'>42</span>), <span class='ident'>super</span>::<span class='ident'>from_libusb</span>(<span class='macro'>device_descriptor</span><span class='macro'>!</span>(<span class='ident'>iProduct</span>: <span class='number'>42</span>)).<span class='ident'>product_string_index</span>());
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='prelude-val'>Some</span>(<span class='number'>42</span>), <span class='kw'>super</span>::<span class='ident'>from_libusb</span>(<span class='macro'>device_descriptor</span><span class='macro'>!</span>(<span class='ident'>iProduct</span>: <span class='number'>42</span>)).<span class='ident'>product_string_index</span>());
     }
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>it_handles_missing_product_string_index</span>() {
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='prelude-val'>None</span>, <span class='ident'>super</span>::<span class='ident'>from_libusb</span>(<span class='macro'>device_descriptor</span><span class='macro'>!</span>(<span class='ident'>iProduct</span>: <span class='number'>0</span>)).<span class='ident'>product_string_index</span>());
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='prelude-val'>None</span>, <span class='kw'>super</span>::<span class='ident'>from_libusb</span>(<span class='macro'>device_descriptor</span><span class='macro'>!</span>(<span class='ident'>iProduct</span>: <span class='number'>0</span>)).<span class='ident'>product_string_index</span>());
     }
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>it_has_serial_number_string_index</span>() {
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='prelude-val'>Some</span>(<span class='number'>42</span>), <span class='ident'>super</span>::<span class='ident'>from_libusb</span>(<span class='macro'>device_descriptor</span><span class='macro'>!</span>(<span class='ident'>iSerialNumber</span>: <span class='number'>42</span>)).<span class='ident'>serial_number_string_index</span>());
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='prelude-val'>Some</span>(<span class='number'>42</span>), <span class='kw'>super</span>::<span class='ident'>from_libusb</span>(<span class='macro'>device_descriptor</span><span class='macro'>!</span>(<span class='ident'>iSerialNumber</span>: <span class='number'>42</span>)).<span class='ident'>serial_number_string_index</span>());
     }
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>it_handles_missing_serial_number_string_index</span>() {
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='prelude-val'>None</span>, <span class='ident'>super</span>::<span class='ident'>from_libusb</span>(<span class='macro'>device_descriptor</span><span class='macro'>!</span>(<span class='ident'>iSerialNumber</span>: <span class='number'>0</span>)).<span class='ident'>serial_number_string_index</span>());
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='prelude-val'>None</span>, <span class='kw'>super</span>::<span class='ident'>from_libusb</span>(<span class='macro'>device_descriptor</span><span class='macro'>!</span>(<span class='ident'>iSerialNumber</span>: <span class='number'>0</span>)).<span class='ident'>serial_number_string_index</span>());
     }
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>it_has_class_code</span>() {
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>42</span>, <span class='ident'>super</span>::<span class='ident'>from_libusb</span>(<span class='macro'>device_descriptor</span><span class='macro'>!</span>(<span class='ident'>bDeviceClass</span>: <span class='number'>42</span>)).<span class='ident'>class_code</span>());
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>42</span>, <span class='kw'>super</span>::<span class='ident'>from_libusb</span>(<span class='macro'>device_descriptor</span><span class='macro'>!</span>(<span class='ident'>bDeviceClass</span>: <span class='number'>42</span>)).<span class='ident'>class_code</span>());
     }
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>it_has_sub_class_code</span>() {
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>42</span>, <span class='ident'>super</span>::<span class='ident'>from_libusb</span>(<span class='macro'>device_descriptor</span><span class='macro'>!</span>(<span class='ident'>bDeviceSubClass</span>: <span class='number'>42</span>)).<span class='ident'>sub_class_code</span>());
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>42</span>, <span class='kw'>super</span>::<span class='ident'>from_libusb</span>(<span class='macro'>device_descriptor</span><span class='macro'>!</span>(<span class='ident'>bDeviceSubClass</span>: <span class='number'>42</span>)).<span class='ident'>sub_class_code</span>());
     }
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>it_has_protocol_code</span>() {
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>42</span>, <span class='ident'>super</span>::<span class='ident'>from_libusb</span>(<span class='macro'>device_descriptor</span><span class='macro'>!</span>(<span class='ident'>bDeviceProtocol</span>: <span class='number'>42</span>)).<span class='ident'>protocol_code</span>());
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>42</span>, <span class='kw'>super</span>::<span class='ident'>from_libusb</span>(<span class='macro'>device_descriptor</span><span class='macro'>!</span>(<span class='ident'>bDeviceProtocol</span>: <span class='number'>42</span>)).<span class='ident'>protocol_code</span>());
     }
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>it_has_vendor_id</span>() {
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>42</span>, <span class='ident'>super</span>::<span class='ident'>from_libusb</span>(<span class='macro'>device_descriptor</span><span class='macro'>!</span>(<span class='ident'>idVendor</span>: <span class='number'>42</span>)).<span class='ident'>vendor_id</span>());
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>42</span>, <span class='kw'>super</span>::<span class='ident'>from_libusb</span>(<span class='macro'>device_descriptor</span><span class='macro'>!</span>(<span class='ident'>idVendor</span>: <span class='number'>42</span>)).<span class='ident'>vendor_id</span>());
     }
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>it_has_product_id</span>() {
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>42</span>, <span class='ident'>super</span>::<span class='ident'>from_libusb</span>(<span class='macro'>device_descriptor</span><span class='macro'>!</span>(<span class='ident'>idProduct</span>: <span class='number'>42</span>)).<span class='ident'>product_id</span>());
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>42</span>, <span class='kw'>super</span>::<span class='ident'>from_libusb</span>(<span class='macro'>device_descriptor</span><span class='macro'>!</span>(<span class='ident'>idProduct</span>: <span class='number'>42</span>)).<span class='ident'>product_id</span>());
     }
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>it_has_max_packet_size</span>() {
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>42</span>, <span class='ident'>super</span>::<span class='ident'>from_libusb</span>(<span class='macro'>device_descriptor</span><span class='macro'>!</span>(<span class='ident'>bMaxPacketSize0</span>: <span class='number'>42</span>)).<span class='ident'>max_packet_size</span>());
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>42</span>, <span class='kw'>super</span>::<span class='ident'>from_libusb</span>(<span class='macro'>device_descriptor</span><span class='macro'>!</span>(<span class='ident'>bMaxPacketSize0</span>: <span class='number'>42</span>)).<span class='ident'>max_packet_size</span>());
     }
 
     <span class='attribute'>#[<span class='ident'>test</span>]</span>
     <span class='kw'>fn</span> <span class='ident'>it_has_num_configurations</span>() {
-        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>3</span>, <span class='ident'>super</span>::<span class='ident'>from_libusb</span>(<span class='macro'>device_descriptor</span><span class='macro'>!</span>(<span class='ident'>bNumConfigurations</span>: <span class='number'>3</span>)).<span class='ident'>num_configurations</span>());
+        <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='number'>3</span>, <span class='kw'>super</span>::<span class='ident'>from_libusb</span>(<span class='macro'>device_descriptor</span><span class='macro'>!</span>(<span class='ident'>bNumConfigurations</span>: <span class='number'>3</span>)).<span class='ident'>num_configurations</span>());
     }
 }
 </pre>
@@ -419,10 +429,12 @@
 
     <section class="footer"></section>
 
-    <div id="help" class="hidden">
+    <aside id="help" class="hidden">
         <div>
+            <h1 class="hidden">Help</h1>
+
             <div class="shortcuts">
-                <h1>Keyboard Shortcuts</h1>
+                <h2>Keyboard Shortcuts</h2>
 
                 <dl>
                     <dt>?</dt>
@@ -435,11 +447,13 @@
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 
             <div class="infos">
-                <h1>Search Tricks</h1>
+                <h2>Search Tricks</h2>
 
                 <p>
                     Prefix searches with a type followed by a colon (e.g.
@@ -449,28 +463,28 @@
                 <p>
                     Accepted types are: <code>fn</code>, <code>mod</code>,
                     <code>struct</code>, <code>enum</code>,
-                    <code>trait</code>, <code>typedef</code> (or
-                    <code>tdef</code>).
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
                 </p>
 
                 <p>
                     Search functions by type signature (e.g.
-                    <code>vec -> usize</code>)
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
                 </p>
             </div>
         </div>
-    </div>
+    </aside>
 
     
 
     <script>
-        window.rootPath = "../../";
+        window.rootPath = "../../../";
         window.currentCrate = "libusb";
         window.playgroundUrl = "";
     </script>
-    <script src="../../jquery.js"></script>
-    <script src="../../main.js"></script>
+    <script src="../../../jquery.js"></script>
+    <script src="../../../main.js"></script>
     
-    <script async src="../../search-index.js"></script>
+    <script defer src="../../../search-index.js"></script>
 </body>
 </html>

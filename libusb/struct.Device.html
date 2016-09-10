@@ -9,7 +9,9 @@
 
     <title>libusb::Device - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../main.css">
+    
 
     
     
@@ -24,10 +26,10 @@
 
     
 
-    <section class="sidebar">
+    <nav class="sidebar">
         
         <p class='location'><a href='index.html'>libusb</a></p><script>window.sidebarCurrent = {name: 'Device', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
-    </section>
+    </nav>
 
     <nav class="sub">
         <form class="search-form js-only">
@@ -42,35 +44,44 @@
 
     <section id='main' class="content struct">
 <h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>libusb</a>::<wbr><a class='struct' href=''>Device</a></span><span class='out-of-band'><span id='render-detail'>
-            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
-                [<span class='inner'>&#x2212;</span>]
-            </a>
-        </span><a id='src-915' class='srclink' href='../src/libusb/device.rs.html#12-15' title='goto source code'>[src]</a></span></h1>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a id='src-216' class='srclink' href='../src/libusb/src/device.rs.html#14-17' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct Device&lt;'a&gt; {
     // some fields omitted
 }</pre><div class='docblock'><p>A reference to a USB device.</p>
-</div><h2 id='methods'>Methods</h2><h3 class='impl'><code>impl&lt;'a&gt; <a class='struct' href='../libusb/struct.Device.html' title='libusb::Device'>Device</a>&lt;'a&gt;</code></h3><div class='impl-items'><h4 id='method.device_descriptor' class='method'><code>fn <a href='#method.device_descriptor' class='fnname'>device_descriptor</a>(&amp;mut self) -&gt; <a class='type' href='../libusb/type.Result.html' title='libusb::Result'>Result</a>&lt;<a class='struct' href='../libusb/struct.DeviceDescriptor.html' title='libusb::DeviceDescriptor'>DeviceDescriptor</a>&gt;</code></h4>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><span class='in-band'><code>impl&lt;'a&gt; <a class='struct' href='../libusb/struct.Device.html' title='libusb::Device'>Device</a>&lt;'a&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a id='src-228' class='srclink' href='../src/libusb/src/device.rs.html#31-89' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.device_descriptor' class='method'><code>fn <a href='#method.device_descriptor' class='fnname'>device_descriptor</a>(&amp;self) -&gt; <a class='type' href='../libusb/type.Result.html' title='libusb::Result'>Result</a>&lt;<a class='struct' href='../libusb/struct.DeviceDescriptor.html' title='libusb::DeviceDescriptor'>DeviceDescriptor</a>&gt;</code></h4>
 <div class='docblock'><p>Reads the device descriptor.</p>
-</div><h4 id='method.config_descriptor' class='method'><code>fn <a href='#method.config_descriptor' class='fnname'>config_descriptor</a>(&amp;mut self, config_index: <a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>) -&gt; <a class='type' href='../libusb/type.Result.html' title='libusb::Result'>Result</a>&lt;<a class='struct' href='../libusb/struct.ConfigDescriptor.html' title='libusb::ConfigDescriptor'>ConfigDescriptor</a>&gt;</code></h4>
+</div><h4 id='method.config_descriptor' class='method'><code>fn <a href='#method.config_descriptor' class='fnname'>config_descriptor</a>(&amp;self, config_index: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a>) -&gt; <a class='type' href='../libusb/type.Result.html' title='libusb::Result'>Result</a>&lt;<a class='struct' href='../libusb/struct.ConfigDescriptor.html' title='libusb::ConfigDescriptor'>ConfigDescriptor</a>&gt;</code></h4>
 <div class='docblock'><p>Reads a configuration descriptor.</p>
-</div><h4 id='method.bus_number' class='method'><code>fn <a href='#method.bus_number' class='fnname'>bus_number</a>(&amp;mut self) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code></h4>
+</div><h4 id='method.active_config_descriptor' class='method'><code>fn <a href='#method.active_config_descriptor' class='fnname'>active_config_descriptor</a>(&amp;self) -&gt; <a class='type' href='../libusb/type.Result.html' title='libusb::Result'>Result</a>&lt;<a class='struct' href='../libusb/struct.ConfigDescriptor.html' title='libusb::ConfigDescriptor'>ConfigDescriptor</a>&gt;</code></h4>
+<div class='docblock'><p>Reads the configuration descriptor for the current configuration.</p>
+</div><h4 id='method.bus_number' class='method'><code>fn <a href='#method.bus_number' class='fnname'>bus_number</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code></h4>
 <div class='docblock'><p>Returns the number of the bus that the device is connected to.</p>
-</div><h4 id='method.address' class='method'><code>fn <a href='#method.address' class='fnname'>address</a>(&amp;mut self) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code></h4>
+</div><h4 id='method.address' class='method'><code>fn <a href='#method.address' class='fnname'>address</a>(&amp;self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.u8.html'>u8</a></code></h4>
 <div class='docblock'><p>Returns the device&#39;s address on the bus that it&#39;s connected to.</p>
-</div><h4 id='method.speed' class='method'><code>fn <a href='#method.speed' class='fnname'>speed</a>(&amp;mut self) -&gt; <a class='enum' href='../libusb/enum.Speed.html' title='libusb::Speed'>Speed</a></code></h4>
+</div><h4 id='method.speed' class='method'><code>fn <a href='#method.speed' class='fnname'>speed</a>(&amp;self) -&gt; <a class='enum' href='../libusb/enum.Speed.html' title='libusb::Speed'>Speed</a></code></h4>
 <div class='docblock'><p>Returns the device&#39;s connection speed.</p>
-</div><h4 id='method.open' class='method'><code>fn <a href='#method.open' class='fnname'>open</a>(&amp;mut self) -&gt; <a class='type' href='../libusb/type.Result.html' title='libusb::Result'>Result</a>&lt;<a class='struct' href='../libusb/struct.DeviceHandle.html' title='libusb::DeviceHandle'>DeviceHandle</a>&lt;'a&gt;&gt;</code></h4>
+</div><h4 id='method.open' class='method'><code>fn <a href='#method.open' class='fnname'>open</a>(&amp;self) -&gt; <a class='type' href='../libusb/type.Result.html' title='libusb::Result'>Result</a>&lt;<a class='struct' href='../libusb/struct.DeviceHandle.html' title='libusb::DeviceHandle'>DeviceHandle</a>&lt;'a&gt;&gt;</code></h4>
 <div class='docblock'><p>Opens the device.</p>
-</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><code>impl&lt;'a&gt; <a class='trait' href='http://doc.rust-lang.org/nightly/core/ops/trait.Drop.html' title='core::ops::Drop'>Drop</a> for <a class='struct' href='../libusb/struct.Device.html' title='libusb::Device'>Device</a>&lt;'a&gt;</code></h3><div class='impl-items'><h4 id='method.drop' class='method'><code>fn <a href='http://doc.rust-lang.org/nightly/core/ops/trait.Drop.html#method.drop' class='fnname'>drop</a>(&amp;mut self)</code></h4>
-</div></section>
+</div></div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl&lt;'a&gt; <a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html' title='core::ops::Drop'>Drop</a> for <a class='struct' href='../libusb/struct.Device.html' title='libusb::Device'>Device</a>&lt;'a&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a id='src-220' class='srclink' href='../src/libusb/src/device.rs.html#19-26' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.drop' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/ops/trait.Drop.html#tymethod.drop' class='fnname'>drop</a>(&amp;mut self)</code></h4>
+<div class='docblock'><p>Releases the device reference.</p>
+</div></div><h3 class='impl'><span class='in-band'><code>impl&lt;'a&gt; <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Send.html' title='core::marker::Send'>Send</a> for <a class='struct' href='../libusb/struct.Device.html' title='libusb::Device'>Device</a>&lt;'a&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a id='src-224' class='srclink' href='../src/libusb/src/device.rs.html#28' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'></div><h3 class='impl'><span class='in-band'><code>impl&lt;'a&gt; <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Sync.html' title='core::marker::Sync'>Sync</a> for <a class='struct' href='../libusb/struct.Device.html' title='libusb::Device'>Device</a>&lt;'a&gt;</code></span><span class='out-of-band'><div class='ghost'></div><a id='src-226' class='srclink' href='../src/libusb/src/device.rs.html#29' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'></div></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
 
-    <div id="help" class="hidden">
+    <aside id="help" class="hidden">
         <div>
+            <h1 class="hidden">Help</h1>
+
             <div class="shortcuts">
-                <h1>Keyboard Shortcuts</h1>
+                <h2>Keyboard Shortcuts</h2>
 
                 <dl>
                     <dt>?</dt>
@@ -83,11 +94,13 @@
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 
             <div class="infos">
-                <h1>Search Tricks</h1>
+                <h2>Search Tricks</h2>
 
                 <p>
                     Prefix searches with a type followed by a colon (e.g.
@@ -97,17 +110,17 @@
                 <p>
                     Accepted types are: <code>fn</code>, <code>mod</code>,
                     <code>struct</code>, <code>enum</code>,
-                    <code>trait</code>, <code>typedef</code> (or
-                    <code>tdef</code>).
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
                 </p>
 
                 <p>
                     Search functions by type signature (e.g.
-                    <code>vec -> usize</code>)
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
                 </p>
             </div>
         </div>
-    </div>
+    </aside>
 
     
 
@@ -119,6 +132,6 @@
     <script src="../jquery.js"></script>
     <script src="../main.js"></script>
     
-    <script async src="../search-index.js"></script>
+    <script defer src="../search-index.js"></script>
 </body>
 </html>

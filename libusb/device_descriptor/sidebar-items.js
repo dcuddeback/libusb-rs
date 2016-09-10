@@ -1,1 +1,0 @@
-initSidebarItems({"struct":[["DeviceDescriptor","Describes a device."]]});

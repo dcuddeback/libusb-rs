@@ -9,7 +9,9 @@
 
     <title>libusb::LogLevel - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../main.css">
+    
 
     
     
@@ -24,10 +26,10 @@
 
     
 
-    <section class="sidebar">
+    <nav class="sidebar">
         
         <p class='location'><a href='index.html'>libusb</a></p><script>window.sidebarCurrent = {name: 'LogLevel', ty: 'enum', relpath: ''};</script><script defer src="sidebar-items.js"></script>
-    </section>
+    </nav>
 
     <nav class="sub">
         <form class="search-form js-only">
@@ -42,10 +44,10 @@
 
     <section id='main' class="content enum">
 <h1 class='fqn'><span class='in-band'>Enum <a href='index.html'>libusb</a>::<wbr><a class='enum' href=''>LogLevel</a></span><span class='out-of-band'><span id='render-detail'>
-            <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
-                [<span class='inner'>&#x2212;</span>]
-            </a>
-        </span><a id='src-684' class='srclink' href='../src/libusb/context.rs.html#83-100' title='goto source code'>[src]</a></span></h1>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a id='src-155' class='srclink' href='../src/libusb/src/context.rs.html#108-125' title='goto source code'>[src]</a></span></h1>
 <pre class='rust enum'>pub enum LogLevel {
     None,
     Error,
@@ -54,22 +56,24 @@
     Debug,
 }</pre><div class='docblock'><p>Library logging levels.</p>
 </div><h2 class='variants'>Variants</h2>
-<table><tr><td id='variant.None'><code>None</code></td><td><div class='docblock'><p>No messages are printed by <code>libusb</code> (default).</p>
-</div></td></tr><tr><td id='variant.Error'><code>Error</code></td><td><div class='docblock'><p>Error messages printed to <code>stderr</code>.</p>
-</div></td></tr><tr><td id='variant.Warning'><code>Warning</code></td><td><div class='docblock'><p>Warning and error messages are printed to <code>stderr</code>.</p>
-</div></td></tr><tr><td id='variant.Info'><code>Info</code></td><td><div class='docblock'><p>Informational messages are printed to <code>stdout</code>. Warnings and error messages are printed to
+<span id='variant.None' class='variant'><code>None</code></span><div class='docblock'><p>No messages are printed by <code>libusb</code> (default).</p>
+</div><span id='variant.Error' class='variant'><code>Error</code></span><div class='docblock'><p>Error messages printed to <code>stderr</code>.</p>
+</div><span id='variant.Warning' class='variant'><code>Warning</code></span><div class='docblock'><p>Warning and error messages are printed to <code>stderr</code>.</p>
+</div><span id='variant.Info' class='variant'><code>Info</code></span><div class='docblock'><p>Informational messages are printed to <code>stdout</code>. Warnings and error messages are printed to
 <code>stderr</code>.</p>
-</div></td></tr><tr><td id='variant.Debug'><code>Debug</code></td><td><div class='docblock'><p>Debug and informational messages are printed to <code>stdout</code>. Warnings and error messages are
+</div><span id='variant.Debug' class='variant'><code>Debug</code></span><div class='docblock'><p>Debug and informational messages are printed to <code>stdout</code>. Warnings and error messages are
 printed to <code>stderr</code>.</p>
-</div></td></tr></table></section>
+</div></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>
 
-    <div id="help" class="hidden">
+    <aside id="help" class="hidden">
         <div>
+            <h1 class="hidden">Help</h1>
+
             <div class="shortcuts">
-                <h1>Keyboard Shortcuts</h1>
+                <h2>Keyboard Shortcuts</h2>
 
                 <dl>
                     <dt>?</dt>
@@ -82,11 +86,13 @@ printed to <code>stderr</code>.</p>
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 
             <div class="infos">
-                <h1>Search Tricks</h1>
+                <h2>Search Tricks</h2>
 
                 <p>
                     Prefix searches with a type followed by a colon (e.g.
@@ -96,17 +102,17 @@ printed to <code>stderr</code>.</p>
                 <p>
                     Accepted types are: <code>fn</code>, <code>mod</code>,
                     <code>struct</code>, <code>enum</code>,
-                    <code>trait</code>, <code>typedef</code> (or
-                    <code>tdef</code>).
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
                 </p>
 
                 <p>
                     Search functions by type signature (e.g.
-                    <code>vec -> usize</code>)
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
                 </p>
             </div>
         </div>
-    </div>
+    </aside>
 
     
 
@@ -118,6 +124,6 @@ printed to <code>stderr</code>.</p>
     <script src="../jquery.js"></script>
     <script src="../main.js"></script>
     
-    <script async src="../search-index.js"></script>
+    <script defer src="../search-index.js"></script>
 </body>
 </html>

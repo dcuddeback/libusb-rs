@@ -9,7 +9,9 @@
 
     <title>lib.rs.html -- source</title>
 
-    <link rel="stylesheet" type="text/css" href="../../main.css">
+    <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../../../main.css">
+    
 
     
     
@@ -24,10 +26,10 @@
 
     
 
-    <section class="sidebar">
+    <nav class="sidebar">
         
         
-    </section>
+    </nav>
 
     <nav class="sub">
         <form class="search-form js-only">
@@ -88,20 +90,20 @@
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>libusb_sys</span> <span class='kw'>as</span> <span class='ident'>libusb</span>;
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>libc</span>;
 
-<span class='kw'>pub</span> <span class='kw'>use</span> ::<span class='ident'>version</span>::{<span class='ident'>LibraryVersion</span>,<span class='ident'>version</span>};
-<span class='kw'>pub</span> <span class='kw'>use</span> ::<span class='ident'>error</span>::{<span class='prelude-ty'>Result</span>,<span class='ident'>Error</span>};
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>version</span>::{<span class='ident'>LibraryVersion</span>, <span class='ident'>version</span>};
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>error</span>::{<span class='prelude-ty'>Result</span>, <span class='ident'>Error</span>};
 
-<span class='kw'>pub</span> <span class='kw'>use</span> ::<span class='ident'>context</span>::{<span class='ident'>Context</span>,<span class='ident'>LogLevel</span>};
-<span class='kw'>pub</span> <span class='kw'>use</span> ::<span class='ident'>device_list</span>::{<span class='ident'>DeviceList</span>,<span class='ident'>Devices</span>};
-<span class='kw'>pub</span> <span class='kw'>use</span> ::<span class='ident'>device</span>::{<span class='ident'>Device</span>};
-<span class='kw'>pub</span> <span class='kw'>use</span> ::<span class='ident'>device_handle</span>::<span class='ident'>DeviceHandle</span>;
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>context</span>::{<span class='ident'>Context</span>, <span class='ident'>LogLevel</span>};
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>device_list</span>::{<span class='ident'>DeviceList</span>, <span class='ident'>Devices</span>};
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>device</span>::<span class='ident'>Device</span>;
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>device_handle</span>::<span class='ident'>DeviceHandle</span>;
 
-<span class='kw'>pub</span> <span class='kw'>use</span> ::<span class='ident'>fields</span>::{<span class='ident'>Speed</span>,<span class='ident'>TransferType</span>,<span class='ident'>SyncType</span>,<span class='ident'>UsageType</span>,<span class='ident'>Direction</span>,<span class='ident'>RequestType</span>,<span class='ident'>Recipient</span>,<span class='ident'>Version</span>,<span class='ident'>request_type</span>};
-<span class='kw'>pub</span> <span class='kw'>use</span> ::<span class='ident'>device_descriptor</span>::{<span class='ident'>DeviceDescriptor</span>};
-<span class='kw'>pub</span> <span class='kw'>use</span> ::<span class='ident'>config_descriptor</span>::{<span class='ident'>ConfigDescriptor</span>,<span class='ident'>Interfaces</span>};
-<span class='kw'>pub</span> <span class='kw'>use</span> ::<span class='ident'>interface_descriptor</span>::{<span class='ident'>Interface</span>,<span class='ident'>InterfaceDescriptors</span>,<span class='ident'>InterfaceDescriptor</span>,<span class='ident'>EndpointDescriptors</span>};
-<span class='kw'>pub</span> <span class='kw'>use</span> ::<span class='ident'>endpoint_descriptor</span>::{<span class='ident'>EndpointDescriptor</span>};
-<span class='kw'>pub</span> <span class='kw'>use</span> ::<span class='ident'>language</span>::{<span class='ident'>Language</span>,<span class='ident'>PrimaryLanguage</span>,<span class='ident'>SubLanguage</span>};
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>fields</span>::{<span class='ident'>Speed</span>, <span class='ident'>TransferType</span>, <span class='ident'>SyncType</span>, <span class='ident'>UsageType</span>, <span class='ident'>Direction</span>, <span class='ident'>RequestType</span>, <span class='ident'>Recipient</span>, <span class='ident'>Version</span>, <span class='ident'>request_type</span>};
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>device_descriptor</span>::<span class='ident'>DeviceDescriptor</span>;
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>config_descriptor</span>::{<span class='ident'>ConfigDescriptor</span>, <span class='ident'>Interfaces</span>};
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>interface_descriptor</span>::{<span class='ident'>Interface</span>, <span class='ident'>InterfaceDescriptors</span>, <span class='ident'>InterfaceDescriptor</span>, <span class='ident'>EndpointDescriptors</span>};
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>endpoint_descriptor</span>::<span class='ident'>EndpointDescriptor</span>;
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>language</span>::{<span class='ident'>Language</span>, <span class='ident'>PrimaryLanguage</span>, <span class='ident'>SubLanguage</span>};
 
 
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>test</span>)]</span>
@@ -129,10 +131,12 @@
 
     <section class="footer"></section>
 
-    <div id="help" class="hidden">
+    <aside id="help" class="hidden">
         <div>
+            <h1 class="hidden">Help</h1>
+
             <div class="shortcuts">
-                <h1>Keyboard Shortcuts</h1>
+                <h2>Keyboard Shortcuts</h2>
 
                 <dl>
                     <dt>?</dt>
@@ -145,11 +149,13 @@
                     <dd>Move down in search results</dd>
                     <dt>&#9166;</dt>
                     <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
                 </dl>
             </div>
 
             <div class="infos">
-                <h1>Search Tricks</h1>
+                <h2>Search Tricks</h2>
 
                 <p>
                     Prefix searches with a type followed by a colon (e.g.
@@ -159,28 +165,28 @@
                 <p>
                     Accepted types are: <code>fn</code>, <code>mod</code>,
                     <code>struct</code>, <code>enum</code>,
-                    <code>trait</code>, <code>typedef</code> (or
-                    <code>tdef</code>).
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
                 </p>
 
                 <p>
                     Search functions by type signature (e.g.
-                    <code>vec -> usize</code>)
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
                 </p>
             </div>
         </div>
-    </div>
+    </aside>
 
     
 
     <script>
-        window.rootPath = "../../";
+        window.rootPath = "../../../";
         window.currentCrate = "libusb";
         window.playgroundUrl = "";
     </script>
-    <script src="../../jquery.js"></script>
-    <script src="../../main.js"></script>
+    <script src="../../../jquery.js"></script>
+    <script src="../../../main.js"></script>
     
-    <script async src="../../search-index.js"></script>
+    <script defer src="../../../search-index.js"></script>
 </body>
 </html>
