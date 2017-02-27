@@ -48,6 +48,30 @@ fn main() {
 }
 ```
 
+## Exampels
+
+### Building and Running the examples
+libusb-rs comes with a few running and useful examples, like listing the usbtree or getting information
+about a speceific device.
+
+The examples can be build/run using the following configurations:
+* device-info
+* libinfo
+* usbtree
+
+#### Building examples
+```shell
+cargo build --bin device-info
+cargo build --bin libinfo
+cargo build --bin usbtree
+```
+#### Running example:
+```shell
+cargo run --bin device-info
+cargo run --bin libinfo
+cargo run --bin usbtree
+```
+
 ## Contributors
 * [dcuddeback](https://github.com/dcuddeback)
 * [nibua-r](https://github.com/nibua-r)

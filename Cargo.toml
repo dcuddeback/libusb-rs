@@ -17,3 +17,18 @@ libc = "0.2"
 
 [dev-dependencies]
 regex = "0.1.26"
+
+[[bin]]
+name = "libinfo"
+path = "examples/libinfo.rs"
+doc = false
+
+[[bin]]
+name = "usbtree"
+path = "examples/usbtree.rs"
+doc = false
+
+[[bin]]
+name = "device-info"
+path = "examples/device_info.rs"
+doc = false
