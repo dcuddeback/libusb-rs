@@ -34,9 +34,9 @@ communicate with their endpoints:
 extern crate libusb;
 
 fn main() {
-    let mut context = libusb::Context::new().unwrap();
+    let context = libusb::Context::new().unwrap();
 
-    for mut device in context.devices().unwrap().iter() {
+    for device in context.devices().unwrap().iter() {
         let device_desc = device.device_descriptor().unwrap();
 
         println!("Bus {:03} Device {:03} ID {:04x}:{:04x}",
