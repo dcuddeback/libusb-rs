@@ -57,6 +57,11 @@ impl<'a> Device<'a> {
         Ok(unsafe { config_descriptor::from_libusb(config) })
     }
 
+    /// Returns the number of the port that the device is connected to.
+    pub fn port_number(&self) -> u8 {
+        unsafe { libusb_get_port_number(self.device) }
+    }
+
     /// Returns the number of the bus that the device is connected to.
     pub fn bus_number(&self) -> u8 {
         unsafe {
