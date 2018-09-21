@@ -79,6 +79,19 @@ impl ConfigDescriptor {
 
         Interfaces { iter: interfaces.iter() }
     }
+
+    /// Returns the unknown 'extra' bytes that libusb does not understand.
+    pub fn extra(&self) -> Option<& [u8]> {
+        unsafe {
+            match (*self.descriptor).extra_length {
+                len if len > 0 => Some(slice::from_raw_parts(
+                    (*self.descriptor).extra,
+                    len as usize,
+                )),
+                _ => None,
+            }
+        }
+    }
 }
 
 impl fmt::Debug for ConfigDescriptor {
