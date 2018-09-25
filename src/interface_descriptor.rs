@@ -37,7 +37,7 @@ impl<'a> Iterator for InterfaceDescriptors<'a> {
 
     fn next(&mut self) -> Option<InterfaceDescriptor<'a>> {
         self.iter.next().map(|descriptor| {
-            InterfaceDescriptor { descriptor: descriptor }
+            InterfaceDescriptor { descriptor }
         })
     }
 
@@ -157,9 +157,9 @@ impl<'a> Iterator for EndpointDescriptors<'a> {
 #[doc(hidden)]
 pub unsafe fn from_libusb(interface: &libusb_interface) -> Interface {
     let descriptors = slice::from_raw_parts(interface.altsetting, interface.num_altsetting as usize);
-    debug_assert!(descriptors.len() > 0);
+    debug_assert!(!descriptors.is_empty());
 
-    Interface { descriptors: descriptors }
+    Interface { descriptors }
 }
 
 

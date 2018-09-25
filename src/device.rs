@@ -98,7 +98,7 @@ pub unsafe fn from_libusb<'a>(context: PhantomData<&'a Context>, device: *mut li
     libusb_ref_device(device);
 
     Device {
-        context: context,
-        device: device,
+        context,
+        device,
     }
 }

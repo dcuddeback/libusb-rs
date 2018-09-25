@@ -28,6 +28,9 @@ impl<'a> DeviceList<'a> {
         self.len
     }
 
+    /// Returns true if the list is empty, else returns false.
+    pub fn is_empty(&self) -> bool { self.len == 0 }
+
     /// Returns an iterator over the devices in the list.
     ///
     /// The iterator yields a sequence of `Device` objects.
@@ -70,10 +73,10 @@ impl<'a, 'b> Iterator for Devices<'a, 'b> {
 
 
 #[doc(hidden)]
-pub unsafe fn from_libusb<'a>(_context: &'a Context, list: *const *mut libusb_device, len: usize,) -> DeviceList<'a> {
+pub unsafe fn from_libusb(_context: &Context, list: *const *mut libusb_device, len: usize,) -> DeviceList {
     DeviceList {
         context: PhantomData,
-        list: list,
-        len: len,
+        list,
+        len,
     }
 }

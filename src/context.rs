@@ -32,7 +32,7 @@ impl Context {
 
         try_unsafe!(libusb_init(&mut context));
 
-        Ok(Context { context: context })
+        Ok(Context { context })
     }
 
     /// Sets the log level of a `libusb` context.
@@ -91,7 +91,7 @@ impl Context {
     ///
     /// Returns a device handle for the first device found matching `vendor_id` and `product_id`.
     /// On error, or if the device could not be found, it returns `None`.
-    pub fn open_device_with_vid_pid<'a>(&'a self, vendor_id: u16, product_id: u16) -> Option<DeviceHandle<'a>> {
+    pub fn open_device_with_vid_pid(&self, vendor_id: u16, product_id: u16) -> Option<DeviceHandle> {
         let handle = unsafe { libusb_open_device_with_vid_pid(self.context, vendor_id, product_id) };
 
         if handle.is_null() {
@@ -105,6 +105,7 @@ impl Context {
 
 
 /// Library logging levels.
+#[derive(Clone,Copy)]
 pub enum LogLevel {
     /// No messages are printed by `libusb` (default).
     None,
@@ -125,8 +126,8 @@ pub enum LogLevel {
 }
 
 impl LogLevel {
-    fn as_c_int(&self) -> c_int {
-        match *self {
+    fn as_c_int(self) -> c_int {
+        match self {
             LogLevel::None    => LIBUSB_LOG_LEVEL_NONE,
             LogLevel::Error   => LIBUSB_LOG_LEVEL_ERROR,
             LogLevel::Warning => LIBUSB_LOG_LEVEL_WARNING,
