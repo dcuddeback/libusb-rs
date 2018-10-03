@@ -65,6 +65,13 @@ impl<'a> DeviceHandle<'a> {
         Ok(())
     }
 
+
+    /// Clear stall/halt state of the endpoint
+    pub fn clear_halt(&self, endpoint: u8) -> ::Result<()> {
+        try_unsafe!(libusb_clear_halt(self.handle, endpoint as c_uchar));
+        Ok(())
+    }
+
     /// Indicates whether the device has an attached kernel driver.
     ///
     /// This method is not supported on all platforms.
