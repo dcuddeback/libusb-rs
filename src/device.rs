@@ -11,6 +11,7 @@ use fields::{self, Speed};
 
 
 /// A reference to a USB device.
+#[derive(Eq, PartialEq)]
 pub struct Device<'a> {
     context: PhantomData<&'a Context>,
     device: *mut libusb_device,
