@@ -3,12 +3,11 @@ use std::mem;
 
 use libusb::*;
 
-use context::Context;
-use device_handle::{self, DeviceHandle};
-use device_descriptor::{self, DeviceDescriptor};
 use config_descriptor::{self, ConfigDescriptor};
+use context::Context;
+use device_descriptor::{self, DeviceDescriptor};
+use device_handle::{self, DeviceHandle};
 use fields::{self, Speed};
-
 
 /// A reference to a USB device.
 pub struct Device<'a> {
@@ -43,7 +42,11 @@ impl<'a> Device<'a> {
     pub fn config_descriptor(&self, config_index: u8) -> ::Result<ConfigDescriptor> {
         let mut config: *const libusb_config_descriptor = unsafe { mem::uninitialized() };
 
-        try_unsafe!(libusb_get_config_descriptor(self.device, config_index, &mut config));
+        try_unsafe!(libusb_get_config_descriptor(
+            self.device,
+            config_index,
+            &mut config
+        ));
 
         Ok(unsafe { config_descriptor::from_libusb(config) })
     }
@@ -52,30 +55,27 @@ impl<'a> Device<'a> {
     pub fn active_config_descriptor(&self) -> ::Result<ConfigDescriptor> {
         let mut config: *const libusb_config_descriptor = unsafe { mem::uninitialized() };
 
-        try_unsafe!(libusb_get_active_config_descriptor(self.device, &mut config));
+        try_unsafe!(libusb_get_active_config_descriptor(
+            self.device,
+            &mut config
+        ));
 
         Ok(unsafe { config_descriptor::from_libusb(config) })
     }
 
     /// Returns the number of the bus that the device is connected to.
     pub fn bus_number(&self) -> u8 {
-        unsafe {
-            libusb_get_bus_number(self.device)
-        }
+        unsafe { libusb_get_bus_number(self.device) }
     }
 
     /// Returns the device's address on the bus that it's connected to.
     pub fn address(&self) -> u8 {
-        unsafe {
-            libusb_get_device_address(self.device)
-        }
+        unsafe { libusb_get_device_address(self.device) }
     }
 
     /// Returns the device's connection speed.
     pub fn speed(&self) -> Speed {
-        fields::speed_from_libusb(unsafe {
-            libusb_get_device_speed(self.device)
-        })
+        fields::speed_from_libusb(unsafe { libusb_get_device_speed(self.device) })
     }
 
     /// Opens the device.
@@ -89,7 +89,10 @@ impl<'a> Device<'a> {
 }
 
 #[doc(hidden)]
-pub unsafe fn from_libusb<'a>(context: PhantomData<&'a Context>, device: *mut libusb_device) -> Device<'a> {
+pub unsafe fn from_libusb<'a>(
+    context: PhantomData<&'a Context>,
+    device: *mut libusb_device,
+) -> Device<'a> {
     libusb_ref_device(device);
 
     Device {

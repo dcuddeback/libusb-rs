@@ -3,11 +3,18 @@ extern crate libusb;
 fn main() {
     let version = libusb::version();
 
-    println!("libusb v{}.{}.{}.{}{}", version.major(), version.minor(), version.micro(), version.nano(), version.rc().unwrap_or(""));
+    println!(
+        "libusb v{}.{}.{}.{}{}",
+        version.major(),
+        version.minor(),
+        version.micro(),
+        version.nano(),
+        version.rc().unwrap_or("")
+    );
 
     let mut context = match libusb::Context::new() {
         Ok(c) => c,
-        Err(e) => panic!("libusb::Context::new(): {}", e)
+        Err(e) => panic!("libusb::Context::new(): {}", e),
     };
 
     context.set_log_level(libusb::LogLevel::Debug);
@@ -19,5 +26,8 @@ fn main() {
     println!("has capability? {}", context.has_capability());
     println!("has hotplug? {}", context.has_hotplug());
     println!("has HID access? {}", context.has_hid_access());
-    println!("supports detach kernel driver? {}", context.supports_detach_kernel_driver())
+    println!(
+        "supports detach kernel driver? {}",
+        context.supports_detach_kernel_driver()
+    )
 }
