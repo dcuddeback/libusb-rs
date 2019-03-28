@@ -4,7 +4,7 @@ use std::slice;
 
 use libusb::*;
 
-use interface_descriptor::{self, Interface};
+use crate::interface_descriptor::{self, Interface};
 
 /// Describes a configuration.
 pub struct ConfigDescriptor {

@@ -2,7 +2,7 @@ use std::fmt;
 
 use libusb::*;
 
-use fields::Version;
+use crate::fields::Version;
 
 /// Describes a device.
 pub struct DeviceDescriptor {
@@ -110,7 +110,7 @@ pub fn from_libusb(device: libusb_device_descriptor) -> DeviceDescriptor {
 
 #[cfg(test)]
 mod test {
-    use fields::Version;
+    use crate::fields::Version;
 
     #[test]
     fn it_has_usb_version() {

@@ -3,7 +3,7 @@ use std::slice;
 
 use libusb::*;
 
-use endpoint_descriptor::{self, EndpointDescriptor};
+use crate::endpoint_descriptor::{self, EndpointDescriptor};
 
 /// A device interface.
 ///

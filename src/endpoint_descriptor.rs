@@ -2,7 +2,7 @@ use std::fmt;
 
 use libusb::*;
 
-use fields::{Direction, SyncType, TransferType, UsageType};
+use crate::fields::{Direction, SyncType, TransferType, UsageType};
 
 /// Describes an endpoint.
 pub struct EndpointDescriptor<'a> {
@@ -97,7 +97,7 @@ pub fn from_libusb(endpoint: &libusb_endpoint_descriptor) -> EndpointDescriptor 
 
 #[cfg(test)]
 mod test {
-    use fields::{Direction, SyncType, TransferType, UsageType};
+    use crate::fields::{Direction, SyncType, TransferType, UsageType};
 
     #[test]
     fn it_interprets_number_for_output_endpoints() {

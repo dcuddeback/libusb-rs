@@ -70,15 +70,12 @@ fn read_device(
     device_desc: &libusb::DeviceDescriptor,
     handle: &mut libusb::DeviceHandle,
 ) -> libusb::Result<()> {
-    try!(handle.reset());
+    handle.reset()?;
 
     let timeout = Duration::from_secs(1);
-    let languages = try!(handle.read_languages(timeout));
+    let languages = handle.read_languages(timeout)?;
 
-    println!(
-        "Active configuration: {}",
-        try!(handle.active_configuration())
-    );
+    println!("Active configuration: {}", handle.active_configuration()?);
     println!("Languages: {:?}", languages);
 
     if languages.len() > 0 {
@@ -169,7 +166,7 @@ fn read_endpoint(
     match configure_endpoint(handle, &endpoint) {
         Ok(_) => {
             let mut vec = Vec::<u8>::with_capacity(256);
-            let mut buf =
+            let buf =
                 unsafe { slice::from_raw_parts_mut((&mut vec[..]).as_mut_ptr(), vec.capacity()) };
 
             let timeout = Duration::from_secs(1);
@@ -208,8 +205,8 @@ fn configure_endpoint<'a>(
     handle: &'a mut libusb::DeviceHandle,
     endpoint: &Endpoint,
 ) -> libusb::Result<()> {
-    try!(handle.set_active_configuration(endpoint.config));
-    try!(handle.claim_interface(endpoint.iface));
-    try!(handle.set_alternate_setting(endpoint.iface, endpoint.setting));
+    handle.set_active_configuration(endpoint.config)?;
+    handle.claim_interface(endpoint.iface)?;
+    handle.set_alternate_setting(endpoint.iface, endpoint.setting)?;
     Ok(())
 }

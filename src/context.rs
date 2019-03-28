@@ -4,9 +4,9 @@ use std::mem;
 use libc::c_int;
 use libusb::*;
 
-use device_handle::{self, DeviceHandle};
-use device_list::{self, DeviceList};
-use error;
+use crate::device_handle::{self, DeviceHandle};
+use crate::device_list::{self, DeviceList};
+use crate::error;
 
 /// A `libusb` context.
 pub struct Context {
@@ -27,7 +27,7 @@ unsafe impl Send for Context {}
 
 impl Context {
     /// Opens a new `libusb` context.
-    pub fn new() -> ::Result<Self> {
+    pub fn new() -> error::Result<Self> {
         let mut context = unsafe { mem::uninitialized() };
 
         try_unsafe!(libusb_init(&mut context));
@@ -62,7 +62,7 @@ impl Context {
     }
 
     /// Returns a list of the current USB devices. The context must outlive the device list.
-    pub fn devices<'a>(&'a self) -> ::Result<DeviceList<'a>> {
+    pub fn devices<'a>(&'a self) -> error::Result<DeviceList<'a>> {
         let mut list: *const *mut libusb_device = unsafe { mem::uninitialized() };
 
         let n = unsafe { libusb_get_device_list(self.context, &mut list) };
