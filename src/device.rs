@@ -1,5 +1,5 @@
-use std::marker::PhantomData;
 use std::mem;
+use std::rc::Rc;
 
 use libusb::*;
 
@@ -11,24 +11,26 @@ use crate::error;
 use crate::fields::{self, Speed};
 
 /// A reference to a USB device.
-pub struct Device<'a> {
-    context: PhantomData<&'a Context>,
+pub struct Device {
+    context: Rc<Context>,
     device: *mut libusb_device,
 }
 
-impl<'a> Drop for Device<'a> {
+impl Drop for Device {
     /// Releases the device reference.
     fn drop(&mut self) {
         unsafe {
             libusb_unref_device(self.device);
         }
+
+        drop(&self.context);
     }
 }
 
-unsafe impl<'a> Send for Device<'a> {}
-unsafe impl<'a> Sync for Device<'a> {}
+unsafe impl Send for Device {}
+unsafe impl Sync for Device {}
 
-impl<'a> Device<'a> {
+impl Device {
     /// Reads the device descriptor.
     pub fn device_descriptor(&self) -> error::Result<DeviceDescriptor> {
         let mut descriptor: libusb_device_descriptor = unsafe { mem::uninitialized() };
@@ -80,24 +82,21 @@ impl<'a> Device<'a> {
     }
 
     /// Opens the device.
-    pub fn open(&self) -> error::Result<DeviceHandle<'a>> {
+    pub fn open(&self) -> error::Result<DeviceHandle> {
         let mut handle: *mut libusb_device_handle = unsafe { mem::uninitialized() };
 
         try_unsafe!(libusb_open(self.device, &mut handle));
 
-        Ok(unsafe { device_handle::from_libusb(self.context, handle) })
+        Ok(unsafe { device_handle::from_libusb(Rc::clone(&self.context), handle) })
     }
 }
 
 #[doc(hidden)]
-pub unsafe fn from_libusb<'a>(
-    context: PhantomData<&'a Context>,
-    device: *mut libusb_device,
-) -> Device<'a> {
+pub unsafe fn from_libusb(context: Rc<Context>, device: *mut libusb_device) -> Device {
     libusb_ref_device(device);
 
     Device {
-        context: context,
+        context: context.clone(),
         device: device,
     }
 }

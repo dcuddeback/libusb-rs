@@ -24,7 +24,7 @@ fn main() {
     let pid: u16 = FromStr::from_str(args[2].as_ref()).unwrap();
 
     match libusb::Context::new() {
-        Ok(mut context) => match open_device(&mut context, vid, pid) {
+        Ok(context) => match open_device(context, vid, pid) {
             Some((mut device, device_desc, mut handle)) => {
                 read_device(&mut device, &device_desc, &mut handle).unwrap()
             }
@@ -35,7 +35,7 @@ fn main() {
 }
 
 fn open_device(
-    context: &mut libusb::Context,
+    context: libusb::Context,
     vid: u16,
     pid: u16,
 ) -> Option<(

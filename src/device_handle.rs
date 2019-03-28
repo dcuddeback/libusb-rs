@@ -1,5 +1,5 @@
-use std::marker::PhantomData;
 use std::mem;
+use std::rc::Rc;
 use std::slice;
 use std::time::Duration;
 
@@ -16,13 +16,13 @@ use crate::interface_descriptor::InterfaceDescriptor;
 use crate::language::{self, Language};
 
 /// A handle to an open USB device.
-pub struct DeviceHandle<'a> {
-    _context: PhantomData<&'a Context>,
+pub struct DeviceHandle {
+    context: Rc<Context>,
     handle: *mut libusb_device_handle,
     interfaces: BitSet,
 }
 
-impl<'a> Drop for DeviceHandle<'a> {
+impl Drop for DeviceHandle {
     /// Closes the device.
     fn drop(&mut self) {
         unsafe {
@@ -32,13 +32,15 @@ impl<'a> Drop for DeviceHandle<'a> {
 
             libusb_close(self.handle);
         }
+
+        drop(&self.context);
     }
 }
 
-unsafe impl<'a> Send for DeviceHandle<'a> {}
-unsafe impl<'a> Sync for DeviceHandle<'a> {}
+unsafe impl Send for DeviceHandle {}
+unsafe impl Sync for DeviceHandle {}
 
-impl<'a> DeviceHandle<'a> {
+impl DeviceHandle {
     /// Returns the active configuration number.
     pub fn active_configuration(&self) -> error::Result<u8> {
         let mut config = unsafe { mem::uninitialized() };
@@ -615,12 +617,9 @@ impl<'a> DeviceHandle<'a> {
 }
 
 #[doc(hidden)]
-pub unsafe fn from_libusb<'a>(
-    context: PhantomData<&'a Context>,
-    handle: *mut libusb_device_handle,
-) -> DeviceHandle<'a> {
+pub unsafe fn from_libusb(context: Rc<Context>, handle: *mut libusb_device_handle) -> DeviceHandle {
     DeviceHandle {
-        _context: context,
+        context: context.clone(),
         handle: handle,
         interfaces: BitSet::with_capacity(u8::max_value() as usize + 1),
     }
