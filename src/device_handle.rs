@@ -1,5 +1,4 @@
 use std::mem;
-use std::rc::Rc;
 use std::slice;
 use std::time::Duration;
 
@@ -17,7 +16,7 @@ use crate::language::{self, Language};
 
 /// A handle to an open USB device.
 pub struct DeviceHandle {
-    context: Rc<Context>,
+    _context: Context,
     handle: *mut libusb_device_handle,
     interfaces: BitSet,
 }
@@ -32,8 +31,6 @@ impl Drop for DeviceHandle {
 
             libusb_close(self.handle);
         }
-
-        drop(&self.context);
     }
 }
 
@@ -617,9 +614,9 @@ impl DeviceHandle {
 }
 
 #[doc(hidden)]
-pub unsafe fn from_libusb(context: Rc<Context>, handle: *mut libusb_device_handle) -> DeviceHandle {
+pub unsafe fn from_libusb(context: Context, handle: *mut libusb_device_handle) -> DeviceHandle {
     DeviceHandle {
-        context: context.clone(),
+        _context: context,
         handle: handle,
         interfaces: BitSet::with_capacity(u8::max_value() as usize + 1),
     }

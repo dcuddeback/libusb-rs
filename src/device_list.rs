@@ -1,4 +1,3 @@
-use std::rc::Rc;
 use std::slice;
 
 use libusb::*;
@@ -8,7 +7,7 @@ use crate::device::{self, Device};
 
 /// A list of detected USB devices.
 pub struct DeviceList {
-    context: Rc<Context>,
+    context: Context,
     list: *const *mut libusb_device,
     len: usize,
 }
@@ -19,7 +18,6 @@ impl Drop for DeviceList {
         unsafe {
             libusb_free_device_list(self.list, 1);
         }
-        drop(&self.context);
     }
 }
 
@@ -43,7 +41,7 @@ impl DeviceList {
 
 /// Iterator over detected USB devices.
 pub struct Devices<'a> {
-    context: Rc<Context>,
+    context: Context,
     devices: &'a [*mut libusb_device],
     index: usize,
 }
@@ -56,8 +54,7 @@ impl<'a> Iterator for Devices<'a> {
             let device = self.devices[self.index];
 
             self.index += 1;
-            let ctx = Rc::clone(&self.context);
-            Some(unsafe { device::from_libusb(ctx, device) })
+            Some(unsafe { device::from_libusb(self.context.clone(), device) })
         } else {
             None
         }
@@ -71,12 +68,12 @@ impl<'a> Iterator for Devices<'a> {
 
 #[doc(hidden)]
 pub unsafe fn from_libusb(
-    context: Rc<Context>,
+    context: Context,
     list: *const *mut libusb_device,
     len: usize,
 ) -> DeviceList {
     DeviceList {
-        context: context.clone(),
+        context: context,
         list: list,
         len: len,
     }

@@ -1,5 +1,4 @@
 use std::mem;
-use std::rc::Rc;
 
 use libusb::*;
 
@@ -12,7 +11,7 @@ use crate::fields::{self, Speed};
 
 /// A reference to a USB device.
 pub struct Device {
-    context: Rc<Context>,
+    context: Context,
     device: *mut libusb_device,
 }
 
@@ -22,8 +21,6 @@ impl Drop for Device {
         unsafe {
             libusb_unref_device(self.device);
         }
-
-        drop(&self.context);
     }
 }
 
@@ -87,16 +84,16 @@ impl Device {
 
         try_unsafe!(libusb_open(self.device, &mut handle));
 
-        Ok(unsafe { device_handle::from_libusb(Rc::clone(&self.context), handle) })
+        Ok(unsafe { device_handle::from_libusb(self.context.clone(), handle) })
     }
 }
 
 #[doc(hidden)]
-pub unsafe fn from_libusb(context: Rc<Context>, device: *mut libusb_device) -> Device {
+pub unsafe fn from_libusb(context: Context, device: *mut libusb_device) -> Device {
     libusb_ref_device(device);
 
     Device {
-        context: context.clone(),
+        context: context,
         device: device,
     }
 }

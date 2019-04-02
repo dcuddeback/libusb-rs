@@ -1,5 +1,5 @@
 use std::mem;
-use std::rc::Rc;
+use std::sync::Arc;
 
 use libc::c_int;
 use libusb::*;
@@ -8,18 +8,33 @@ use crate::device_handle::{self, DeviceHandle};
 use crate::device_list::{self, DeviceList};
 use crate::error;
 
-/// A `libusb` context.
-pub struct Context {
+struct ContextInner {
     context: *mut libusb_context,
 }
 
-impl Drop for Context {
-    /// Closes the `libusb` context.
+impl ContextInner {
+    /// Opens a new `libusb` context.
+    pub fn new() -> error::Result<Self> {
+        let mut context = unsafe { mem::uninitialized() };
+
+        try_unsafe!(libusb_init(&mut context));
+
+        Ok(ContextInner { context: context })
+    }
+}
+
+impl Drop for ContextInner {
     fn drop(&mut self) {
         unsafe {
             libusb_exit(self.context);
         }
     }
+}
+
+/// A `libusb` context.
+#[derive(Clone)]
+pub struct Context {
+    inner: Arc<ContextInner>,
 }
 
 unsafe impl Sync for Context {}
@@ -28,17 +43,16 @@ unsafe impl Send for Context {}
 impl Context {
     /// Opens a new `libusb` context.
     pub fn new() -> error::Result<Self> {
-        let mut context = unsafe { mem::uninitialized() };
-
-        try_unsafe!(libusb_init(&mut context));
-
-        Ok(Context { context: context })
+        let inner = ContextInner::new()?;
+        Ok(Context {
+            inner: Arc::new(inner),
+        })
     }
 
     /// Sets the log level of a `libusb` context.
     pub fn set_log_level(&mut self, level: LogLevel) {
         unsafe {
-            libusb_set_debug(self.context, level.as_c_int());
+            libusb_set_debug(self.inner.context, level.as_c_int());
         }
     }
 
@@ -65,12 +79,12 @@ impl Context {
     pub fn devices(self) -> error::Result<DeviceList> {
         let mut list: *const *mut libusb_device = unsafe { mem::uninitialized() };
 
-        let n = unsafe { libusb_get_device_list(self.context, &mut list) };
+        let n = unsafe { libusb_get_device_list(self.inner.context, &mut list) };
 
         if n < 0 {
             Err(error::from_libusb(n as c_int))
         } else {
-            Ok(unsafe { device_list::from_libusb(Rc::new(self), list, n as usize) })
+            Ok(unsafe { device_list::from_libusb(self.clone(), list, n as usize) })
         }
     }
 
@@ -84,12 +98,12 @@ impl Context {
     /// On error, or if the device could not be found, it returns `None`.
     pub fn open_device_with_vid_pid(self, vendor_id: u16, product_id: u16) -> Option<DeviceHandle> {
         let handle =
-            unsafe { libusb_open_device_with_vid_pid(self.context, vendor_id, product_id) };
+            unsafe { libusb_open_device_with_vid_pid(self.inner.context, vendor_id, product_id) };
 
         if handle.is_null() {
             None
         } else {
-            Some(unsafe { device_handle::from_libusb(Rc::new(self), handle) })
+            Some(unsafe { device_handle::from_libusb(self.clone(), handle) })
         }
     }
 }
