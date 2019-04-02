@@ -1,24 +1,28 @@
 //! This crate provides a safe wrapper around the native `libusb` library.
 
 extern crate bit_set;
-extern crate libusb_sys as libusb;
 extern crate libc;
+extern crate libusb_sys as libusb;
 
-pub use version::{LibraryVersion, version};
-pub use error::{Result, Error};
+pub use error::{Error, Result};
+pub use version::{version, LibraryVersion};
 
 pub use context::{Context, LogLevel};
-pub use device_list::{DeviceList, Devices};
 pub use device::Device;
 pub use device_handle::DeviceHandle;
+pub use device_list::{DeviceList, Devices};
 
-pub use fields::{Speed, TransferType, SyncType, UsageType, Direction, RequestType, Recipient, Version, request_type};
-pub use device_descriptor::DeviceDescriptor;
 pub use config_descriptor::{ConfigDescriptor, Interfaces};
-pub use interface_descriptor::{Interface, InterfaceDescriptors, InterfaceDescriptor, EndpointDescriptors};
+pub use device_descriptor::DeviceDescriptor;
 pub use endpoint_descriptor::EndpointDescriptor;
+pub use fields::{
+    request_type, Direction, Recipient, RequestType, Speed, SyncType, TransferType, UsageType,
+    Version,
+};
+pub use interface_descriptor::{
+    EndpointDescriptors, Interface, InterfaceDescriptor, InterfaceDescriptors,
+};
 pub use language::{Language, PrimaryLanguage, SubLanguage};
-
 
 #[cfg(test)]
 #[macro_use]
@@ -29,13 +33,13 @@ mod error;
 mod version;
 
 mod context;
-mod device_list;
 mod device;
 mod device_handle;
+mod device_list;
 
-mod fields;
-mod device_descriptor;
 mod config_descriptor;
-mod interface_descriptor;
+mod device_descriptor;
 mod endpoint_descriptor;
+mod fields;
+mod interface_descriptor;
 mod language;
