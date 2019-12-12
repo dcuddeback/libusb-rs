@@ -401,7 +401,7 @@ impl<'a> DeviceHandle<'a> {
     /// This function returns a list of languages that can be used to read the device's string
     /// descriptors.
     pub fn read_languages(&self, timeout: Duration) -> ::Result<Vec<Language>> {
-        let mut buf = Vec::<u8>::with_capacity(256);
+        let mut buf = Vec::<u8>::with_capacity(255);
 
         let mut buf_slice = unsafe {
             slice::from_raw_parts_mut((&mut buf[..]).as_mut_ptr(), buf.capacity())
@@ -428,7 +428,7 @@ impl<'a> DeviceHandle<'a> {
     ///
     /// `language` should be one of the languages returned from [`read_languages`](#method.read_languages).
     pub fn read_string_descriptor(&self, language: Language, index: u8, timeout: Duration) -> ::Result<String> {
-        let mut buf = Vec::<u8>::with_capacity(256);
+        let mut buf = Vec::<u8>::with_capacity(255);
 
         let mut buf_slice = unsafe {
             slice::from_raw_parts_mut((&mut buf[..]).as_mut_ptr(), buf.capacity())
