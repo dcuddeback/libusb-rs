@@ -4,6 +4,7 @@ extern crate bit_set;
 extern crate libc;
 extern crate libusb_sys as libusb;
 
+pub use libusb::constants;
 pub use error::{Error, Result};
 pub use version::{version, LibraryVersion};
 
