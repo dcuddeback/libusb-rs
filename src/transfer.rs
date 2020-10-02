@@ -49,32 +49,18 @@ impl<'a> Drop for Transfer<'a> {
 }
 
 impl<'a> Transfer<'a> {
-    pub fn new(
-        device_handle: &'a mut DeviceHandle<'a>,
-        iso_packets: i32,
-        flags: u8,
-        endpoint: u8,
-        transfer_type: u8,
-        status: i32,
-        timeout: u32,
-        callback: TransferCallbackFunction,
-    ) -> Result<Self> {
+    pub fn new(device_handle: &'a mut DeviceHandle<'a>, iso_packets: i32) -> Result<Self> {
         let transfer_handle = Self::allocate_trhansfer_handle(iso_packets)?;
 
         unsafe {
             (*transfer_handle).dev_handle = device_handle.get_lib_usb_handle();
-            (*transfer_handle).flags = flags;
-            (*transfer_handle).endpoint = endpoint;
-            (*transfer_handle).transfer_type = transfer_type;
-            (*transfer_handle).status = status;
-            (*transfer_handle).timeout = timeout;
             (*transfer_handle).callback = libusb_transfer_callback_function;
         }
 
         let mut transfer = Self {
             transfer_handle,
-            device_handle: device_handle,
-            callback,
+            device_handle,
+            callback: None,
         };
 
         unsafe {
@@ -89,14 +75,13 @@ impl<'a> Transfer<'a> {
         device_handle: &'a mut DeviceHandle<'a>,
         iso_packets: i32,
         setup_packet: &mut [u8],
-        callback: TransferCallbackFunction,
     ) -> Result<Self> {
         let transfer_handle = Self::allocate_trhansfer_handle(iso_packets)?;
 
         let mut transfer = Self {
             transfer_handle,
             device_handle: device_handle,
-            callback,
+            callback: None,
         };
 
         unsafe {
@@ -110,6 +95,46 @@ impl<'a> Transfer<'a> {
         };
 
         Ok(transfer)
+    }
+
+    pub fn set_flags(&mut self, flags: u8) -> Result<()> {
+        unsafe {
+            (*self.transfer_handle).flags = flags;
+        };
+        Ok(())
+    }
+
+    pub fn set_endpoint(&mut self, endpoint: u8) -> Result<()> {
+        unsafe {
+            (*self.transfer_handle).endpoint = endpoint;
+        };
+        Ok(())
+    }
+
+    pub fn set_transfer_type(&mut self, transfer_type: u8) -> Result<()> {
+        unsafe {
+            (*self.transfer_handle).transfer_type = transfer_type;
+        };
+        Ok(())
+    }
+
+    pub fn set_status(&mut self, status: i32) -> Result<()> {
+        unsafe {
+            (*self.transfer_handle).status = status;
+        };
+        Ok(())
+    }
+
+    pub fn set_timeout(&mut self, timeout: u32) -> Result<()> {
+        unsafe {
+            (*self.transfer_handle).timeout = timeout;
+        };
+        Ok(())
+    }
+
+    pub fn set_callback(&mut self, callback: TransferCallbackFunction) -> Result<()> {
+        self.callback = callback;
+        Ok(())
     }
 
     pub fn append_setup_packet_and_submit_transfer(
