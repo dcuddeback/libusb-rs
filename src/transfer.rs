@@ -36,7 +36,7 @@ pub type TransferCallbackFunction = Option<Box<dyn FnMut(TransferStatus, i32)>>;
 pub struct Transfer<'a> {
     transfer_handle: *mut libusb_transfer,
     callback: TransferCallbackFunction,
-    _device_handle: &'a mut DeviceHandle<'a>,
+    device_handle: &'a mut DeviceHandle<'a>,
 }
 
 impl<'a> Drop for Transfer<'a> {
@@ -59,10 +59,7 @@ impl<'a> Transfer<'a> {
         timeout: u32,
         callback: TransferCallbackFunction,
     ) -> Result<Self> {
-        let transfer_handle = unsafe { libusb_alloc_transfer(iso_packets) };
-        if transfer_handle == std::ptr::null_mut() {
-            return Err(Error::NoMem);
-        }
+        let transfer_handle = Self::allocate_trhansfer_handle(iso_packets)?;
 
         unsafe {
             (*transfer_handle).dev_handle = device_handle.get_lib_usb_handle();
@@ -76,7 +73,7 @@ impl<'a> Transfer<'a> {
 
         let mut transfer = Self {
             transfer_handle,
-            _device_handle: device_handle,
+            device_handle: device_handle,
             callback,
         };
 
@@ -86,6 +83,56 @@ impl<'a> Transfer<'a> {
         }
 
         Ok(transfer)
+    }
+
+    pub fn new_and_init_with_setup_packet(
+        device_handle: &'a mut DeviceHandle<'a>,
+        iso_packets: i32,
+        setup_packet: &mut [u8],
+        callback: TransferCallbackFunction,
+    ) -> Result<Self> {
+        let transfer_handle = Self::allocate_trhansfer_handle(iso_packets)?;
+
+        let mut transfer = Self {
+            transfer_handle,
+            device_handle: device_handle,
+            callback,
+        };
+
+        unsafe {
+            libusb_fill_control_transfer(
+                transfer.transfer_handle,
+                transfer.device_handle.get_lib_usb_handle(),
+                setup_packet.as_mut_ptr(),
+                libusb_transfer_callback_function,
+                std::mem::transmute::<&mut Transfer<'a>, *mut libc::c_void>(&mut transfer),
+            )
+        };
+
+        Ok(transfer)
+    }
+
+    pub fn append_setup_packet_and_submit_transfer(
+        &mut self,
+        data: &mut [u8],
+        bm_request_type: u8,
+        b_request: u8,
+        w_value: u16,
+        w_index: u16,
+    ) -> Result<()> {
+        let setup_packet = Self::create_setup_packet(
+            bm_request_type,
+            b_request,
+            w_value,
+            w_index,
+            data.len() as u16,
+        )?;
+        let mut data = setup_packet
+            .into_iter()
+            .chain(data.iter().copied())
+            .collect::<Vec<u8>>();
+        self.submit_transfer(data.as_mut())?;
+        Ok(())
     }
 
     pub fn submit_transfer(&mut self, data: &mut [u8]) -> Result<()> {
@@ -101,6 +148,36 @@ impl<'a> Transfer<'a> {
     pub fn cancel_transfer(&mut self) -> Result<()> {
         try_unsafe!(libusb_cancel_transfer(self.transfer_handle));
         Ok(())
+    }
+
+    pub fn create_setup_packet(
+        bm_request_type: u8,
+        b_request: u8,
+        w_value: u16,
+        w_index: u16,
+        data_size: u16,
+    ) -> Result<Vec<u8>> {
+        let mut setup_packet = vec![0u8; LIBUSB_CONTROL_SETUP_SIZE];
+        unsafe {
+            libusb_fill_control_setup(
+                setup_packet.as_mut_ptr(),
+                bm_request_type,
+                b_request,
+                w_value,
+                w_index,
+                data_size,
+            )
+        };
+        Ok(setup_packet)
+    }
+
+    fn allocate_trhansfer_handle(iso_packets: i32) -> Result<*mut libusb_transfer> {
+        let transfer_handle = unsafe { libusb_alloc_transfer(iso_packets) };
+        if transfer_handle == std::ptr::null_mut() {
+            return Err(Error::NoMem);
+        }
+
+        Ok(transfer_handle)
     }
 }
 
