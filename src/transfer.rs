@@ -5,6 +5,7 @@ use crate::{
     error::{Error, Result},
 };
 
+#[derive(Clone)]
 pub enum TransferStatus {
     Completed,
     Error,
