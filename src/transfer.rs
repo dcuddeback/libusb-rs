@@ -18,6 +18,20 @@ pub enum TransferStatus {
 }
 
 impl TransferStatus {
+    pub fn to_libusb_result(&self) -> Result<()> {
+        match self {
+            Self::Completed => Ok(()),
+            Self::Timeout => Err(Error::Timeout),
+            Self::Stall => Err(Error::Pipe),
+            Self::NoDevice => Err(Error::NoDevice),
+            Self::Overflow => Err(Error::Overflow),
+            Self::Error | Self::Cancelled => Err(Error::Io),
+            _ => Err(Error::Other),
+        }
+    }
+}
+
+impl TransferStatus {
     fn from_libusb(code: libc::c_int) -> Self {
         match code {
             0 => TransferStatus::Completed,
