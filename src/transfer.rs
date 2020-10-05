@@ -169,7 +169,7 @@ impl<'a, 'b> Transfer<'a, 'b> {
         data_size: u16,
     ) -> Result<Vec<u8>> {
         // Actual at the time of version 1.0.23
-        static_assertions::const_assert!(libusb::LIBUSB_CONTROL_SETUP_SIZE == 8);
+        static_assertions::const_assert!(libusb::constants::LIBUSB_CONTROL_SETUP_SIZE == 8);
 
         let mut setup_packet = vec![bm_request_type, b_request];
         setup_packet.extend(w_value.to_le_bytes().iter());
