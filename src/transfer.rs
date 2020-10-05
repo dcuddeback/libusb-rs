@@ -48,13 +48,13 @@ impl TransferStatus {
 
 pub type TransferCallbackFunction = Option<Box<dyn FnMut(TransferStatus, i32)>>;
 
-pub struct Transfer<'a> {
+pub struct Transfer<'a, 'b> {
     transfer_handle: *mut libusb_transfer,
     callback: TransferCallbackFunction,
-    device_handle: &'a mut DeviceHandle<'a>,
+    device_handle: &'b mut DeviceHandle<'a>,
 }
 
-impl<'a> Drop for Transfer<'a> {
+impl<'a, 'b> Drop for Transfer<'a, 'b> {
     fn drop(&mut self) {
         unsafe {
             libusb_cancel_transfer(self.transfer_handle);
@@ -63,8 +63,8 @@ impl<'a> Drop for Transfer<'a> {
     }
 }
 
-impl<'a> Transfer<'a> {
-    pub fn new(device_handle: &'a mut DeviceHandle<'a>, iso_packets: i32) -> Result<Self> {
+impl<'a, 'b> Transfer<'a, 'b> {
+    pub fn new(device_handle: &'b mut DeviceHandle<'a>, iso_packets: i32) -> Result<Self> {
         let transfer_handle = Self::allocate_trhansfer_handle(iso_packets)?;
 
         unsafe {
@@ -80,7 +80,7 @@ impl<'a> Transfer<'a> {
 
         unsafe {
             (*transfer_handle).user_data =
-                std::mem::transmute::<&mut Transfer<'a>, *mut libc::c_void>(&mut transfer);
+                std::mem::transmute::<&mut Transfer<'a, 'b>, *mut libc::c_void>(&mut transfer);
         }
 
         Ok(transfer)
@@ -90,7 +90,7 @@ impl<'a> Transfer<'a> {
         device_handle: &'a mut DeviceHandle<'a>,
         iso_packets: i32,
         setup_packet: &mut [u8],
-        timoute: u32
+        timoute: u32,
     ) -> Result<Self> {
         let transfer_handle = Self::allocate_trhansfer_handle(iso_packets)?;
 
@@ -106,8 +106,8 @@ impl<'a> Transfer<'a> {
                 transfer.device_handle.get_lib_usb_handle(),
                 setup_packet.as_mut_ptr(),
                 libusb_transfer_callback_function,
-                std::mem::transmute::<&mut Transfer<'a>, *mut libc::c_void>(&mut transfer),
-                timoute
+                std::mem::transmute::<&mut Transfer<'a, 'b>, *mut libc::c_void>(&mut transfer),
+                timoute,
             )
         };
 
@@ -225,7 +225,9 @@ impl<'a> Transfer<'a> {
 
 extern "C" fn libusb_transfer_callback_function(transfer_handle: *mut libusb_transfer) {
     let transfer = unsafe {
-        std::mem::transmute::<*mut libc::c_void, &mut Transfer<'_>>((*transfer_handle).user_data)
+        std::mem::transmute::<*mut libc::c_void, &mut Transfer<'_, '_>>(
+            (*transfer_handle).user_data,
+        )
     };
 
     if let Some(ref mut callback) = transfer.callback {
