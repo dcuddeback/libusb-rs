@@ -87,7 +87,7 @@ impl<'a, 'b> Transfer<'a, 'b> {
     }
 
     pub fn new_and_init_with_setup_packet(
-        device_handle: &'a mut DeviceHandle<'a>,
+        device_handle: &'b mut DeviceHandle<'a>,
         iso_packets: i32,
         setup_packet: &mut [u8],
         timoute: u32,
