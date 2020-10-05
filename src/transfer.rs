@@ -1,4 +1,5 @@
 use libusb::*;
+use std::marker::PhantomData;
 
 use crate::{
     device_handle::{DeviceHandle, GetLibUsbDeviceHandle},
@@ -51,7 +52,7 @@ pub type TransferCallbackFunction = Option<Box<dyn FnMut(TransferStatus, i32)>>;
 pub struct Transfer<'a, 'b> {
     transfer_handle: *mut libusb_transfer,
     callback: TransferCallbackFunction,
-    device_handle: &'b mut DeviceHandle<'a>,
+    _device_handle: PhantomData<&'b DeviceHandle<'a>>,
 }
 
 impl<'a, 'b> Drop for Transfer<'a, 'b> {
@@ -74,7 +75,7 @@ impl<'a, 'b> Transfer<'a, 'b> {
 
         let mut transfer = Self {
             transfer_handle,
-            device_handle,
+            _device_handle: PhantomData,
             callback: None,
         };
 
@@ -82,34 +83,6 @@ impl<'a, 'b> Transfer<'a, 'b> {
             (*transfer_handle).user_data =
                 std::mem::transmute::<&mut Transfer<'a, 'b>, *mut libc::c_void>(&mut transfer);
         }
-
-        Ok(transfer)
-    }
-
-    pub fn new_and_init_with_setup_packet(
-        device_handle: &'b mut DeviceHandle<'a>,
-        iso_packets: i32,
-        setup_packet: &mut [u8],
-        timoute: u32,
-    ) -> Result<Self> {
-        let transfer_handle = Self::allocate_trhansfer_handle(iso_packets)?;
-
-        let mut transfer = Self {
-            transfer_handle,
-            device_handle: device_handle,
-            callback: None,
-        };
-
-        unsafe {
-            libusb_fill_control_transfer(
-                transfer.transfer_handle,
-                transfer.device_handle.get_lib_usb_handle(),
-                setup_packet.as_mut_ptr(),
-                libusb_transfer_callback_function,
-                std::mem::transmute::<&mut Transfer<'a, 'b>, *mut libc::c_void>(&mut transfer),
-                timoute,
-            )
-        };
 
         Ok(transfer)
     }
@@ -199,17 +172,11 @@ impl<'a, 'b> Transfer<'a, 'b> {
         w_index: u16,
         data_size: u16,
     ) -> Result<Vec<u8>> {
-        let mut setup_packet = vec![0u8; LIBUSB_CONTROL_SETUP_SIZE];
-        unsafe {
-            libusb_fill_control_setup(
-                setup_packet.as_mut_ptr(),
-                bm_request_type,
-                b_request,
-                w_value,
-                w_index,
-                data_size,
-            )
-        };
+        let mut setup_packet = vec![bm_request_type, b_request];
+        setup_packet.extend(w_value.to_le_bytes().iter());
+        setup_packet.extend(w_index.to_le_bytes().iter());
+        setup_packet.extend(data_size.to_le_bytes().iter());
+
         Ok(setup_packet)
     }
 
