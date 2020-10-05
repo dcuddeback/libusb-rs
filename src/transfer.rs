@@ -90,6 +90,7 @@ impl<'a> Transfer<'a> {
         device_handle: &'a mut DeviceHandle<'a>,
         iso_packets: i32,
         setup_packet: &mut [u8],
+        timoute: u32
     ) -> Result<Self> {
         let transfer_handle = Self::allocate_trhansfer_handle(iso_packets)?;
 
@@ -106,6 +107,7 @@ impl<'a> Transfer<'a> {
                 setup_packet.as_mut_ptr(),
                 libusb_transfer_callback_function,
                 std::mem::transmute::<&mut Transfer<'a>, *mut libc::c_void>(&mut transfer),
+                timoute
             )
         };
 
