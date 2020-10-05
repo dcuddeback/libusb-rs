@@ -127,7 +127,7 @@ impl<'a, 'b> Transfer<'a, 'b> {
         Ok(())
     }
 
-    pub fn append_setup_packet_and_submit_transfer(
+    pub fn submit_transfer(
         &mut self,
         data: &mut [u8],
         bm_request_type: u8,
@@ -146,11 +146,7 @@ impl<'a, 'b> Transfer<'a, 'b> {
             .into_iter()
             .chain(data.iter().copied())
             .collect::<Vec<u8>>();
-        self.submit_transfer(data.as_mut())?;
-        Ok(())
-    }
 
-    pub fn submit_transfer(&mut self, data: &mut [u8]) -> Result<()> {
         unsafe {
             (*self.transfer_handle).buffer = data.as_mut_ptr();
             (*self.transfer_handle).length = data.len() as i32;
@@ -165,13 +161,16 @@ impl<'a, 'b> Transfer<'a, 'b> {
         Ok(())
     }
 
-    pub fn create_setup_packet(
+    fn create_setup_packet(
         bm_request_type: u8,
         b_request: u8,
         w_value: u16,
         w_index: u16,
         data_size: u16,
     ) -> Result<Vec<u8>> {
+        // Actual at the time of version 1.0.23
+        static_assertions::const_assert!(libusb::LIBUSB_CONTROL_SETUP_SIZE == 8);
+
         let mut setup_packet = vec![bm_request_type, b_request];
         setup_packet.extend(w_value.to_le_bytes().iter());
         setup_packet.extend(w_index.to_le_bytes().iter());
