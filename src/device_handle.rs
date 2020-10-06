@@ -1,4 +1,3 @@
-use std::marker::PhantomData;
 use std::mem;
 use std::slice;
 use std::time::Duration;
@@ -17,7 +16,7 @@ use language::Language;
 
 /// A handle to an open USB device.
 pub struct DeviceHandle<'a> {
-    _context: PhantomData<&'a Context>,
+    context: &'a Context,
     handle: *mut libusb_device_handle,
     interfaces: BitSet,
 }
@@ -476,7 +475,7 @@ impl<'a> DeviceHandle<'a> {
     pub fn read_languages(&self, timeout: Duration) -> ::Result<Vec<Language>> {
         let mut buf = Vec::<u8>::with_capacity(256);
 
-        let mut buf_slice =
+        let buf_slice =
             unsafe { slice::from_raw_parts_mut((&mut buf[..]).as_mut_ptr(), buf.capacity()) };
 
         let len = try!(self.read_control(
@@ -513,7 +512,7 @@ impl<'a> DeviceHandle<'a> {
     ) -> ::Result<String> {
         let mut buf = Vec::<u8>::with_capacity(256);
 
-        let mut buf_slice =
+        let buf_slice =
             unsafe { slice::from_raw_parts_mut((&mut buf[..]).as_mut_ptr(), buf.capacity()) };
 
         let len = try!(self.read_control(
@@ -606,22 +605,32 @@ impl<'a> DeviceHandle<'a> {
 
 #[doc(hidden)]
 pub unsafe fn from_libusb<'a>(
-    context: PhantomData<&'a Context>,
+    context: &'a Context,
     handle: *mut libusb_device_handle,
 ) -> DeviceHandle<'a> {
     DeviceHandle {
-        _context: context,
+        context,
         handle: handle,
         interfaces: BitSet::with_capacity(u8::max_value() as usize + 1),
     }
 }
 
 pub trait GetLibUsbDeviceHandle {
-    unsafe fn get_lib_usb_handle(&mut self) -> *mut libusb_device_handle;
+    unsafe fn get_lib_usb_handle(&self) -> *mut libusb_device_handle;
 }
 
 impl<'a> GetLibUsbDeviceHandle for DeviceHandle<'a> {
-    unsafe fn get_lib_usb_handle(&mut self) -> *mut libusb_device_handle {
+    unsafe fn get_lib_usb_handle(&self) -> *mut libusb_device_handle {
         self.handle
+    }
+}
+
+pub trait GetContext {
+    fn get_context(&self) -> &Context;
+}
+
+impl<'a> GetContext for DeviceHandle<'a> {
+    fn get_context(&self) -> &Context {
+        self.context
     }
 }

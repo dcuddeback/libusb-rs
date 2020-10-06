@@ -1,6 +1,4 @@
-use std::marker::PhantomData;
 use std::slice;
-
 use libusb::*;
 
 use context::Context;
@@ -8,7 +6,7 @@ use device::{self, Device};
 
 /// A list of detected USB devices.
 pub struct DeviceList<'a> {
-    context: PhantomData<&'a Context>,
+    context: &'a Context,
     list: *const *mut libusb_device,
     len: usize,
 }
@@ -42,7 +40,7 @@ impl<'a> DeviceList<'a> {
 
 /// Iterator over detected USB devices.
 pub struct Devices<'a, 'b> {
-    context: PhantomData<&'a Context>,
+    context: &'a Context,
     devices: &'b [*mut libusb_device],
     index: usize,
 }
@@ -69,12 +67,12 @@ impl<'a, 'b> Iterator for Devices<'a, 'b> {
 
 #[doc(hidden)]
 pub unsafe fn from_libusb<'a>(
-    _context: &'a Context,
+    context: &'a Context,
     list: *const *mut libusb_device,
     len: usize,
 ) -> DeviceList<'a> {
     DeviceList {
-        context: PhantomData,
+        context,
         list: list,
         len: len,
     }

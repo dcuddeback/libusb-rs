@@ -1,3 +1,9 @@
+mod async_awakener;
+mod local_context;
+
+use self::{async_awakener::AsyncAwakener, local_context::LocalContext};
+use crate::{context::GetRawContext, device_handle::GetContext};
+
 use libusb::*;
 use std::sync::{Arc, Mutex};
 
@@ -13,6 +19,7 @@ use crate::{
 pub struct UnhandledTransfer {
     pub handle: *mut libusb_transfer,
     pub state: SharedStatePtr,
+    _awakener: AsyncAwakener,
     data: Vec<u8>,
 }
 
@@ -28,9 +35,18 @@ impl UnhandledTransfer {
             (*handle).callback = libusb_transfer_callback_function;
         }
 
+        let local_context = LocalContext::new(
+            device_handle.get_context().get_raw_context(),
+            std::marker::PhantomData,
+        );
+        let awakener = AsyncAwakener::spawn(move || unsafe {
+            libusb_handle_events_completed(*local_context, std::ptr::null_mut());
+        });
+
         let transfer = Box::new(Self {
             handle,
             state: Arc::new(Mutex::new(SharedState::new(handle))),
+            _awakener: awakener,
             data: vec![],
         });
         let transfer = Box::into_raw(transfer);

@@ -1,6 +1,4 @@
-use std::marker::PhantomData;
 use std::mem;
-
 use libusb::*;
 
 use config_descriptor::{self, ConfigDescriptor};
@@ -11,7 +9,7 @@ use fields::{self, Speed};
 
 /// A reference to a USB device.
 pub struct Device<'a> {
-    context: PhantomData<&'a Context>,
+    context: &'a Context,
     device: *mut libusb_device,
 }
 
@@ -89,14 +87,11 @@ impl<'a> Device<'a> {
 }
 
 #[doc(hidden)]
-pub unsafe fn from_libusb<'a>(
-    context: PhantomData<&'a Context>,
-    device: *mut libusb_device,
-) -> Device<'a> {
+pub unsafe fn from_libusb<'a>(context: &'a Context, device: *mut libusb_device) -> Device<'a> {
     libusb_ref_device(device);
 
     Device {
-        context: context,
+        context,
         device: device,
     }
 }

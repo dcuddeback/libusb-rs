@@ -1,13 +1,12 @@
 use std::{
     sync::{Arc, Mutex},
-    thread::{self, JoinHandle},
+    thread,
 };
 
 type Signal = Arc<Mutex<bool>>;
 
 pub struct AsyncAwakener {
     signal: Signal,
-    _thread: JoinHandle<()>,
 }
 
 impl Drop for AsyncAwakener {
@@ -17,24 +16,17 @@ impl Drop for AsyncAwakener {
 }
 
 impl AsyncAwakener {
-    pub fn spawn<F: 'static + Send + FnMut(), R: 'static + Send + FnMut()>(
-        mut func: F,
-        mut do_after_stop: R,
-    ) -> Self {
+    pub fn spawn<F: 'static + Send + FnMut()>(mut func: F) -> Self {
         let signal = Arc::new(Mutex::new(true));
 
         let thread_signal = signal.clone();
-        let thread = thread::spawn(move || {
+        thread::spawn(move || {
             while *thread_signal.lock().unwrap() {
                 std::thread::sleep(std::time::Duration::from_millis(100));
                 func();
             }
-            do_after_stop();
         });
 
-        Self {
-            _thread: thread,
-            signal,
-        }
+        Self { signal }
     }
 }

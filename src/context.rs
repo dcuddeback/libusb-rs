@@ -1,7 +1,4 @@
-mod async_awakener;
-use self::async_awakener::AsyncAwakener;
-
-use std::{marker::PhantomData, mem};
+use std::mem;
 
 use libc::c_int;
 use libusb::*;
@@ -10,25 +7,9 @@ use device_handle::{self, DeviceHandle};
 use device_list::{self, DeviceList};
 use error;
 
-#[derive(Copy, Clone)]
-struct ContextSend {
-    context: *mut libusb_context,
-}
-unsafe impl Sync for ContextSend {}
-unsafe impl Send for ContextSend {}
-
-impl std::ops::Deref for ContextSend {
-    type Target = *mut libusb_context;
-
-    fn deref(&self) -> &Self::Target {
-        &self.context
-    }
-}
-
 /// A `libusb` context.
 pub struct Context {
-    context: ContextSend,
-    _awakener: AsyncAwakener,
+    context: *mut libusb_context,
 }
 
 unsafe impl Sync for Context {}
@@ -38,32 +19,16 @@ impl Context {
     /// Opens a new `libusb` context.
     pub fn new() -> ::Result<Self> {
         let mut context = unsafe { mem::uninitialized() };
+
         try_unsafe!(libusb_init(&mut context));
 
-        let context = ContextSend { context };
-        let context_awakener = context.clone();
-        let context_stop = context.clone();
-
-        let awakener = AsyncAwakener::spawn(
-            move || unsafe {
-                libusb_handle_events_completed(*context_awakener, std::ptr::null_mut());
-            },
-            move || {
-                // Closes the `libusb` context.
-                unsafe { libusb_exit(*context_stop) };
-            },
-        );
-
-        Ok(Self {
-            context,
-            _awakener: awakener,
-        })
+        Ok(Self { context })
     }
 
     /// Sets the log level of a `libusb` context.
     pub fn set_log_level(&mut self, level: LogLevel) {
         unsafe {
-            libusb_set_debug(*self.context, level.as_c_int());
+            libusb_set_debug(self.context, level.as_c_int());
         }
     }
 
@@ -90,7 +55,7 @@ impl Context {
     pub fn devices<'a>(&'a self) -> ::Result<DeviceList<'a>> {
         let mut list: *const *mut libusb_device = unsafe { mem::uninitialized() };
 
-        let n = unsafe { libusb_get_device_list(*self.context, &mut list) };
+        let n = unsafe { libusb_get_device_list(self.context, &mut list) };
 
         if n < 0 {
             Err(error::from_libusb(n as c_int))
@@ -113,12 +78,12 @@ impl Context {
         product_id: u16,
     ) -> Option<DeviceHandle<'a>> {
         let handle =
-            unsafe { libusb_open_device_with_vid_pid(*self.context, vendor_id, product_id) };
+            unsafe { libusb_open_device_with_vid_pid(self.context, vendor_id, product_id) };
 
         if handle.is_null() {
             None
         } else {
-            Some(unsafe { device_handle::from_libusb(PhantomData, handle) })
+            Some(unsafe { device_handle::from_libusb(self, handle) })
         }
     }
 }
@@ -152,5 +117,15 @@ impl LogLevel {
             LogLevel::Info => LIBUSB_LOG_LEVEL_INFO,
             LogLevel::Debug => LIBUSB_LOG_LEVEL_DEBUG,
         }
+    }
+}
+
+pub trait GetRawContext {
+    fn get_raw_context(&self) -> *mut libusb::libusb_context;
+}
+
+impl GetRawContext for Context {
+    fn get_raw_context(&self) -> *mut libusb::libusb_context {
+        self.context
     }
 }
