@@ -1,8 +1,11 @@
-use libusb::*;
+mod shared_state;
+mod unhandled_transfer;
+
+use self::{shared_state::OperationStatus, unhandled_transfer::UnhandledTransfer};
 use std::marker::PhantomData;
 
 use crate::{
-    device_handle::{DeviceHandle, GetLibUsbDeviceHandle},
+    device_handle::DeviceHandle,
     error::{Error, Result},
 };
 
@@ -47,159 +50,98 @@ impl TransferStatus {
     }
 }
 
-pub type TransferCallbackFunction = Option<Box<dyn FnMut(TransferStatus, i32)>>;
+pub type TransferCallbackFunction = Option<Box<dyn FnMut(TransferStatus, Vec<u8>)>>;
 
 pub struct Transfer<'a, 'b> {
-    transfer_handle: *mut libusb_transfer,
-    callback: TransferCallbackFunction,
+    unhandled_transfer: *mut UnhandledTransfer,
     _device_handle: PhantomData<&'b DeviceHandle<'a>>,
 }
 
 impl<'a, 'b> Drop for Transfer<'a, 'b> {
     fn drop(&mut self) {
-        unsafe {
-            libusb_cancel_transfer(self.transfer_handle);
-            libusb_free_transfer(self.transfer_handle);
+        let mut state = unsafe { (*self.unhandled_transfer).state.lock().unwrap() };
+        match state.status {
+            OperationStatus::Busy => {
+                state.is_transfer_dropped = true;
+            }
+            OperationStatus::Completed => {
+                UnhandledTransfer::drop(state.handle);
+                unsafe { Box::from_raw(self.unhandled_transfer) };
+            }
         }
     }
 }
 
 impl<'a, 'b> Transfer<'a, 'b> {
     pub fn new(device_handle: &'b mut DeviceHandle<'a>, iso_packets: i32) -> Result<Self> {
-        let transfer_handle = Self::allocate_trhansfer_handle(iso_packets)?;
-
-        unsafe {
-            (*transfer_handle).dev_handle = device_handle.get_lib_usb_handle();
-            (*transfer_handle).callback = libusb_transfer_callback_function;
-        }
-
-        let mut transfer = Self {
-            transfer_handle,
+        let unhandled_transfer = UnhandledTransfer::new(device_handle, iso_packets)?;
+        let transfer = Self {
+            unhandled_transfer,
             _device_handle: PhantomData,
-            callback: None,
         };
-
-        unsafe {
-            (*transfer_handle).user_data =
-                std::mem::transmute::<&mut Transfer<'a, 'b>, *mut libc::c_void>(&mut transfer);
-        }
 
         Ok(transfer)
     }
 
-    pub fn set_flags(&mut self, flags: u8) -> Result<()> {
-        unsafe {
-            (*self.transfer_handle).flags = flags;
-        };
-        Ok(())
-    }
-
     pub fn set_endpoint(&mut self, endpoint: u8) -> Result<()> {
         unsafe {
-            (*self.transfer_handle).endpoint = endpoint;
+            (*(*self.unhandled_transfer).handle).endpoint = endpoint;
         };
         Ok(())
     }
 
     pub fn set_transfer_type(&mut self, transfer_type: u8) -> Result<()> {
         unsafe {
-            (*self.transfer_handle).transfer_type = transfer_type;
+            (*(*self.unhandled_transfer).handle).transfer_type = transfer_type;
         };
         Ok(())
     }
 
     pub fn set_status(&mut self, status: i32) -> Result<()> {
         unsafe {
-            (*self.transfer_handle).status = status;
+            (*(*self.unhandled_transfer).handle).status = status;
         };
         Ok(())
     }
 
     pub fn set_timeout(&mut self, timeout: u32) -> Result<()> {
         unsafe {
-            (*self.transfer_handle).timeout = timeout;
+            (*(*self.unhandled_transfer).handle).timeout = timeout;
         };
         Ok(())
     }
 
     pub fn set_callback(&mut self, callback: TransferCallbackFunction) -> Result<()> {
-        self.callback = callback;
+        let mut state = unsafe { (*self.unhandled_transfer).state.lock().unwrap() };
+        state.callback = callback;
         Ok(())
     }
 
     pub fn submit_transfer(
         &mut self,
-        data: &mut [u8],
+        data: &[u8],
         bm_request_type: u8,
         b_request: u8,
         w_value: u16,
         w_index: u16,
     ) -> Result<()> {
-        let setup_packet = Self::create_setup_packet(
-            bm_request_type,
-            b_request,
-            w_value,
-            w_index,
-            data.len() as u16,
-        )?;
-        let mut data = setup_packet
-            .into_iter()
-            .chain(data.iter().copied())
-            .collect::<Vec<u8>>();
+        let mut unhandled_transfer = unsafe { Box::from_raw(self.unhandled_transfer) };
+        let result =
+            unhandled_transfer.submit_transfer(data, bm_request_type, b_request, w_value, w_index);
 
-        unsafe {
-            (*self.transfer_handle).buffer = data.as_mut_ptr();
-            (*self.transfer_handle).length = data.len() as i32;
-        }
+        Box::into_raw(unhandled_transfer);
+        result?;
 
-        try_unsafe!(libusb_submit_transfer(self.transfer_handle));
         Ok(())
     }
 
     pub fn cancel_transfer(&mut self) -> Result<()> {
-        try_unsafe!(libusb_cancel_transfer(self.transfer_handle));
+        let mut unhandled_transfer = unsafe { Box::from_raw(self.unhandled_transfer) };
+        let result = unhandled_transfer.cancel_transfer();
+
+        Box::into_raw(unhandled_transfer);
+        result?;
+
         Ok(())
-    }
-
-    fn create_setup_packet(
-        bm_request_type: u8,
-        b_request: u8,
-        w_value: u16,
-        w_index: u16,
-        data_size: u16,
-    ) -> Result<Vec<u8>> {
-        // Actual at the time of version 1.0.23
-        static_assertions::const_assert!(libusb::constants::LIBUSB_CONTROL_SETUP_SIZE == 8);
-
-        let mut setup_packet = vec![bm_request_type, b_request];
-        setup_packet.extend(w_value.to_le_bytes().iter());
-        setup_packet.extend(w_index.to_le_bytes().iter());
-        setup_packet.extend(data_size.to_le_bytes().iter());
-
-        Ok(setup_packet)
-    }
-
-    fn allocate_trhansfer_handle(iso_packets: i32) -> Result<*mut libusb_transfer> {
-        let transfer_handle = unsafe { libusb_alloc_transfer(iso_packets) };
-        if transfer_handle == std::ptr::null_mut() {
-            return Err(Error::NoMem);
-        }
-
-        Ok(transfer_handle)
-    }
-}
-
-extern "C" fn libusb_transfer_callback_function(transfer_handle: *mut libusb_transfer) {
-    let transfer = unsafe {
-        std::mem::transmute::<*mut libc::c_void, &mut Transfer<'_, '_>>(
-            (*transfer_handle).user_data,
-        )
-    };
-
-    if let Some(ref mut callback) = transfer.callback {
-        let status = unsafe { TransferStatus::from_libusb((*transfer_handle).status) };
-        let actual_length = unsafe { (*transfer_handle).actual_length };
-
-        callback(status, actual_length);
     }
 }
