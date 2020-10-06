@@ -1,4 +1,4 @@
-use std::mem;
+use std::mem::MaybeUninit;
 
 use libc::c_int;
 use libusb::*;
@@ -18,7 +18,7 @@ unsafe impl Send for Context {}
 impl Context {
     /// Opens a new `libusb` context.
     pub fn new() -> ::Result<Self> {
-        let mut context = unsafe { mem::uninitialized() };
+        let mut context = unsafe { MaybeUninit::uninit().assume_init() };
 
         try_unsafe!(libusb_init(&mut context));
 
@@ -53,7 +53,7 @@ impl Context {
 
     /// Returns a list of the current USB devices. The context must outlive the device list.
     pub fn devices<'a>(&'a self) -> ::Result<DeviceList<'a>> {
-        let mut list: *const *mut libusb_device = unsafe { mem::uninitialized() };
+        let mut list: *const *mut libusb_device = unsafe { MaybeUninit::uninit().assume_init() };
 
         let n = unsafe { libusb_get_device_list(self.context, &mut list) };
 

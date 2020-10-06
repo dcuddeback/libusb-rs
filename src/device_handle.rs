@@ -1,4 +1,4 @@
-use std::mem;
+use std::mem::MaybeUninit;
 use std::slice;
 use std::time::Duration;
 
@@ -40,7 +40,7 @@ unsafe impl<'a> Sync for DeviceHandle<'a> {}
 impl<'a> DeviceHandle<'a> {
     /// Returns the active configuration number.
     pub fn active_configuration(&self) -> ::Result<u8> {
-        let mut config = unsafe { mem::uninitialized() };
+        let mut config = unsafe { MaybeUninit::uninit().assume_init() };
 
         try_unsafe!(libusb_get_configuration(self.handle, &mut config));
         Ok(config as u8)
@@ -150,7 +150,7 @@ impl<'a> DeviceHandle<'a> {
             return Err(Error::InvalidParam);
         }
 
-        let mut transferred: c_int = unsafe { mem::uninitialized() };
+        let mut transferred: c_int = unsafe { MaybeUninit::uninit().assume_init() };
 
         let ptr = buf.as_mut_ptr() as *mut c_uchar;
         let len = buf.len() as c_int;
@@ -203,7 +203,7 @@ impl<'a> DeviceHandle<'a> {
             return Err(Error::InvalidParam);
         }
 
-        let mut transferred: c_int = unsafe { mem::uninitialized() };
+        let mut transferred: c_int = unsafe { MaybeUninit::uninit().assume_init() };
 
         let ptr = buf.as_ptr() as *mut c_uchar;
         let len = buf.len() as c_int;
@@ -258,7 +258,7 @@ impl<'a> DeviceHandle<'a> {
             return Err(Error::InvalidParam);
         }
 
-        let mut transferred: c_int = unsafe { mem::uninitialized() };
+        let mut transferred: c_int = unsafe { MaybeUninit::uninit().assume_init() };
 
         let ptr = buf.as_mut_ptr() as *mut c_uchar;
         let len = buf.len() as c_int;
@@ -311,7 +311,7 @@ impl<'a> DeviceHandle<'a> {
             return Err(Error::InvalidParam);
         }
 
-        let mut transferred: c_int = unsafe { mem::uninitialized() };
+        let mut transferred: c_int = unsafe { MaybeUninit::uninit().assume_init() };
 
         let ptr = buf.as_ptr() as *mut c_uchar;
         let len = buf.len() as c_int;
@@ -478,14 +478,14 @@ impl<'a> DeviceHandle<'a> {
         let buf_slice =
             unsafe { slice::from_raw_parts_mut((&mut buf[..]).as_mut_ptr(), buf.capacity()) };
 
-        let len = try!(self.read_control(
+        let len = self.read_control(
             request_type(Direction::In, RequestType::Standard, Recipient::Device),
             LIBUSB_REQUEST_GET_DESCRIPTOR,
             (LIBUSB_DT_STRING as u16) << 8,
             0,
             buf_slice,
-            timeout
-        ));
+            timeout,
+        )?;
 
         unsafe {
             buf.set_len(len);
@@ -515,14 +515,14 @@ impl<'a> DeviceHandle<'a> {
         let buf_slice =
             unsafe { slice::from_raw_parts_mut((&mut buf[..]).as_mut_ptr(), buf.capacity()) };
 
-        let len = try!(self.read_control(
+        let len = self.read_control(
             request_type(Direction::In, RequestType::Standard, Recipient::Device),
             LIBUSB_REQUEST_GET_DESCRIPTOR,
             (LIBUSB_DT_STRING as u16) << 8 | index as u16,
             language.lang_id(),
             buf_slice,
-            timeout
-        ));
+            timeout,
+        )?;
 
         unsafe {
             buf.set_len(len);

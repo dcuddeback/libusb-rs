@@ -1,5 +1,5 @@
-use std::mem;
 use libusb::*;
+use std::mem::MaybeUninit;
 
 use config_descriptor::{self, ConfigDescriptor};
 use context::Context;
@@ -28,7 +28,8 @@ unsafe impl<'a> Sync for Device<'a> {}
 impl<'a> Device<'a> {
     /// Reads the device descriptor.
     pub fn device_descriptor(&self) -> ::Result<DeviceDescriptor> {
-        let mut descriptor: libusb_device_descriptor = unsafe { mem::uninitialized() };
+        let mut descriptor: libusb_device_descriptor =
+            unsafe { MaybeUninit::uninit().assume_init() };
 
         // since libusb 1.0.16, this function always succeeds
         try_unsafe!(libusb_get_device_descriptor(self.device, &mut descriptor));
@@ -38,7 +39,8 @@ impl<'a> Device<'a> {
 
     /// Reads a configuration descriptor.
     pub fn config_descriptor(&self, config_index: u8) -> ::Result<ConfigDescriptor> {
-        let mut config: *const libusb_config_descriptor = unsafe { mem::uninitialized() };
+        let mut config: *const libusb_config_descriptor =
+            unsafe { MaybeUninit::uninit().assume_init() };
 
         try_unsafe!(libusb_get_config_descriptor(
             self.device,
@@ -51,7 +53,8 @@ impl<'a> Device<'a> {
 
     /// Reads the configuration descriptor for the current configuration.
     pub fn active_config_descriptor(&self) -> ::Result<ConfigDescriptor> {
-        let mut config: *const libusb_config_descriptor = unsafe { mem::uninitialized() };
+        let mut config: *const libusb_config_descriptor =
+            unsafe { MaybeUninit::uninit().assume_init() };
 
         try_unsafe!(libusb_get_active_config_descriptor(
             self.device,
@@ -78,7 +81,7 @@ impl<'a> Device<'a> {
 
     /// Opens the device.
     pub fn open(&self) -> ::Result<DeviceHandle<'a>> {
-        let mut handle: *mut libusb_device_handle = unsafe { mem::uninitialized() };
+        let mut handle: *mut libusb_device_handle = unsafe { MaybeUninit::uninit().assume_init() };
 
         try_unsafe!(libusb_open(self.device, &mut handle));
 

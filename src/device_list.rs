@@ -1,5 +1,5 @@
-use std::slice;
 use libusb::*;
+use std::slice;
 
 use context::Context;
 use device::{self, Device};
