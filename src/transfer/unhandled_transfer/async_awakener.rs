@@ -22,7 +22,6 @@ impl AsyncAwakener {
         let thread_signal = signal.clone();
         thread::spawn(move || {
             while *thread_signal.lock().unwrap() {
-                std::thread::sleep(std::time::Duration::from_millis(100));
                 func();
             }
         });
