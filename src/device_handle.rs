@@ -16,8 +16,8 @@ use language::Language;
 
 /// A handle to an open USB device.
 pub struct DeviceHandle<'a> {
-    context: &'a Context,
-    handle: *mut libusb_device_handle,
+    pub(crate) context: &'a Context,
+    pub(crate) handle: *mut libusb_device_handle,
     interfaces: BitSet,
 }
 
@@ -612,25 +612,5 @@ pub unsafe fn from_libusb<'a>(
         context,
         handle: handle,
         interfaces: BitSet::with_capacity(u8::max_value() as usize + 1),
-    }
-}
-
-pub trait GetLibUsbDeviceHandle {
-    unsafe fn get_lib_usb_handle(&self) -> *mut libusb_device_handle;
-}
-
-impl<'a> GetLibUsbDeviceHandle for DeviceHandle<'a> {
-    unsafe fn get_lib_usb_handle(&self) -> *mut libusb_device_handle {
-        self.handle
-    }
-}
-
-pub trait GetContext {
-    fn get_context(&self) -> &Context;
-}
-
-impl<'a> GetContext for DeviceHandle<'a> {
-    fn get_context(&self) -> &Context {
-        self.context
     }
 }

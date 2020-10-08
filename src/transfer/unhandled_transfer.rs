@@ -2,7 +2,6 @@ mod async_awakener;
 mod local_context;
 
 use self::{async_awakener::AsyncAwakener, local_context::LocalContext};
-use crate::{context::GetRawContext, device_handle::GetContext};
 
 use libusb::*;
 use std::sync::{Arc, Mutex};
@@ -12,7 +11,7 @@ use super::{
     OperationStatus, TransferStatus,
 };
 use crate::{
-    device_handle::{DeviceHandle, GetLibUsbDeviceHandle},
+    device_handle::DeviceHandle,
     error::{Error, Result},
 };
 
@@ -31,14 +30,12 @@ impl UnhandledTransfer {
         let handle = Self::allocate_trhansfer_handle(iso_packets)?;
 
         unsafe {
-            (*handle).dev_handle = device_handle.get_lib_usb_handle();
+            (*handle).dev_handle = device_handle.handle;
             (*handle).callback = libusb_transfer_callback_function;
         }
 
-        let local_context = LocalContext::new(
-            device_handle.get_context().get_raw_context(),
-            std::marker::PhantomData,
-        );
+        let local_context =
+            LocalContext::new(device_handle.context.context, std::marker::PhantomData);
         let awakener = AsyncAwakener::spawn(move || unsafe {
             libusb_handle_events_completed(*local_context, std::ptr::null_mut());
         });

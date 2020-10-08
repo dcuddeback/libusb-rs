@@ -9,7 +9,7 @@ use error;
 
 /// A `libusb` context.
 pub struct Context {
-    context: *mut libusb_context,
+    pub(crate) context: *mut libusb_context,
 }
 
 unsafe impl Sync for Context {}
@@ -117,15 +117,5 @@ impl LogLevel {
             LogLevel::Info => LIBUSB_LOG_LEVEL_INFO,
             LogLevel::Debug => LIBUSB_LOG_LEVEL_DEBUG,
         }
-    }
-}
-
-pub trait GetRawContext {
-    fn get_raw_context(&self) -> *mut libusb::libusb_context;
-}
-
-impl GetRawContext for Context {
-    fn get_raw_context(&self) -> *mut libusb::libusb_context {
-        self.context
     }
 }
