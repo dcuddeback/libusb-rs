@@ -12,7 +12,7 @@ keywords = ["usb", "libusb", "hardware", "bindings"]
 
 [dependencies]
 bit-set = "0.2.0"
-libusb-sys = { git = "https://github.com/passware/libusb-sys" }
+libusb-sys = { git = "https://github.com/passware/libusb-sys", branch = "feature/cases/PKM-15" }
 libc = "0.2"
 static_assertions = "1.1.0"
 
