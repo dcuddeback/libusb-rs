@@ -1,4 +1,7 @@
-use std::mem::MaybeUninit;
+mod raw_context_wrapper;
+use self::raw_context_wrapper::RawContextWrapper;
+
+use std::{mem::MaybeUninit, sync::Arc};
 
 use libc::c_int;
 use libusb::*;
@@ -9,7 +12,15 @@ use error;
 
 /// A `libusb` context.
 pub struct Context {
-    pub(crate) context: *mut libusb_context,
+    pub(crate) context: Arc<RawContextWrapper>,
+}
+
+impl Clone for Context {
+    fn clone(&self) -> Self {
+        Self {
+            context: self.context.clone(),
+        }
+    }
 }
 
 unsafe impl Sync for Context {}
@@ -19,16 +30,16 @@ impl Context {
     /// Opens a new `libusb` context.
     pub fn new() -> ::Result<Self> {
         let mut context = unsafe { MaybeUninit::uninit().assume_init() };
-
         try_unsafe!(libusb_init(&mut context));
-
-        Ok(Self { context })
+        Ok(Self {
+            context: Arc::new(RawContextWrapper { context }),
+        })
     }
 
     /// Sets the log level of a `libusb` context.
     pub fn set_log_level(&mut self, level: LogLevel) {
         unsafe {
-            libusb_set_debug(self.context, level.as_c_int());
+            libusb_set_debug(**self.context, level.as_c_int());
         }
     }
 
@@ -52,15 +63,15 @@ impl Context {
     }
 
     /// Returns a list of the current USB devices. The context must outlive the device list.
-    pub fn devices<'a>(&'a self) -> ::Result<DeviceList<'a>> {
+    pub fn devices(&self) -> ::Result<DeviceList> {
         let mut list: *const *mut libusb_device = unsafe { MaybeUninit::uninit().assume_init() };
 
-        let n = unsafe { libusb_get_device_list(self.context, &mut list) };
+        let n = unsafe { libusb_get_device_list(**self.context, &mut list) };
 
         if n < 0 {
             Err(error::from_libusb(n as c_int))
         } else {
-            Ok(unsafe { device_list::from_libusb(self, list, n as usize) })
+            Ok(unsafe { device_list::from_libusb(self.clone(), list, n as usize) })
         }
     }
 
@@ -72,18 +83,18 @@ impl Context {
     ///
     /// Returns a device handle for the first device found matching `vendor_id` and `product_id`.
     /// On error, or if the device could not be found, it returns `None`.
-    pub fn open_device_with_vid_pid<'a>(
-        &'a self,
+    pub fn open_device_with_vid_pid(
+        &self,
         vendor_id: u16,
         product_id: u16,
-    ) -> Option<DeviceHandle<'a>> {
+    ) -> Option<DeviceHandle> {
         let handle =
-            unsafe { libusb_open_device_with_vid_pid(self.context, vendor_id, product_id) };
+            unsafe { libusb_open_device_with_vid_pid(**self.context, vendor_id, product_id) };
 
         if handle.is_null() {
             None
         } else {
-            Some(unsafe { device_handle::from_libusb(self, handle) })
+            Some(unsafe { device_handle::from_libusb(self.clone(), handle) })
         }
     }
 }

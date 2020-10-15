@@ -1,6 +1,4 @@
-use std::mem::MaybeUninit;
-use std::slice;
-use std::time::Duration;
+use std::{mem::MaybeUninit, slice, time::Duration};
 
 use bit_set::BitSet;
 use libc::{c_int, c_uchar, c_uint};
@@ -15,13 +13,13 @@ use interface_descriptor::InterfaceDescriptor;
 use language::Language;
 
 /// A handle to an open USB device.
-pub struct DeviceHandle<'a> {
-    pub(crate) context: &'a Context,
+pub struct DeviceHandle {
+    pub(crate) context: Context,
     pub(crate) handle: *mut libusb_device_handle,
     interfaces: BitSet,
 }
 
-impl<'a> Drop for DeviceHandle<'a> {
+impl Drop for DeviceHandle {
     /// Closes the device.
     fn drop(&mut self) {
         unsafe {
@@ -34,10 +32,10 @@ impl<'a> Drop for DeviceHandle<'a> {
     }
 }
 
-unsafe impl<'a> Send for DeviceHandle<'a> {}
-unsafe impl<'a> Sync for DeviceHandle<'a> {}
+unsafe impl Send for DeviceHandle {}
+unsafe impl Sync for DeviceHandle {}
 
-impl<'a> DeviceHandle<'a> {
+impl DeviceHandle {
     /// Returns the active configuration number.
     pub fn active_configuration(&self) -> ::Result<u8> {
         let mut config = unsafe { MaybeUninit::uninit().assume_init() };
@@ -604,10 +602,7 @@ impl<'a> DeviceHandle<'a> {
 }
 
 #[doc(hidden)]
-pub unsafe fn from_libusb<'a>(
-    context: &'a Context,
-    handle: *mut libusb_device_handle,
-) -> DeviceHandle<'a> {
+pub unsafe fn from_libusb(context: Context, handle: *mut libusb_device_handle) -> DeviceHandle {
     DeviceHandle {
         context,
         handle: handle,

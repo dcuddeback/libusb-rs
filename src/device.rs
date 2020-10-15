@@ -8,12 +8,12 @@ use device_handle::{self, DeviceHandle};
 use fields::{self, Speed};
 
 /// A reference to a USB device.
-pub struct Device<'a> {
-    context: &'a Context,
+pub struct Device {
+    context: Context,
     device: *mut libusb_device,
 }
 
-impl<'a> Drop for Device<'a> {
+impl Drop for Device {
     /// Releases the device reference.
     fn drop(&mut self) {
         unsafe {
@@ -22,10 +22,10 @@ impl<'a> Drop for Device<'a> {
     }
 }
 
-unsafe impl<'a> Send for Device<'a> {}
-unsafe impl<'a> Sync for Device<'a> {}
+unsafe impl Send for Device {}
+unsafe impl Sync for Device {}
 
-impl<'a> Device<'a> {
+impl Device {
     /// Reads the device descriptor.
     pub fn device_descriptor(&self) -> ::Result<DeviceDescriptor> {
         let mut descriptor: libusb_device_descriptor =
@@ -80,17 +80,15 @@ impl<'a> Device<'a> {
     }
 
     /// Opens the device.
-    pub fn open(&self) -> ::Result<DeviceHandle<'a>> {
+    pub fn open(&self) -> ::Result<DeviceHandle> {
         let mut handle: *mut libusb_device_handle = unsafe { MaybeUninit::uninit().assume_init() };
-
         try_unsafe!(libusb_open(self.device, &mut handle));
-
-        Ok(unsafe { device_handle::from_libusb(self.context, handle) })
+        Ok(unsafe { device_handle::from_libusb(self.context.clone(), handle) })
     }
 }
 
 #[doc(hidden)]
-pub unsafe fn from_libusb<'a>(context: &'a Context, device: *mut libusb_device) -> Device<'a> {
+pub unsafe fn from_libusb(context: Context, device: *mut libusb_device) -> Device {
     libusb_ref_device(device);
 
     Device {

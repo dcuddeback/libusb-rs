@@ -52,12 +52,12 @@ impl TransferStatus {
 
 pub type TransferCallbackFunction = Option<Box<dyn FnMut(TransferStatus, Vec<u8>)>>;
 
-pub struct Transfer<'a, 'b> {
+pub struct Transfer<'a> {
     unhandled_transfer: *mut UnhandledTransfer,
-    _device_handle: PhantomData<&'b DeviceHandle<'a>>,
+    _device_handle: PhantomData<&'a DeviceHandle>,
 }
 
-impl<'a, 'b> Drop for Transfer<'a, 'b> {
+impl<'a> Drop for Transfer<'a> {
     fn drop(&mut self) {
         let mut state = unsafe { (*self.unhandled_transfer).state.lock().unwrap() };
         match state.status {
@@ -72,8 +72,8 @@ impl<'a, 'b> Drop for Transfer<'a, 'b> {
     }
 }
 
-impl<'a, 'b> Transfer<'a, 'b> {
-    pub fn new(device_handle: &'b mut DeviceHandle<'a>, iso_packets: i32) -> Result<Self> {
+impl<'a> Transfer<'a> {
+    pub fn new(device_handle: &'a mut DeviceHandle, iso_packets: i32) -> Result<Self> {
         let unhandled_transfer = UnhandledTransfer::new(device_handle, iso_packets)?;
         let transfer = Self {
             unhandled_transfer,

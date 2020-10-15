@@ -1,7 +1,6 @@
 mod async_awakener;
-mod local_context;
 
-use self::{async_awakener::AsyncAwakener, local_context::LocalContext};
+use self::async_awakener::AsyncAwakener;
 
 use libusb::*;
 use std::sync::{Arc, Mutex};
@@ -23,10 +22,7 @@ pub struct UnhandledTransfer {
 }
 
 impl UnhandledTransfer {
-    pub fn new<'a, 'b>(
-        device_handle: &'b mut DeviceHandle<'a>,
-        iso_packets: i32,
-    ) -> Result<*mut Self> {
+    pub fn new<'a>(device_handle: &'a mut DeviceHandle, iso_packets: i32) -> Result<*mut Self> {
         let handle = Self::allocate_trhansfer_handle(iso_packets)?;
 
         unsafe {
@@ -34,10 +30,9 @@ impl UnhandledTransfer {
             (*handle).callback = libusb_transfer_callback_function;
         }
 
-        let local_context =
-            LocalContext::new(device_handle.context.context, std::marker::PhantomData);
+        let local_context = device_handle.context.context.clone();
         let awakener = AsyncAwakener::spawn(move || unsafe {
-            libusb_handle_events_completed(*local_context, std::ptr::null_mut());
+            libusb_handle_events_completed(**local_context, std::ptr::null_mut());
         });
 
         let transfer = Box::new(Self {
