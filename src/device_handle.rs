@@ -25,6 +25,7 @@ pub struct DeviceHandle<'a> {
 impl<'a> Drop for DeviceHandle<'a> {
     /// Closes the device.
     fn drop(&mut self) {
+        eprintln!("Dropping a device handle");
         unsafe {
             for iface in self.interfaces.iter() {
                 libusb_release_interface(self.handle, iface as c_int);

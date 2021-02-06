@@ -16,6 +16,7 @@ pub struct DeviceList<'a> {
 impl<'a> Drop for DeviceList<'a> {
     /// Frees the device list.
     fn drop(&mut self) {
+        eprintln!("Dropping a device lisst");
         unsafe {
             libusb_free_device_list(self.list, 1);
         }

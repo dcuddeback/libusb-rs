@@ -32,6 +32,7 @@ mod context;
 mod device_list;
 mod device;
 mod device_handle;
+mod event;
 
 mod fields;
 mod device_descriptor;
@@ -39,3 +40,4 @@ mod config_descriptor;
 mod interface_descriptor;
 mod endpoint_descriptor;
 mod language;
+mod hotplug;

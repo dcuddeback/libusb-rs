@@ -13,6 +13,7 @@ pub struct ConfigDescriptor {
 
 impl Drop for ConfigDescriptor {
     fn drop(&mut self) {
+        eprintln!("Dropping a config descriptor");
         unsafe {
             libusb_free_config_descriptor(self.descriptor);
         }
