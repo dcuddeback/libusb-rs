@@ -101,7 +101,7 @@ impl Context {
     pub fn register_callback<F>(&mut self, filter: HotplugFilter, closure: F) -> ::Result<()>
     where F: Fn(&Device, HotPlugEvent) + 'static {
         let mut wrapper = Box::pin(CallbackWrapper {
-            cb: Box::new(closure),
+            closure: Box::new(closure),
             handle: 0,
         });
         let mut handle = 0;
@@ -149,23 +149,22 @@ impl Context {
 }
 
 extern "C" fn invoke_callback(_ctx: *mut libusb_context, device: *const libusb_device, event: i32, data: *mut std::ffi::c_void) -> i32 {
-    let parsed = match event {
-        e if e == LIBUSB_HOTPLUG_EVENT_DEVICE_ARRIVED => HotPlugEvent::Arrived,
-        e if e == LIBUSB_HOTPLUG_EVENT_DEVICE_LEFT =>  HotPlugEvent::Left,
-        _ => {
+    match HotPlugEvent::from_i32(event) {
+        Some(event) => {
+            let device = ManuallyDrop::new(unsafe { device::from_libusb(PhantomData, device as *mut libusb_device) });
+
+            let wrapper = data as *mut CallbackWrapper;
+
+            unsafe { ((*wrapper).closure)(&device, event) };
+
+            0
+        },
+        None => {
             // With no meaningful way to signal this error condition we simply don't dispatch the
             // call and return.
             return 0;
-        },
-    };
-
-    let device = ManuallyDrop::new(unsafe { device::from_libusb(PhantomData, device as *mut libusb_device) });
-
-    let wrapper = data as *mut CallbackWrapper;
-
-    unsafe { ((*wrapper).closure)(&device, parsed) };
-
-    0
+        }
+    }
 }
 
 
