@@ -18,7 +18,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     ctx.register_callback(Default::default(), |device, event| {
         eprintln!("invoked");
         println!("{:?} - {:?}", device.device_descriptor(), event);
-    });
+    })?;
     loop {
         ctx.handle_events();
     }

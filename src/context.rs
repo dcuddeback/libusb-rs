@@ -148,24 +148,22 @@ impl Context {
     }
 }
 
-extern "C" fn invoke_callback(_ctx: *mut libusb_context, device: *const libusb_device, event: i32, closure: *mut std::ffi::c_void) -> i32 {
-    eprintln!("ffi invoked");
+extern "C" fn invoke_callback(_ctx: *mut libusb_context, device: *const libusb_device, event: i32, data: *mut std::ffi::c_void) -> i32 {
     let parsed = match event {
         e if e == LIBUSB_HOTPLUG_EVENT_DEVICE_ARRIVED => HotPlugEvent::Arrived,
         e if e == LIBUSB_HOTPLUG_EVENT_DEVICE_LEFT =>  HotPlugEvent::Left,
         _ => {
-            // warn!("Unknown event type: {}", e);
+            // With no meaningful way to signal this error condition we simply don't dispatch the
+            // call and return.
             return 0;
         },
     };
 
     let device = ManuallyDrop::new(unsafe { device::from_libusb(PhantomData, device as *mut libusb_device) });
 
-    let cb = closure as *mut CallbackWrapper;
+    let wrapper = data as *mut CallbackWrapper;
 
-    eprintln!("Handle: {}", unsafe { &(*cb).handle}) ;
-
-    unsafe { ((*cb).cb)(&device, parsed) };
+    unsafe { ((*wrapper).closure)(&device, parsed) };
 
     0
 }

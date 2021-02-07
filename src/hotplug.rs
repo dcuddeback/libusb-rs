@@ -4,7 +4,7 @@ use event::HotPlugEvent;
 use libusb::*;
 
 pub struct CallbackWrapper {
-    pub cb: Box<dyn Fn(&Device, HotPlugEvent)>,
+    pub closure: Box<dyn Fn(&Device, HotPlugEvent)>,
     pub handle: i32,
 }
 
