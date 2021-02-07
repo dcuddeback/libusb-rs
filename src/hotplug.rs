@@ -14,6 +14,7 @@ pub struct HotplugFilter {
     product: Option<i32>,
     class: Option<i32>,
     events: Option<i32>,
+    enumerate: bool,
 }
 
 impl HotplugFilter {
@@ -23,6 +24,7 @@ impl HotplugFilter {
             product: None,
             class: None,
             events: None,
+            enumerate: false,
         }
     }
 
@@ -40,6 +42,14 @@ impl HotplugFilter {
 
     pub(crate) fn get_events(&self) -> i32 {
         self.events.unwrap_or(LIBUSB_HOTPLUG_EVENT_DEVICE_ARRIVED | LIBUSB_HOTPLUG_EVENT_DEVICE_LEFT)
+    }
+
+    pub(crate) fn get_flags(&self) -> i32 {
+        if self.enumerate {
+            LIBUSB_HOTPLUG_ENUMERATE
+        } else {
+            0
+        }
     }
 
     pub fn vendor(mut self, vendor: i32) -> Self {
@@ -64,6 +74,11 @@ impl HotplugFilter {
 
     pub fn left_only(mut self) -> Self {
         self.events = Some(LIBUSB_HOTPLUG_EVENT_DEVICE_LEFT);
+        self
+    }
+
+    pub fn enumerate(mut self) -> Self {
+        self.enumerate = true;
         self
     }
 }

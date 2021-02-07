@@ -108,7 +108,7 @@ impl Context {
         let res = unsafe { libusb_hotplug_register_callback(
             self.context,
             filter.get_events(),
-            LIBUSB_HOTPLUG_ENUMERATE,
+            filter.get_flags(),
             filter.get_vendor(),
             filter.get_product(),
             filter.get_class(),

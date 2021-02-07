@@ -15,7 +15,9 @@ struct Endpoint {
 
 fn main() -> Result<(), Box<dyn Error>> {
     let mut ctx = libusb::Context::new()?;
-    ctx.register_callback(Default::default(), |device, event| {
+    let filter = libusb::HotplugFilter::new()
+        .enumerate();
+    ctx.register_callback(filter, |device, event| {
         eprintln!("invoked");
         println!("{:?} - {:?}", device.device_descriptor(), event);
     })?;

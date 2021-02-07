@@ -11,6 +11,7 @@ pub use context::{Context, LogLevel};
 pub use device_list::{DeviceList, Devices};
 pub use device::Device;
 pub use device_handle::DeviceHandle;
+pub use hotplug::HotplugFilter;
 
 pub use fields::{Speed, TransferType, SyncType, UsageType, Direction, RequestType, Recipient, Version, request_type};
 pub use device_descriptor::DeviceDescriptor;
