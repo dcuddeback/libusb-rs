@@ -1,9 +1,6 @@
 extern crate libusb;
 
 use std::error::Error;
-use std::slice;
-use std::str::FromStr;
-use std::time::Duration;
 
 #[derive(Debug)]
 struct Endpoint {
@@ -24,6 +21,5 @@ fn main() -> Result<(), Box<dyn Error>> {
     loop {
         ctx.handle_events();
     }
-    Ok(())
 }
 
