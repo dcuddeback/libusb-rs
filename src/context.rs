@@ -1,5 +1,5 @@
 use std::marker::PhantomData;
-use std::mem;
+use std::mem::MaybeUninit;
 
 use libc::c_int;
 use libusb::*;
@@ -28,11 +28,11 @@ unsafe impl Send for Context {}
 impl Context {
     /// Opens a new `libusb` context.
     pub fn new() -> ::Result<Self> {
-        let mut context = unsafe { mem::uninitialized() };
+        let mut context = MaybeUninit::uninit();
 
-        try_unsafe!(libusb_init(&mut context));
+        try_unsafe!(libusb_init(context.as_mut_ptr()));
 
-        Ok(Context { context: context })
+        Ok(Context { context: unsafe { context.assume_init() } })
     }
 
     /// Sets the log level of a `libusb` context.
@@ -71,15 +71,15 @@ impl Context {
 
     /// Returns a list of the current USB devices. The context must outlive the device list.
     pub fn devices<'a>(&'a self) -> ::Result<DeviceList<'a>> {
-        let mut list: *const *mut libusb_device = unsafe { mem::uninitialized() };
+        let mut list = MaybeUninit::uninit();
 
-        let n = unsafe { libusb_get_device_list(self.context, &mut list) };
+        let n = unsafe { libusb_get_device_list(self.context, list.as_mut_ptr()) };
 
         if n < 0 {
             Err(error::from_libusb(n as c_int))
         }
         else {
-            Ok(unsafe { device_list::from_libusb(self, list, n as usize) })
+            Ok(unsafe { device_list::from_libusb(self, list.assume_init(), n as usize) })
         }
     }
 

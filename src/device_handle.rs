@@ -1,5 +1,5 @@
 use std::marker::PhantomData;
-use std::mem;
+use std::mem::MaybeUninit;
 use std::slice;
 use std::time::Duration;
 
@@ -41,10 +41,10 @@ unsafe impl<'a> Sync for DeviceHandle<'a> {}
 impl<'a> DeviceHandle<'a> {
     /// Returns the active configuration number.
     pub fn active_configuration(&self) -> ::Result<u8> {
-        let mut config = unsafe { mem::uninitialized() };
+        let mut config = MaybeUninit::uninit();
 
-        try_unsafe!(libusb_get_configuration(self.handle, &mut config));
-        Ok(config as u8)
+        try_unsafe!(libusb_get_configuration(self.handle, config.as_mut_ptr()));
+        Ok(unsafe { config.assume_init() } as u8)
     }
 
     /// Sets the device's active configuration.
@@ -142,17 +142,18 @@ impl<'a> DeviceHandle<'a> {
             return Err(Error::InvalidParam);
         }
 
-        let mut transferred: c_int = unsafe { mem::uninitialized() };
+        let mut transferred = MaybeUninit::uninit();
 
         let ptr = buf.as_mut_ptr() as *mut c_uchar;
         let len = buf.len() as c_int;
         let timeout_ms = (timeout.as_secs() * 1000 + timeout.subsec_nanos() as u64 / 1_000_000) as c_uint;
 
-        match unsafe { libusb_interrupt_transfer(self.handle, endpoint, ptr, len, &mut transferred, timeout_ms) } {
+        match unsafe { libusb_interrupt_transfer(self.handle, endpoint, ptr, len, transferred.as_mut_ptr(), timeout_ms) } {
             0 => {
-                Ok(transferred as usize)
+                Ok(unsafe { transferred.assume_init() } as usize)
             },
             err => {
+                let transferred = unsafe { transferred.assume_init() };
                 if err == LIBUSB_ERROR_INTERRUPTED && transferred > 0 {
                     Ok(transferred as usize)
                 }
@@ -188,17 +189,18 @@ impl<'a> DeviceHandle<'a> {
             return Err(Error::InvalidParam);
         }
 
-        let mut transferred: c_int = unsafe { mem::uninitialized() };
+        let mut transferred = MaybeUninit::uninit();
 
         let ptr = buf.as_ptr() as *mut c_uchar;
         let len = buf.len() as c_int;
         let timeout_ms = (timeout.as_secs() * 1000 + timeout.subsec_nanos() as u64 / 1_000_000) as c_uint;
 
-        match unsafe { libusb_interrupt_transfer(self.handle, endpoint, ptr, len, &mut transferred, timeout_ms) } {
+        match unsafe { libusb_interrupt_transfer(self.handle, endpoint, ptr, len, transferred.as_mut_ptr(), timeout_ms) } {
             0 => {
-                Ok(transferred as usize)
+                Ok(unsafe { transferred.assume_init() }  as usize)
             },
             err => {
+                let transferred = unsafe { transferred.assume_init() };
                 if err == LIBUSB_ERROR_INTERRUPTED && transferred > 0 {
                     Ok(transferred as usize)
                 }
@@ -236,17 +238,18 @@ impl<'a> DeviceHandle<'a> {
             return Err(Error::InvalidParam);
         }
 
-        let mut transferred: c_int = unsafe { mem::uninitialized() };
+        let mut transferred = MaybeUninit::uninit();
 
         let ptr = buf.as_mut_ptr() as *mut c_uchar;
         let len = buf.len() as c_int;
         let timeout_ms = (timeout.as_secs() * 1000 + timeout.subsec_nanos() as u64 / 1_000_000) as c_uint;
 
-        match unsafe { libusb_bulk_transfer(self.handle, endpoint, ptr, len, &mut transferred, timeout_ms) } {
+        match unsafe { libusb_bulk_transfer(self.handle, endpoint, ptr, len, transferred.as_mut_ptr(), timeout_ms) } {
             0 => {
-                Ok(transferred as usize)
+                Ok(unsafe { transferred.assume_init() } as usize)
             },
             err => {
+                let transferred = unsafe { transferred.assume_init() };
                 if err == LIBUSB_ERROR_INTERRUPTED && transferred > 0 {
                     Ok(transferred as usize)
                 }
@@ -282,17 +285,18 @@ impl<'a> DeviceHandle<'a> {
             return Err(Error::InvalidParam);
         }
 
-        let mut transferred: c_int = unsafe { mem::uninitialized() };
+        let mut transferred = MaybeUninit::uninit();
 
         let ptr = buf.as_ptr() as *mut c_uchar;
         let len = buf.len() as c_int;
         let timeout_ms = (timeout.as_secs() * 1000 + timeout.subsec_nanos() as u64 / 1_000_000) as c_uint;
 
-        match unsafe { libusb_bulk_transfer(self.handle, endpoint, ptr, len, &mut transferred, timeout_ms) } {
+        match unsafe { libusb_bulk_transfer(self.handle, endpoint, ptr, len, transferred.as_mut_ptr(), timeout_ms) } {
             0 => {
-                Ok(transferred as usize)
+                Ok(unsafe { transferred.assume_init() } as usize)
             },
             err => {
+                let transferred = unsafe { transferred.assume_init() };
                 if err == LIBUSB_ERROR_INTERRUPTED && transferred > 0 {
                     Ok(transferred as usize)
                 }
