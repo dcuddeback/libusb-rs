@@ -407,16 +407,16 @@ impl<'a> DeviceHandle<'a> {
     pub fn read_languages(&self, timeout: Duration) -> ::Result<Vec<Language>> {
         let mut buf = Vec::<u8>::with_capacity(256);
 
-        let mut buf_slice = unsafe {
+        let buf_slice = unsafe {
             slice::from_raw_parts_mut((&mut buf[..]).as_mut_ptr(), buf.capacity())
         };
 
-        let len = try!(self.read_control(request_type(Direction::In, RequestType::Standard, Recipient::Device),
+        let len = self.read_control(request_type(Direction::In, RequestType::Standard, Recipient::Device),
                                          LIBUSB_REQUEST_GET_DESCRIPTOR,
                                          (LIBUSB_DT_STRING as u16) << 8,
                                          0,
                                          buf_slice,
-                                         timeout));
+                                         timeout)?;
 
         unsafe {
             buf.set_len(len);
@@ -434,16 +434,16 @@ impl<'a> DeviceHandle<'a> {
     pub fn read_string_descriptor(&self, language: Language, index: u8, timeout: Duration) -> ::Result<String> {
         let mut buf = Vec::<u8>::with_capacity(256);
 
-        let mut buf_slice = unsafe {
+        let buf_slice = unsafe {
             slice::from_raw_parts_mut((&mut buf[..]).as_mut_ptr(), buf.capacity())
         };
 
-        let len = try!(self.read_control(request_type(Direction::In, RequestType::Standard, Recipient::Device),
+        let len = self.read_control(request_type(Direction::In, RequestType::Standard, Recipient::Device),
                                          LIBUSB_REQUEST_GET_DESCRIPTOR,
                                          (LIBUSB_DT_STRING as u16) << 8 | index as u16,
                                          language.lang_id(),
                                          buf_slice,
-                                         timeout));
+                                         timeout)?;
 
         unsafe {
             buf.set_len(len);
