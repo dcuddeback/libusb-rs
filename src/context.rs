@@ -1,22 +1,31 @@
 use std::marker::PhantomData;
-use std::mem;
+use std::mem::{self, ManuallyDrop};
 
 use libc::c_int;
 use libusb::*;
 
+use device::{self, Device};
 use device_list::{self, DeviceList};
 use device_handle::{self, DeviceHandle};
 use error;
+use event::HotPlugEvent;
+use hotplug::{CallbackWrapper, HotplugFilter};
 
 /// A `libusb` context.
 pub struct Context {
     context: *mut libusb_context,
+    cbs: Vec<Box<CallbackWrapper>>,
 }
 
 impl Drop for Context {
     /// Closes the `libusb` context.
     fn drop(&mut self) {
+        eprintln!("Dropping a ctx");
+
         unsafe {
+            for ref cb in &self.cbs {
+                // TODO(richo) Deregister the callback
+            }
             libusb_exit(self.context);
         }
     }
@@ -32,7 +41,10 @@ impl Context {
 
         try_unsafe!(libusb_init(&mut context));
 
-        Ok(Context { context: context })
+        Ok(Context {
+            context: context,
+            cbs: vec![],
+        })
     }
 
     /// Sets the log level of a `libusb` context.
@@ -83,6 +95,38 @@ impl Context {
         }
     }
 
+
+    /// Register a callback to fire when a device attached or removed.
+    pub fn register_callback<F>(&mut self, filter: HotplugFilter, closure: F) -> ::Result<()>
+    where F: Fn(&Device, HotPlugEvent) + 'static {
+        let mut wrapper = Box::new(CallbackWrapper {
+            closure: Box::new(closure),
+            handle: 0,
+        });
+        let mut handle = 0;
+        let res = unsafe { libusb_hotplug_register_callback(
+            self.context,
+            filter.get_events(),
+            filter.get_flags(),
+            filter.get_vendor(),
+            filter.get_product(),
+            filter.get_class(),
+            invoke_callback,
+            &mut *wrapper as *mut _ as *mut ::std::ffi::c_void,
+            &mut handle)
+        };
+        if res != LIBUSB_SUCCESS {
+            panic!("Couldn't setup callback");
+        }
+        wrapper.handle = handle;
+        self.cbs.push(wrapper);
+        Ok(())
+    }
+
+    pub fn handle_events(&self) {
+        unsafe { libusb_handle_events(self.context) };
+    }
+
     /// Convenience function to open a device by its vendor ID and product ID.
     ///
     /// This function is provided as a convenience for building prototypes without having to
@@ -99,6 +143,25 @@ impl Context {
         }
         else {
             Some(unsafe { device_handle::from_libusb(PhantomData, handle) })
+        }
+    }
+}
+
+extern "C" fn invoke_callback(_ctx: *mut libusb_context, device: *const libusb_device, event: i32, data: *mut std::ffi::c_void) -> i32 {
+    match HotPlugEvent::from_i32(event) {
+        Some(event) => {
+            let device = ManuallyDrop::new(unsafe { device::from_libusb(PhantomData, device as *mut libusb_device) });
+
+            let wrapper = data as *mut CallbackWrapper;
+
+            unsafe { ((*wrapper).closure)(&device, event) };
+
+            0
+        },
+        None => {
+            // With no meaningful way to signal this error condition we simply don't dispatch the
+            // call and return.
+            return 0;
         }
     }
 }
