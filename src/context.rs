@@ -10,12 +10,11 @@ use device_handle::{self, DeviceHandle};
 use error;
 use event::HotPlugEvent;
 use hotplug::{CallbackWrapper, HotplugFilter};
-use std::pin::Pin;
 
 /// A `libusb` context.
 pub struct Context {
     context: *mut libusb_context,
-    cbs: Vec<Pin<Box<CallbackWrapper>>>,
+    cbs: Vec<Box<CallbackWrapper>>,
 }
 
 impl Drop for Context {
@@ -100,7 +99,7 @@ impl Context {
     /// Register a callback to fire when a device attached or removed.
     pub fn register_callback<F>(&mut self, filter: HotplugFilter, closure: F) -> ::Result<()>
     where F: Fn(&Device, HotPlugEvent) + 'static {
-        let mut wrapper = Box::pin(CallbackWrapper {
+        let mut wrapper = Box::new(CallbackWrapper {
             closure: Box::new(closure),
             handle: 0,
         });
