@@ -102,6 +102,20 @@ impl<'a> InterfaceDescriptor<'a> {
 
         EndpointDescriptors { iter: endpoints.iter() }
     }
+
+    /// Returns the extra bytes of the interface descriptor if any.
+    pub fn extra(&self) -> Option<&[u8]> {
+        if self.descriptor.extra_length == 0 {
+            None
+        } else {
+            unsafe {
+                Some(slice::from_raw_parts(
+                    self.descriptor.extra,
+                    self.descriptor.extra_length as usize,
+                ))
+            }
+        }
+    }
 }
 
 impl<'a> fmt::Debug for InterfaceDescriptor<'a> {

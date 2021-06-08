@@ -79,6 +79,20 @@ impl ConfigDescriptor {
 
         Interfaces { iter: interfaces.iter() }
     }
+
+    /// Returns the extra bytes of the configuration descriptor if any.
+    pub fn extra(&self) -> Option<&[u8]> {
+        unsafe {
+            if (*self.descriptor).extra_length == 0 {
+                None
+            } else {
+                Some(slice::from_raw_parts(
+                    (*self.descriptor).extra,
+                    (*self.descriptor).extra_length as usize,
+                ))
+            }
+        }
+    }
 }
 
 impl fmt::Debug for ConfigDescriptor {
