@@ -98,14 +98,14 @@ impl<'a> DeviceHandle<'a> {
     /// when the device handle goes out of scope.
     pub fn claim_interface(&mut self, iface: u8) -> ::Result<()> {
         try_unsafe!(libusb_claim_interface(self.handle, iface as c_int));
-        self.interfaces.insert(iface as usize);
+        self.interfaces.insert(iface as usize)?;
         Ok(())
     }
 
     /// Releases a claimed interface.
     pub fn release_interface(&mut self, iface: u8) -> ::Result<()> {
         try_unsafe!(libusb_release_interface(self.handle, iface as c_int));
-        self.interfaces.remove(&(iface as usize));
+        self.interfaces.remove(iface as usize)?;
         Ok(())
     }
 
