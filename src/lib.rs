@@ -1,6 +1,5 @@
 //! This crate provides a safe wrapper around the native `libusb` library.
 
-extern crate bit_set;
 extern crate libusb_sys as libusb;
 extern crate libc;
 
@@ -39,3 +38,5 @@ mod config_descriptor;
 mod interface_descriptor;
 mod endpoint_descriptor;
 mod language;
+
+mod bit_set;
