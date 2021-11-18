@@ -11,6 +11,7 @@ use context::Context;
 use error::{self, Error};
 use device_descriptor::DeviceDescriptor;
 use config_descriptor::ConfigDescriptor;
+use bos_descriptor::{self, BosDescriptor, BosDevCapabilityDescriptor, Usb20ExtensionDescriptor, SsUsbDescriptor, ContainerIdDescriptor};
 use interface_descriptor::InterfaceDescriptor;
 use fields::{Direction, RequestType, Recipient, request_type};
 use language::Language;
@@ -489,6 +490,118 @@ impl<'a> DeviceHandle<'a> {
         match interface.description_string_index() {
             None => Err(Error::InvalidParam),
             Some(n) => self.read_string_descriptor(language, n, timeout)
+        }
+    }
+
+    /// Reads a BOS descriptor.
+    pub fn bos_descriptor(&self) -> ::Result<BosDescriptor> {
+        let mut descriptor: * const libusb_bos_descriptor = unsafe{ mem::uninitialized() };
+
+        match unsafe { libusb_get_bos_descriptor(self.handle, &mut descriptor) } {
+            0 => Ok(bos_descriptor::from_libusb(descriptor)),
+            err => Err(error::from_libusb(err)),
+        }
+    }
+
+    /// Reads a USB2.0 extension descriptor.
+    pub fn bos_usb_2_0_extension_descriptor(&self, bos_desc: &BosDescriptor, bos_dev_cap_desc: &BosDevCapabilityDescriptor) -> ::Result<Usb20ExtensionDescriptor>{
+        let context: *mut libusb_context = unsafe{ mem::uninitialized() };
+        let mut usb_2_0_extension: * const libusb_usb_2_0_extension_descriptor = unsafe{ mem::uninitialized() };
+        // 结构体和其成员 dev_capability_data 指向的内存是连续的，因此，只能将原来的内存区域传下去，不能新封装结构体。
+        //查找 dev_cap 的地址：
+        let mut cap_addr: Option<*const u8> = None;
+        for cap in bos_desc.dev_capability() {
+            if cap.dev_capability_type() == LIBUSB_BT_USB_2_0_EXTENSION {
+                unsafe {
+                    cap_addr = Some(*cap.get_addr());
+                }
+            }
+        }
+        unsafe {
+            match cap_addr {
+                None => {
+                    return Err(error::from_libusb(LIBUSB_ERROR_INVALID_PARAM));
+                },
+                Some(addr) => {
+                    let dev_cap: *mut libusb_bos_dev_capability_descriptor = addr as *mut libusb::libusb_bos_dev_capability_descriptor;
+                    match libusb_get_usb_2_0_extension_descriptor(
+                            context,
+                            dev_cap,
+                            &mut usb_2_0_extension)
+                    {
+                        0 => Ok(bos_descriptor::from_libusb_usb_2_0_extension_descriptor(usb_2_0_extension)),
+                        err => Err(error::from_libusb(err)),
+                    }
+                }
+            }
+        }
+    }
+
+    /// Reads a SuperSpeed USB descriptor.
+    pub fn bos_superspeed_usb_descriptor(&self, bos_desc: &BosDescriptor, bos_dev_cap_desc: &BosDevCapabilityDescriptor) -> ::Result<SsUsbDescriptor>{
+        let context: *mut libusb_context = unsafe{ mem::uninitialized() };
+        let mut ss_usb_device_cap: * const libusb_ss_usb_device_capability_descriptor = unsafe{ mem::uninitialized() };
+        // 结构体和其成员 dev_capability_data 指向的内存是连续的，因此，只能将原来的内存区域传下去，不能新封装结构体。
+        //查找 dev_cap 的地址：
+        let mut cap_addr: Option<*const u8> = None;
+        for cap in bos_desc.dev_capability() {
+            if cap.dev_capability_type() == LIBUSB_BT_SS_USB_DEVICE_CAPABILITY {
+                unsafe {
+                    cap_addr = Some(*cap.get_addr());
+                }
+            }
+        }
+        unsafe {
+            match cap_addr {
+                None => {
+                    return Err(error::from_libusb(LIBUSB_ERROR_INVALID_PARAM));
+                },
+                Some(addr) => {
+                    let dev_cap: *mut libusb_bos_dev_capability_descriptor = addr as *mut libusb::libusb_bos_dev_capability_descriptor;
+                    match libusb_get_ss_usb_device_capability_descriptor(
+                            context,
+                            dev_cap,
+                            &mut ss_usb_device_cap)
+                    {
+                        0 => Ok(bos_descriptor::from_libusb_ss_usb_device_capability_descriptor(ss_usb_device_cap)),
+                        err => Err(error::from_libusb(err)),
+                    }
+                }
+            }
+        }
+    }
+
+    /// Reads a container ID extension descriptor.
+    pub fn bos_container_id_descriptor(&self, bos_desc: &BosDescriptor, bos_dev_cap_desc: &BosDevCapabilityDescriptor) -> ::Result<ContainerIdDescriptor>{
+        let context: *mut libusb_context = unsafe{ mem::uninitialized() };
+        let mut container_id: * const libusb_container_id_descriptor = unsafe{ mem::uninitialized() };
+        // 结构体和其成员 dev_capability_data 指向的内存是连续的，因此，只能将原来的内存区域传下去，不能新封装结构体。
+        //查找 dev_cap 的地址：
+        let mut cap_addr: Option<*const u8> = None;
+        for cap in bos_desc.dev_capability() {
+            if cap.dev_capability_type() == LIBUSB_BT_CONTAINER_ID {
+                unsafe {
+                    cap_addr = Some(*cap.get_addr());
+                }
+            }
+        }
+        unsafe {
+            match cap_addr {
+                None => {
+                    return Err(error::from_libusb(LIBUSB_ERROR_INVALID_PARAM));
+                },
+                Some(addr) => {
+                    let dev_cap: *mut libusb_bos_dev_capability_descriptor = addr as *mut libusb::libusb_bos_dev_capability_descriptor;
+                    match libusb_get_container_id_descriptor(
+                            context,
+                            dev_cap,
+                            &mut container_id)
+                    {
+                        0 => Ok(bos_descriptor::from_libusb_container_id_descriptor(container_id)),
+                        err => Err(error::from_libusb(err)),
+                    }
+                }
+            }
         }
     }
 }
