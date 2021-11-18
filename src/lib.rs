@@ -15,10 +15,10 @@ pub use device_handle::DeviceHandle;
 pub use fields::{Speed, TransferType, SyncType, UsageType, Direction, RequestType, Recipient, Version, request_type};
 pub use device_descriptor::DeviceDescriptor;
 pub use config_descriptor::{ConfigDescriptor, Interfaces};
+pub use bos_descriptor::{BosDescriptor, BosDevCapabilityDescriptor};
 pub use interface_descriptor::{Interface, InterfaceDescriptors, InterfaceDescriptor, EndpointDescriptors};
 pub use endpoint_descriptor::EndpointDescriptor;
 pub use language::{Language, PrimaryLanguage, SubLanguage};
-
 
 #[cfg(test)]
 #[macro_use]
@@ -36,6 +36,7 @@ mod device_handle;
 mod fields;
 mod device_descriptor;
 mod config_descriptor;
+mod bos_descriptor;
 mod interface_descriptor;
 mod endpoint_descriptor;
 mod language;

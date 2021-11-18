@@ -50,6 +50,8 @@ fn list_devices() -> libusb::Result<()> {
         println!("Bus {:03} Device {:03} ID {:04x}:{:04x} {}", device.bus_number(), device.address(), device_desc.vendor_id(), device_desc.product_id(), get_speed(device.speed()));
         print_device(&device_desc, &mut usb_device);
 
+        print_bos(&mut usb_device);
+
         for n in 0..device_desc.num_configurations() {
             let config_desc = match device.config_descriptor(n) {
                 Ok(c) => c,
@@ -93,6 +95,64 @@ fn print_device(device_desc: &libusb::DeviceDescriptor, handle: &mut Option<UsbD
              device_desc.serial_number_string_index().unwrap_or(0),
              handle.as_mut().map_or(String::new(), |h| h.handle.read_serial_number_string(h.language, device_desc, h.timeout).unwrap_or(String::new())));
     println!("  bNumConfigurations   {:3}", device_desc.num_configurations());
+}
+
+fn print_bos(UsbDevice: &mut Option<UsbDevice>) {
+    let h = match UsbDevice {
+        Some(h) => &h.handle,
+        None => return,
+    };
+    let bos_desc = match h.bos_descriptor() {
+            Ok(desc) => desc,
+            Err(_) => { return; },
+
+    };
+
+    println!("  BOS Descriptor:");
+    println!("    bDescriptorType      {}", bos_desc.descriptor_type());
+    println!("    bNumDeviceCaps       {}", bos_desc.num_device_caps());
+
+    for dev_cap in bos_desc.dev_capability() {
+        match dev_cap.dev_capability_type() {
+            2 => {
+                match h.bos_usb_2_0_extension_descriptor(&bos_desc, &dev_cap) {
+                    Ok(desc) => {
+                        println!("    USB 2.0 Extension Capabilities:");
+                        println!("      bDevCapabilityType:    {}", desc.dev_capability_type());
+                        println!("      bmAttributes           {:08x}h", desc.attributes());
+                    },
+                    Err(e) => println!("{}", e),
+                }
+            },
+            3 => {
+                match h.bos_superspeed_usb_descriptor(&bos_desc, &dev_cap) {
+                    Ok(desc) => {
+                        println!("    USB 3.0 Capabilities:");
+                        println!("      bDevCapabilityType:    {}", desc.dev_capability_type());
+                        println!("      bmAttributes:          {:02x}h", desc.attributes());
+                        println!("      wSpeedSupported:       {}", desc.speed_supported());
+                        println!("      bFunctionalitySupport: {}", desc.functionality_support());
+                        println!("      bU1devExitLat:         {}", desc.u1_dev_exit_lat());
+                        println!("      bU2devExitLat:         {}", desc.u2_dev_exit_lat());
+                    },
+                    Err(e) => println!("{}", e),
+                }
+            },
+            4 => {
+                match h.bos_container_id_descriptor(&bos_desc, &dev_cap) {
+                    Ok(desc) => {
+                        print!("    Container ID:            ");
+                        for i in desc.container_id() {
+                            print!("{:02X}", i);
+                        }
+                        println!();
+                    },
+                    Err(e) => println!("{}", e),
+                }
+            },
+            _ => {},
+        }
+    }
 }
 
 fn print_config(config_desc: &libusb::ConfigDescriptor, handle: &mut Option<UsbDevice>) {

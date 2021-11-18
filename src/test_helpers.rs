@@ -162,3 +162,18 @@ macro_rules! device_descriptor {
         )
     }
 }
+
+#[macro_export]
+macro_rules! bos_descriptor {
+    ($($key:ident : $value:expr),*) => {
+        merge!(
+            ::libusb::libusb_bos_descriptor {
+                bLength:            5,
+                bDescriptorType:    0x0f,
+                wTotalLength:       5,
+                bNumDeviceCaps:     0,
+                dev_capability:     std::ptr::null(),
+            } => $($key: $value),*
+        )
+    }
+}
